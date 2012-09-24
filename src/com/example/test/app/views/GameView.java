@@ -2,6 +2,8 @@ package com.example.test.app.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -14,11 +16,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
         getHolder().addCallback(this);
-        gameThread = new GameThread(getHolder());
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
+        gameThread = new GameThread(getHolder());
+        gameThread.run();
+
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -37,6 +41,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             super();
 
             Canvas c = sh.lockCanvas();
+
+            Paint mPaint = new Paint();
+            mPaint.setColor(Color.GREEN);
+            mPaint.setStrokeWidth(2);
+            c.drawCircle(150, 150, 80, mPaint);
+
+            sh.unlockCanvasAndPost(c);
         }
     }
 }
