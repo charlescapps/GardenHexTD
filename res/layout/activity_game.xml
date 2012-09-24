@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayoutGame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <GameView
+        android:id="@+id/gameView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" >
+    </GameView>
+
+    <SlidingDrawer
+        android:id="@+id/gameSlidingDrawer"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+      	android:layout_alignParentBottom="true"
+        android:allowSingleTap="@bool/single_tap"
+        android:animateOnClick="@bool/single_tap"
+        android:orientation="vertical"
+        android:content="@+id/towersLinearLayout"
+        android:handle="@+id/handle"
+        android:scrollbarAlwaysDrawVerticalTrack="false" >
+
+        <ImageButton
+            android:id="@+id/handle"
+            style="@style/HandleTheme" />
+        
+	        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	            android:id="@+id/towersLinearLayout"
+	            android:layout_gravity="bottom"
+		    	android:layout_width="match_parent"
+		    	android:layout_height="45dp"
+		    	android:orientation="horizontal" >
+		    	
+	            <ImageButton
+            android:id="@+id/tower1"
+            style="@style/HandleTheme" />
+	            <ImageButton
+            android:id="@+id/tower2"
+            style="@style/HandleTheme" />
+	            <ImageButton
+            android:id="@+id/tower3"
+            style="@style/HandleTheme" />
+            <ImageButton
+                android:id="@+id/tower4"
+                style="@style/HandleTheme" />
+            <ImageButton
+                android:id="@+id/tower5"
+                style="@style/HandleTheme" />
+            <ImageButton
+                android:id="@+id/tower6"
+                style="@style/HandleTheme" />
+            <ImageButton
+                android:id="@+id/tower7"
+                style="@style/HandleTheme" />
+		    	
+	        </LinearLayout>
+        	
+    </SlidingDrawer>
+    
+</RelativeLayout>
+    
+
