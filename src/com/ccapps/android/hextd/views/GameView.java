@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -42,19 +43,24 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             super();
 
             Canvas c = sh.lockCanvas();
+//
+//            Paint mPaint = new Paint();
+//            mPaint.setColor(Color.GREEN);
+//            mPaint.setStrokeWidth(2);
+//
+//            Hexagon hex = new Hexagon(new PointF(100.f, 100.f));
+//
+//            hex.draw(c);
+//
+//            Hexagon hex2 = new Hexagon(new PointF(250.f, 250.f));
+//
+//            Hexagon.setGlobalSideLength(20.f);
+//
+//            hex2.draw(c);
 
-            Paint mPaint = new Paint();
-            mPaint.setColor(Color.GREEN);
-            mPaint.setStrokeWidth(2);
+            HexGrid.initHexGrid(new PointF(0.f, 0.f), 10, 20, 40.f);
 
-            Hexagon hex = new Hexagon(new PointF(100.f, 100.f));
-
-            hex.draw(c);
-
-            Hexagon.setGlobalSideLength(20.f);
-            Hexagon hex2 = new Hexagon(new PointF(250.f, 250.f));
-
-            hex2.draw(c);
+            HexGrid.getInstance().draw(c);
 
             sh.unlockCanvasAndPost(c);
         }

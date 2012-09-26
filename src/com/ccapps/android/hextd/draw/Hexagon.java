@@ -44,6 +44,7 @@ public class Hexagon extends Drawable {
     private Path hexPath;
     private Paint hexPaint;
     private PointF center;
+    private Hexagon[] neighbors;
 
     public Hexagon(PointF center) {
         this.center = center;
@@ -52,12 +53,13 @@ public class Hexagon extends Drawable {
         hexPaint.setColor(Color.GREEN);
         hexPaint.setStrokeWidth(1);
         hexPaint.setStyle(Paint.Style.STROKE);
+        //neighbors to be set by the HexGrid instance.
     }
 
     /**
-     * Must call after changing the global side length;
+     * Determines path based on current side length and center
      */
-    public void recomputePath() {
+    private void recomputePath() {
         hexPath = new Path();
         hexPath.moveTo(hexPoints[0].x, hexPoints[0].y);
         for (int i = 0; i < 6; i++) {
@@ -71,7 +73,12 @@ public class Hexagon extends Drawable {
     @Override
     public void draw(Canvas canvas) {
 
+        recomputePath();
         canvas.drawPath(hexPath, hexPaint);
+    }
+
+    public void setNeighbors(Hexagon[] neighbors) {
+        this.neighbors = neighbors;
     }
 
     @Override
