@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,6 +17,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
         getHolder().addCallback(this);
+
     }
 
     @Override
@@ -23,7 +25,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameThread = new GameThread(getHolder());
         gameThread.run();
 
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -45,7 +46,22 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             Paint mPaint = new Paint();
             mPaint.setColor(Color.GREEN);
             mPaint.setStrokeWidth(2);
-            c.drawCircle(150, 150, 80, mPaint);
+
+            float xDelta = 100.f;
+            float yDelta = 100.f;
+            float a = 40.f;
+            double sqrt2 = Math.sqrt(2.);
+            PointF[] hexPoints = new PointF[6];
+            hexPoints[0] = new PointF(-a+xDelta, 0.f+yDelta);
+            hexPoints[1] = new PointF((-a/2.f)+xDelta, (float)(a*sqrt2/2.)+yDelta);
+            hexPoints[2] = new PointF((a/2.f)+xDelta, (float)(a*sqrt2/2.)+yDelta);
+            hexPoints[3] = new PointF(a+xDelta, 0.f+yDelta);
+            hexPoints[4] = new PointF((a/2.f)+xDelta, (float)(-a*sqrt2/2.)+yDelta);
+            hexPoints[5] = new PointF((-a/2.f)+xDelta, (float)(-a*sqrt2/2.)+yDelta);
+
+            for (int i = 0; i < 6; i++) {
+                c.drawLine(hexPoints[i].x, hexPoints[i].y, hexPoints[(i+1)%6].x, hexPoints[(i+1)%6].y, mPaint);
+            }
 
             sh.unlockCanvasAndPost(c);
         }

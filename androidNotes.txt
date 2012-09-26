@@ -1,0 +1,23 @@
+Setting up SurfaceView
+----------------------
+1) Make a View extending SurfaceView, implementing SurfaceHolder.callback
+2) In constructor, getHolder().addCallback(this)
+3) Wait to draw to onSurfaceCreated
+    3a) Canvas c = getHolder().lockCanvas()
+    3b) c.postAndUnlock();
+
+SurfaceView
+-----------
+Must not use canvas until onSurfaceCreated
+Must not pass the SurfaceHolder into any other places until onSurfaceCreated (makes no sense, but empirically true)
+
+
+Hex grid:
+---------
+draw 1 then repeat properly.
+
+ /--\
+ \--/
+
+ internal angle = 2pi / 6 = pi/3
+ side length a.
