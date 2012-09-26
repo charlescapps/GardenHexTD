@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.example.test.app.views.GameView
+    <com.ccapps.android.hextd.views.GameView
             android:id="@+id/gameView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             >
-    </com.example.test.app.views.GameView>
+    </com.ccapps.android.hextd.views.GameView>
 
 
     <SlidingDrawer
