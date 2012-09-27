@@ -13,17 +13,19 @@ public class Hexagon extends Drawable {
 
     public static final PointF[] hexPoints;
     public static final float sqrt2;
-    private static float sideLength = 40.f;
+    private static float sideLength ;
+    private static PointF globalOffset;
 
     static {
         sqrt2 = (float)Math.sqrt(2.);
         hexPoints = new PointF[6];
         sideLength = 40.f; //initial side length value
         setGlobalSideLength(sideLength);
+        setGlobalOffset(new PointF(0.f, 0.f));
     }
 
     /**
-     * Set new side length and compute the relative coordinates of vertices based on the new length;
+     * Set new side length and compute the relative coordinates of a hexagon's vertices based on the new length;
      *
      * @param newLength
      */
@@ -35,10 +37,21 @@ public class Hexagon extends Drawable {
         hexPoints[3] = new PointF(sideLength, 0.f);
         hexPoints[4] = new PointF((sideLength/2.f), (float)(-sideLength*sqrt2/2.));
         hexPoints[5] = new PointF((-sideLength/2.f), (float)(-sideLength*sqrt2/2.));
+        if (HexGrid.isInitialized()) {
+            HexGrid.getInstance().invalidateAllPaths();
+        }
     }
 
     public static float getGlobalSideLength() {
         return Hexagon.sideLength;
+    }
+
+    public static void setGlobalOffset(PointF offset) {
+        Hexagon.globalOffset = offset;
+    }
+
+    public static PointF getGlobalOffset() {
+        return Hexagon.globalOffset;
     }
 
     private Path hexPath;
@@ -48,7 +61,7 @@ public class Hexagon extends Drawable {
 
     public Hexagon(PointF center) {
         this.center = center;
-        recomputePath();
+        invalidatePath();
         hexPaint = new Paint();
         hexPaint.setColor(Color.GREEN);
         hexPaint.setStrokeWidth(1);
@@ -59,21 +72,19 @@ public class Hexagon extends Drawable {
     /**
      * Determines path based on current side length and center
      */
-    private void recomputePath() {
+    public void invalidatePath() {
         hexPath = new Path();
         hexPath.moveTo(hexPoints[0].x, hexPoints[0].y);
         for (int i = 0; i < 6; i++) {
             hexPath.lineTo(hexPoints[(i+1)%6].x, hexPoints[(i+1)%6].y);
         }
         hexPath.close();
-        hexPath.offset(center.x, center.y);
+        hexPath.offset(center.x - Hexagon.globalOffset.x, center.y - globalOffset.y);
 
     }
 
     @Override
     public void draw(Canvas canvas) {
-
-        recomputePath();
         canvas.drawPath(hexPath, hexPaint);
     }
 

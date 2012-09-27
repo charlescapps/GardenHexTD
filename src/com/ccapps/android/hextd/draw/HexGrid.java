@@ -33,6 +33,21 @@ public class HexGrid extends Drawable {
         Hexagon.setGlobalSideLength(sideLength);
     }
 
+    public static void shiftTopLeft(PointF delta) {
+        if (HexGrid.isInitialized()) {
+            GRID.topLeft.x += delta.x;
+            GRID.topLeft.y += delta.y;
+            PointF currentOffset = Hexagon.getGlobalOffset();
+            Hexagon.setGlobalOffset(new PointF(delta.x + currentOffset.x, delta.y + currentOffset.y ));
+            GRID.invalidateAllPaths();
+            GRID.invalidateSelf();
+        }
+    }
+
+    public static boolean isInitialized() {
+        return GRID != null;
+    }
+
     public static HexGrid getInstance()  {
         if (GRID==null) {
             throw new RuntimeException("Must init hex grid before getting the instance.");
@@ -58,6 +73,7 @@ public class HexGrid extends Drawable {
      */
     private HexGrid(PointF topLeft, int numHorizontal, int numVertical) {
 
+        this.topLeft = topLeft;
         float a = Hexagon.getGlobalSideLength();
         float h = a*Hexagon.sqrt2/2.f;
 
@@ -74,6 +90,14 @@ public class HexGrid extends Drawable {
                     vOffset = 2.f*h*(float)j - h;
                 }
                 hexMatrix[j][i] = new Hexagon(new PointF(topLeft.x + hOffset, topLeft.y + vOffset));
+            }
+        }
+    }
+
+    public void invalidateAllPaths() {
+        for (Hexagon[] hs: hexMatrix) {
+            for (Hexagon h: hs) {
+                h.invalidatePath();
             }
         }
     }

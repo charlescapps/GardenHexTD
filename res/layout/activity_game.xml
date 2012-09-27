@@ -3,7 +3,9 @@
     android:id="@+id/rootLayoutGame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <com.ccapps.android.hextd.views.GameView
             android:id="@+id/gameView"
@@ -11,9 +13,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            >
-    </com.ccapps.android.hextd.views.GameView>
-
+            android:focusableInTouchMode="true"
+            android:focusable="true"/>
 
     <SlidingDrawer
         android:id="@+id/gameSlidingDrawer"
