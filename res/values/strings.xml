@@ -3,6 +3,6 @@
     <string name="app_name">Garden Hex TD</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Garden Hex TD</string>
-    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_game">Garden Hex TD</string>
 
 </resources>
