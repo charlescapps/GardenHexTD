@@ -74,20 +74,23 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    //@Override
-   // public void dispatchDraw()
 
+    /**
+     * From docs, looks like if I do it this way w / a custom thread, there's no need to even pause the thread.
+     * I can just draw "as fast as your thread is capable". http://developer.android.com/guide/topics/graphics/2d-graphics.html
+     */
     public class GameThread extends Thread {
         private SurfaceHolder sh;
-        private Canvas canvas;
+        private boolean needsDrawing;
         private PointF gridShiftValue;
         private boolean isRunning;
         private static final long PAUSE_TIME = 10; //30 frames per second (2 pauses happen)
-        private static final float VELOCITY_FACTOR = 2.0f;
+        private static final float VELOCITY_FACTOR = 1.5f;
 
         public GameThread(SurfaceHolder sh) {
             super();
             this.sh = sh;
+            this.needsDrawing = true;
         }
 
         @Override
@@ -102,19 +105,24 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         private void drawGrid() {
 
-            Canvas c = sh.lockCanvas();
+            if (this.needsDrawing) {
+                Canvas c = sh.lockCanvas();
 
-            c.drawColor(Color.BLACK);
+                c.drawColor(Color.BLACK);
 
-            HexGrid.getInstance().draw(c);
+                HexGrid.getInstance().draw(c);
 
-            sh.unlockCanvasAndPost(c);
+                sh.unlockCanvasAndPost(c);
+
+                this.needsDrawing = false;
+            }
         }
 
         private void shiftGrid() {
             if (this.gridShiftValue != null) {
                 HexGrid.shiftTopLeft(gridShiftValue);
                 this.gridShiftValue = null;
+                this.needsDrawing = true;
             }
         }
 
@@ -144,7 +152,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
-
         /**
          * Wait, then shift the grid if necessary, then draw the grid
          */
@@ -152,9 +159,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             while ( true ) {
                 if (isRunning) {
-                    pauseMe(PAUSE_TIME);
+//                    pauseMe(PAUSE_TIME);
                     shiftGrid();
-                    pauseMe(PAUSE_TIME);
+//                    pauseMe(PAUSE_TIME*4);
                     drawGrid();
                 } else {
                     suspendMe();

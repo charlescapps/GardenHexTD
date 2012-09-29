@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610e256e-d5d5-41fc-880b-368893e5f860" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
     </list>
     <ignored path="HexTD.iws" />
@@ -79,8 +78,27 @@
       <file leaf-file-name="GameView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="91" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.20289855">
-              <folding />
+            <state line="153" column="0" selection-start="4325" selection-end="4325" vertical-scroll-proportion="1.7198068">
+              <folding>
+                <element signature="method#GameView#0;class#GameView#0" expanded="false" />
+                <element signature="method#stopDrawing#0;class#GameView#0" expanded="false" />
+                <element signature="method#startDrawing#0;class#GameView#0" expanded="false" />
+                <element signature="method#onTouchEvent#0;class#GameView#0" expanded="false" />
+                <element signature="method#surfaceCreated#0;class#GameView#0" expanded="false" />
+                <element signature="method#surfaceChanged#0;class#GameView#0" expanded="false" />
+                <element signature="method#surfaceDestroyed#0;class#GameView#0" expanded="false" />
+                <element signature="docComment;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#GameThread#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#run#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#postSuspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#drawGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#shiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#postShiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#pauseMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#suspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="docComment;method#eventLoop#0;class#GameThread#0;class#GameView#0" expanded="false" />
+                <element signature="method#eventLoop#0;class#GameThread#0;class#GameView#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -180,6 +198,22 @@
     <option name="y" value="27" />
     <option name="width" value="1600" />
     <option name="height" value="846" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Spelling</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -375,6 +409,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="176" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="178" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="176" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="MemberChooser.sorted" value="false" />
@@ -390,15 +425,18 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="Errors" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
-  <component name="RunManager" selected="Android Application.HexTD - phone">
+  <component name="RunManager" selected="Android Application.HexTD">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -642,7 +680,11 @@
       <created>1348904290756</created>
       <updated>1348904290756</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Made scrolling performance better. Still could look better / be faster.">
+      <created>1348906919250</created>
+      <updated>1348906919250</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -664,7 +706,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24935065" sideWeight="0.67005813" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32994187" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32994187" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -709,7 +751,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scrolling is working. But I want to punch android and also the drawing is way too slow. Need to look into performance tomorrow." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made scrolling performance better. Still could look better / be faster." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -725,6 +767,7 @@
     <MESSAGE value="Adding intelliJ files. Dragging is not working yet." />
     <MESSAGE value="GameThread in GameView keeping track of drawing by sleeping. Arbitrarily 30 frames / s." />
     <MESSAGE value="Scrolling is working. But I want to punch android and also the drawing is way too slow. Need to look into performance tomorrow." />
+    <MESSAGE value="Made scrolling performance better. Still could look better / be faster." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -799,8 +842,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="91" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.20289855">
-          <folding />
+        <state line="153" column="0" selection-start="4325" selection-end="4325" vertical-scroll-proportion="1.7198068">
+          <folding>
+            <element signature="method#GameView#0;class#GameView#0" expanded="false" />
+            <element signature="method#stopDrawing#0;class#GameView#0" expanded="false" />
+            <element signature="method#startDrawing#0;class#GameView#0" expanded="false" />
+            <element signature="method#onTouchEvent#0;class#GameView#0" expanded="false" />
+            <element signature="method#surfaceCreated#0;class#GameView#0" expanded="false" />
+            <element signature="method#surfaceChanged#0;class#GameView#0" expanded="false" />
+            <element signature="method#surfaceDestroyed#0;class#GameView#0" expanded="false" />
+            <element signature="docComment;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#GameThread#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#run#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#postSuspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#drawGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#shiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#postShiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#pauseMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#suspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="docComment;method#eventLoop#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#eventLoop#0;class#GameThread#0;class#GameView#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
