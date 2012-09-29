@@ -39,7 +39,8 @@ public class HexGrid extends Drawable {
             GRID.topLeft.y += delta.y;
             PointF currentOffset = Hexagon.getGlobalOffset();
             Hexagon.setGlobalOffset(new PointF(delta.x + currentOffset.x, delta.y + currentOffset.y ));
-            GRID.invalidateAllPaths();
+            delta.negate();
+            GRID.invalidateAllPaths(delta);
         }
     }
 
@@ -93,10 +94,18 @@ public class HexGrid extends Drawable {
         }
     }
 
-    public void invalidateAllPaths() {
+    public void initAllPaths() {
         for (Hexagon[] hs: hexMatrix) {
             for (Hexagon h: hs) {
-                h.invalidatePath();
+                h.initPath();
+            }
+        }
+    }
+
+    public void invalidateAllPaths(PointF delta) {
+        for (Hexagon[] hs: hexMatrix) {
+            for (Hexagon h: hs) {
+                h.invalidatePath(delta);
             }
         }
     }

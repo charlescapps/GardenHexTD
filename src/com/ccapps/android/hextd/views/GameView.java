@@ -11,7 +11,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import com.ccapps.android.hextd.draw.HexGrid;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -27,7 +26,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void stopDrawing() {
-        this.gameThread.stopMe();
+        this.gameThread.postSuspendMe();
     }
 
     public void startDrawing() {
@@ -83,8 +82,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private Canvas canvas;
         private PointF gridShiftValue;
         private boolean isRunning;
-        private static final long PAUSE_TIME = 50; //about 60 frames per second
-        private static final float VELOCITY_FACTOR = 1.2f;
+        private static final long PAUSE_TIME = 10; //30 frames per second (2 pauses happen)
+        private static final float VELOCITY_FACTOR = 2.0f;
 
         public GameThread(SurfaceHolder sh) {
             super();
@@ -94,54 +93,71 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         @Override
         public void run() {
             this.isRunning = true;
-            HexGrid.initHexGrid(new PointF(0.f, 0.f), 10, 20, 40.f);
             eventLoop();
         }
 
-        public void stopMe() {
+        public void postSuspendMe() {
             this.isRunning = false;
         }
 
         private void drawGrid() {
 
-            if (HexGrid.isInitialized()) {
-                Canvas c = sh.lockCanvas();
+            Canvas c = sh.lockCanvas();
 
-                c.drawColor(Color.BLACK);
+            c.drawColor(Color.BLACK);
 
-                HexGrid.getInstance().draw(c);
+            HexGrid.getInstance().draw(c);
 
-                sh.unlockCanvasAndPost(c);
+            sh.unlockCanvasAndPost(c);
+        }
+
+        private void shiftGrid() {
+            if (this.gridShiftValue != null) {
+                HexGrid.shiftTopLeft(gridShiftValue);
+                this.gridShiftValue = null;
             }
         }
 
         public void postShiftGrid(PointF delta) {
             delta.x *= VELOCITY_FACTOR;
             delta.y *= VELOCITY_FACTOR;
-            HexGrid.shiftTopLeft(delta);
-            //GameView.this.invalidate();
+            this.gridShiftValue = delta;
         }
 
+        private void pauseMe(long time) {
+            try {
+                synchronized (this) {
+                    this.wait(time);
+                }
+            } catch (InterruptedException e) {
+                //pwn
+            }
+        }
+
+        private void suspendMe() {
+            try {
+                synchronized (this) {
+                    this.wait();
+                }
+            } catch (InterruptedException e) {
+                //pwn
+            }
+        }
+
+
+        /**
+         * Wait, then shift the grid if necessary, then draw the grid
+         */
         private void eventLoop() {
 
             while ( true ) {
                 if (isRunning) {
-                    try {
-                        synchronized (this) {
-                            this.wait(PAUSE_TIME);
-                        }
-                    } catch (InterruptedException e) {
-                        //pwn
-                    }
+                    pauseMe(PAUSE_TIME);
+                    shiftGrid();
+                    pauseMe(PAUSE_TIME);
                     drawGrid();
                 } else {
-                    synchronized (this) {
-                        try {
-                            this.wait();
-                        } catch (InterruptedException e) {
-                            //pwn
-                        }
-                    }
+                    suspendMe();
                 }
             }
 

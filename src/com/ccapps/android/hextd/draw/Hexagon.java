@@ -37,8 +37,9 @@ public class Hexagon extends Drawable {
         hexPoints[3] = new PointF(sideLength, 0.f);
         hexPoints[4] = new PointF((sideLength/2.f), (float)(-sideLength*sqrt2/2.));
         hexPoints[5] = new PointF((-sideLength/2.f), (float)(-sideLength*sqrt2/2.));
+
         if (HexGrid.isInitialized()) {
-            HexGrid.getInstance().invalidateAllPaths();
+            HexGrid.getInstance().initAllPaths();
         }
     }
 
@@ -72,8 +73,8 @@ public class Hexagon extends Drawable {
     /**
      * Determines path based on current side length and center
      */
-    public void invalidatePath() {
-        initPath();
+    public void invalidatePath(PointF delta) {
+        hexPath.offset(delta.x, delta.y);
     }
 
     public void initPath() {
