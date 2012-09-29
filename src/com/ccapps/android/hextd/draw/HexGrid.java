@@ -40,7 +40,6 @@ public class HexGrid extends Drawable {
             PointF currentOffset = Hexagon.getGlobalOffset();
             Hexagon.setGlobalOffset(new PointF(delta.x + currentOffset.x, delta.y + currentOffset.y ));
             GRID.invalidateAllPaths();
-            GRID.invalidateSelf();
         }
     }
 

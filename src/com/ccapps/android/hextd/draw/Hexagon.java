@@ -61,7 +61,7 @@ public class Hexagon extends Drawable {
 
     public Hexagon(PointF center) {
         this.center = center;
-        invalidatePath();
+        initPath();
         hexPaint = new Paint();
         hexPaint.setColor(Color.GREEN);
         hexPaint.setStrokeWidth(1);
@@ -73,13 +73,17 @@ public class Hexagon extends Drawable {
      * Determines path based on current side length and center
      */
     public void invalidatePath() {
+        initPath();
+    }
+
+    public void initPath() {
         hexPath = new Path();
         hexPath.moveTo(hexPoints[0].x, hexPoints[0].y);
         for (int i = 0; i < 6; i++) {
             hexPath.lineTo(hexPoints[(i+1)%6].x, hexPoints[(i+1)%6].y);
         }
         hexPath.close();
-        hexPath.offset(center.x - Hexagon.globalOffset.x, center.y - globalOffset.y);
+        hexPath.offset(center.x - Hexagon.globalOffset.x, center.y - Hexagon.globalOffset.y);
 
     }
 
