@@ -84,7 +84,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private boolean needsDrawing;
         private PointF gridShiftValue;
         private boolean isRunning;
-        private static final long PAUSE_TIME = 10; //30 frames per second (2 pauses happen)
+        private static final long PAUSE_TIME = 10; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
 
         public GameThread(SurfaceHolder sh) {
@@ -159,9 +159,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             while ( true ) {
                 if (isRunning) {
-//                    pauseMe(PAUSE_TIME);
+                    pauseMe(PAUSE_TIME);
                     shiftGrid();
-//                    pauseMe(PAUSE_TIME*4);
                     drawGrid();
                 } else {
                     suspendMe();

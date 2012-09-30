@@ -11,17 +11,18 @@ import android.graphics.drawable.Drawable;
  */
 public class Hexagon extends Drawable {
 
+    /********************STATICS****************************/
     public static final PointF[] hexPoints;
     public static final float sqrt2;
     private static float sideLength ;
-    private static PointF globalOffset;
+    public static PointF globalOffset;
 
     static {
         sqrt2 = (float)Math.sqrt(2.);
         hexPoints = new PointF[6];
         sideLength = 40.f; //initial side length value
         setGlobalSideLength(sideLength);
-        setGlobalOffset(new PointF(0.f, 0.f));
+        globalOffset=new PointF(0.f, 0.f);
     }
 
     /**
@@ -55,6 +56,8 @@ public class Hexagon extends Drawable {
         return Hexagon.globalOffset;
     }
 
+    /************************NON-STATICS************************************/
+
     private Path hexPath;
     private Paint hexPaint;
     private PointF center;
@@ -70,6 +73,7 @@ public class Hexagon extends Drawable {
         //neighbors to be set by the HexGrid instance.
     }
 
+    /***********************DRAWING RELATED**************************/
     /**
      * Determines path based on current side length and center
      */
@@ -88,13 +92,14 @@ public class Hexagon extends Drawable {
 
     }
 
+    public void addPathTo(Path p) {
+        p.addPath(this.hexPath);
+    }
+
     @Override
     public void draw(Canvas canvas) {
         canvas.drawPath(hexPath, hexPaint);
-    }
-
-    public void setNeighbors(Hexagon[] neighbors) {
-        this.neighbors = neighbors;
+        canvas.drawPath(hexPath, hexPaint);
     }
 
     @Override
@@ -111,4 +116,15 @@ public class Hexagon extends Drawable {
     public int getOpacity() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    /************************SETTERS / GETTERS************************************/
+    public Hexagon[] getNeighbors() {
+        return this.neighbors;
+    }
+
+    public void setNeighbors(Hexagon[] neighbors) {
+        this.neighbors = neighbors;
+    }
+
+
 }

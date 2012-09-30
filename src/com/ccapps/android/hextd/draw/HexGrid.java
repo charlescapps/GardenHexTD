@@ -1,10 +1,11 @@
 package com.ccapps.android.hextd.draw;
 
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.PointF;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.widget.GridLayout;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,14 +35,14 @@ public class HexGrid extends Drawable {
     }
 
     public static void shiftTopLeft(PointF delta) {
-        if (HexGrid.isInitialized()) {
-            GRID.topLeft.x += delta.x;
-            GRID.topLeft.y += delta.y;
-            PointF currentOffset = Hexagon.getGlobalOffset();
-            Hexagon.setGlobalOffset(new PointF(delta.x + currentOffset.x, delta.y + currentOffset.y ));
-            delta.negate();
-            GRID.invalidateAllPaths(delta);
-        }
+        GRID.topLeft.x += delta.x;
+        GRID.topLeft.y += delta.y;
+        Hexagon.globalOffset.x += delta.x;
+        Hexagon.globalOffset.y += delta.y;
+
+        GRID.gridPath.offset(delta.x, delta.y);
+        //  GRID.invalidateAllPaths(delta);
+
     }
 
     public static boolean isInitialized() {
@@ -49,9 +50,6 @@ public class HexGrid extends Drawable {
     }
 
     public static HexGrid getInstance()  {
-        if (GRID==null) {
-            throw new RuntimeException("Must init hex grid before getting the instance.");
-        }
         return HexGrid.GRID;
     }
 
@@ -59,6 +57,8 @@ public class HexGrid extends Drawable {
     private PointF topLeft;
     private int numHorizontal;
     private int numVertical;
+    private Path gridPath;
+    private Paint gridPaint; 
     /**
      * A hex grid is laid out basically like a square grid w/ more connections.
      * Will create documentation eventually w/ pretty diagrams.
@@ -76,7 +76,12 @@ public class HexGrid extends Drawable {
         this.topLeft = topLeft;
         float a = Hexagon.getGlobalSideLength();
         float h = a*Hexagon.sqrt2/2.f;
-
+        this.gridPath = new Path();
+        gridPaint = new Paint();
+        gridPaint.setColor(Color.GREEN);
+        gridPaint.setStrokeWidth(1);
+        gridPaint.setStyle(Paint.Style.STROKE);
+        
         hexMatrix = new Hexagon[numVertical][numHorizontal];  //rows / columns starting from top-left (math matrix style)
 
         //Generate the appropriate hexagons
@@ -90,6 +95,40 @@ public class HexGrid extends Drawable {
                     vOffset = 2.f*h*(float)j - h;
                 }
                 hexMatrix[j][i] = new Hexagon(new PointF(topLeft.x + hOffset, topLeft.y + vOffset));
+                hexMatrix[j][i].addPathTo(this.gridPath);
+            }
+        }
+
+        //link up hexagons
+        for (int i = 0; i < numVertical; i++) {
+            for (int j = 0; j < numHorizontal; j++) {
+                Hexagon[] nbrs = new Hexagon[6];
+                int numFound = 0;
+                for (int k = -1; k <= 1; k++) {
+                    for (int l = -1; l <= 1; l++) {
+                        if ( l == 0 && k == 0 ) { //no edge to self
+                            continue;
+                        }
+                        //out of bounds
+                        if (i+k < 0 || i + k > numVertical - 1 || j + l < 0 || j + l > numHorizontal - 1) {
+                            continue;
+                        }
+                        //Even columns only corner links in down a row
+                        if ( k == -1 && ( l == 1 ||  l == -1) && j % 2 == 0 ) {
+                            continue;
+                        }
+                        //Odd columns only have corner links up a row
+                        if ( k == 1 && ( l == 1 || l == -1) && j % 2 == 1 ) {
+                            continue;
+                        }
+                        nbrs[numFound++] = hexMatrix[i+k][j+l];
+                       // Verifying the proper edges are created!
+                       // Logger.getAnonymousLogger().log(Level.SEVERE, "Hex ("  + i + "," + j +
+                       //         ") has nbr at (" + (i+k) + ", " + (j+l) + ")");
+                    }
+                }
+                hexMatrix[i][j].setNeighbors(nbrs);
+
             }
         }
     }
@@ -112,11 +151,12 @@ public class HexGrid extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        for (Hexagon[] hs: hexMatrix) {
-            for (Hexagon h: hs) {
-                h.draw(canvas);
-            }
-        }
+//        for (Hexagon[] hs: hexMatrix) {
+//            for (Hexagon h: hs) {
+//                h.draw(canvas);
+//            }
+//        }
+        canvas.drawPath(gridPath, gridPaint);
     }
 
     @Override

@@ -26,3 +26,7 @@ draw 1 then repeat properly.
 
 --I was dumb calling a method on a thread object. It still runs in the other thread (derp.) Need to call a method
 that "posts" that something needs to be done, and have an event loop.
+    *Fixed
+
+TO DO: 9/29/2012: Make docs with plans
+--
