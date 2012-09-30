@@ -2,6 +2,7 @@ package com.ccapps.android.hextd.draw;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import com.ccapps.android.hextd.gamedata.Tower;
 
 /**
  * Created with IntelliJ IDEA.
@@ -61,10 +62,13 @@ public class Hexagon extends Drawable {
     private Path hexPath;
     private Paint hexPaint;
     private PointF center;
+    private Point gridPosition;
     private Hexagon[] neighbors;
+    private Tower tower;
 
-    public Hexagon(PointF center) {
+    public Hexagon(PointF center, Point gridPosition) {
         this.center = center;
+        this.gridPosition = gridPosition;
         initPath();
         hexPaint = new Paint();
         hexPaint.setColor(Color.GREEN);
@@ -98,8 +102,10 @@ public class Hexagon extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawPath(hexPath, hexPaint);
-        canvas.drawPath(hexPath, hexPaint);
+//        canvas.drawPath(hexPath, hexPaint);
+        if (this.getTower() != null) {
+            this.getTower().draw(canvas);
+        }
     }
 
     @Override
@@ -118,6 +124,14 @@ public class Hexagon extends Drawable {
     }
 
     /************************SETTERS / GETTERS************************************/
+    public PointF getCenter() {
+        return center;
+    }
+
+    public void setCenter(PointF center) {
+        this.center = center;
+    }
+
     public Hexagon[] getNeighbors() {
         return this.neighbors;
     }
@@ -126,5 +140,16 @@ public class Hexagon extends Drawable {
         this.neighbors = neighbors;
     }
 
+    public Point getGridPosition() {
+        return gridPosition;
+    }
+
+    public void setTower(Tower tower) {
+        this.tower = tower;
+    }
+
+    public Tower getTower() {
+        return this.tower;
+    }
 
 }

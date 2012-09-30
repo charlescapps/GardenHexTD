@@ -1,6 +1,8 @@
 package com.ccapps.android.hextd.gamedata;
 
+import android.graphics.Canvas;
 import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.draw.TowerDrawable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,13 +17,16 @@ public interface Tower {
     public int getDmgPerAttack();
     public Hexagon[] getAttackHexes(); //Read-only, not set directly
     public int getBeatsToWait();
+    public TowerDrawable getTowerDrawable();
 
-    public void settHex(Hexagon hex);
+    public void setHex(Hexagon hex);
     public void setDmgPerAttack(int dmgPerAttack);
     public void setBeatsToWait(int beatsToWait);
+    public void setTowerDrawable(TowerDrawable towerDrawable);
 
     /*************ACTIONS************************/
     public void rotateClockwise(int numHexes);
     public void attack();
+    public void draw(Canvas canvas);
 
 }

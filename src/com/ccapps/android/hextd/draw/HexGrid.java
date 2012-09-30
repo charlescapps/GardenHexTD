@@ -3,6 +3,7 @@ package com.ccapps.android.hextd.draw;
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.widget.GridLayout;
+import com.ccapps.android.hextd.gamedata.Tower;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +67,6 @@ public class HexGrid extends Drawable {
     private Hexagon[][] hexMatrix;
 
     /**
-     *
      * @param topLeft - coordinates of the bottom-left hexagon
      * @param numHorizontal - the number of hexagons left-to-right
      * @param numVertical - the number of hexagons top-to-bottom
@@ -94,7 +94,8 @@ public class HexGrid extends Drawable {
                 } else {
                     vOffset = 2.f*h*(float)j - h;
                 }
-                hexMatrix[j][i] = new Hexagon(new PointF(topLeft.x + hOffset, topLeft.y + vOffset));
+                hexMatrix[j][i] = new Hexagon(new PointF(topLeft.x + hOffset, topLeft.y + vOffset),
+                        new Point(j, i));
                 hexMatrix[j][i].addPathTo(this.gridPath);
             }
         }
@@ -151,12 +152,12 @@ public class HexGrid extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-//        for (Hexagon[] hs: hexMatrix) {
-//            for (Hexagon h: hs) {
-//                h.draw(canvas);
-//            }
-//        }
         canvas.drawPath(gridPath, gridPaint);
+        for (Hexagon[] hs: hexMatrix) {
+            for (Hexagon h: hs) {
+                h.draw(canvas);
+            }
+        }
     }
 
     @Override
@@ -172,5 +173,22 @@ public class HexGrid extends Drawable {
     @Override
     public int getOpacity() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    /***********************SETTERS / GETTERS*******************************/
+    public int getNumVertical() {
+        return numVertical;
+    }
+
+    public int getNumHorizontal() {
+        return numHorizontal;
+    }
+
+    public Hexagon get(int r, int c) {
+        return hexMatrix[r][c];
+    }
+
+    public void setTower(int r, int c, Tower tower) {
+        hexMatrix[r][c].setTower(tower);
     }
 }
