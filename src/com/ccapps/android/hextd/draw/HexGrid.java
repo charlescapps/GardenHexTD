@@ -22,6 +22,9 @@ public class HexGrid extends Drawable {
 
     //STATICS
     private static HexGrid GRID;
+    public static PointF TOP_LEFT_EXTENT;
+    public static PointF BOTTOM_RIGHT_EXTENT;
+    public static PointF MARGIN = new PointF(40.f, 40.f); //pixels
 
     /**
      * Must be called before getting an instance...
@@ -30,16 +33,23 @@ public class HexGrid extends Drawable {
      * @param numHorizontal
      * @param numVertical
      */
-    public static void initHexGrid(PointF topLeft, int numHorizontal, int numVertical, float sideLength ) {
-        HexGrid.GRID = new HexGrid(topLeft, numHorizontal, numVertical);
+    public static void initHexGrid(PointF topLeft, int numHorizontal, int numVertical, float sideLength, Point screenSize ) {
+        HexGrid.GRID = new HexGrid(numHorizontal, numVertical, screenSize);
         Hexagon.setGlobalSideLength(sideLength);
     }
 
     public static void shiftTopLeft(PointF delta) {
-        GRID.topLeft.x += delta.x;
-        GRID.topLeft.y += delta.y;
-        Hexagon.globalOffset.x += delta.x;
-        Hexagon.globalOffset.y += delta.y;
+
+        float newX = Hexagon.globalOffset.x + delta.x;
+        if (-newX < TOP_LEFT_EXTENT.x || -newX > BOTTOM_RIGHT_EXTENT.x) {
+            return;
+        }
+        float newY = Hexagon.globalOffset.y + delta.y;
+        if (-newY < TOP_LEFT_EXTENT.y || -newY > BOTTOM_RIGHT_EXTENT.y) {
+            return;
+        }
+        Hexagon.globalOffset.x = newX;
+        Hexagon.globalOffset.y = newY;
 
         GRID.gridPath.offset(delta.x, delta.y);
         //  GRID.invalidateAllPaths(delta);
@@ -67,15 +77,16 @@ public class HexGrid extends Drawable {
     private Hexagon[][] hexMatrix;
 
     /**
-     * @param topLeft - coordinates of the bottom-left hexagon
      * @param numHorizontal - the number of hexagons left-to-right
      * @param numVertical - the number of hexagons top-to-bottom
      */
-    private HexGrid(PointF topLeft, int numHorizontal, int numVertical) {
+    private HexGrid(int numHorizontal, int numVertical, Point screenSize) {
 
-        this.topLeft = topLeft;
+        this.topLeft = new PointF(0.f, 0.f);
+        this.numHorizontal = numHorizontal;
+        this.numVertical = numVertical;
         float a = Hexagon.getGlobalSideLength();
-        float h = a*Hexagon.sqrt2/2.f;
+        float h = a*Hexagon.sqrt3/2.f;
         this.gridPath = new Path();
         gridPaint = new Paint();
         gridPaint.setColor(Color.GREEN);
@@ -132,6 +143,10 @@ public class HexGrid extends Drawable {
 
             }
         }
+
+        TOP_LEFT_EXTENT = new PointF(-MARGIN.x - a, -MARGIN.y - 2*h);
+        BOTTOM_RIGHT_EXTENT = new PointF(2.f*a*(float)numHorizontal - a + MARGIN.x - (float)screenSize.x,
+                h*2.f*(float)(numVertical+1) + MARGIN.y - (float)screenSize.y);
     }
 
     public void initAllPaths() {

@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610e256e-d5d5-41fc-880b-368893e5f860" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/tower.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerDrawable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
     </list>
     <ignored path="HexTD.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,14 +67,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HexGrid.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HexGrid.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="155" column="0" selection-start="5024" selection-end="5024" vertical-scroll-proportion="-39.3">
+            <state line="147" column="54" selection-start="5132" selection-end="5132" vertical-scroll-proportion="0.41483516">
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1349037009000" expanded="true" signature="5030:5153" placeholder="..." />
+                <marker date="1349043943000" expanded="true" signature="5740:5863" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="37" selection-start="634" selection-end="634" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -85,13 +91,11 @@
       <file leaf-file-name="GameView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="54" selection-start="2743" selection-end="2743" vertical-scroll-proportion="0.0">
+            <state line="58" column="61" selection-start="1572" selection-end="1572" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="method#GameView#0;class#GameView#0" expanded="false" />
                 <element signature="method#stopDrawing#0;class#GameView#0" expanded="false" />
-                <element signature="method#startDrawing#0;class#GameView#0" expanded="false" />
                 <element signature="method#onTouchEvent#0;class#GameView#0" expanded="false" />
-                <element signature="method#surfaceCreated#0;class#GameView#0" expanded="false" />
                 <element signature="method#surfaceChanged#0;class#GameView#0" expanded="false" />
                 <element signature="method#surfaceDestroyed#0;class#GameView#0" expanded="false" />
                 <element signature="docComment;class#GameThread#0;class#GameView#0" expanded="false" />
@@ -100,8 +104,6 @@
                 <element signature="method#postSuspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
                 <element signature="method#postShiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
                 <element signature="method#pauseMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
-                <element signature="method#suspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
-                <element signature="docComment;method#eventLoop#0;class#GameThread#0;class#GameView#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -110,7 +112,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="20" selection-start="1170" selection-end="1170" vertical-scroll-proportion="0.0">
+            <state line="27" column="0" selection-start="904" selection-end="904" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -119,7 +121,7 @@
       <file leaf-file-name="SwipeListener.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/SwipeListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="19" selection-start="996" selection-end="996" vertical-scroll-proportion="0.0">
+            <state line="34" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -156,10 +158,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TowerDrawable.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TowerDrawable.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerDrawable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="57" selection-start="566" selection-end="566" vertical-scroll-proportion="0.07971015">
+            <state line="21" column="57" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,7 +172,7 @@
       <file leaf-file-name="Hexagon.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="12" selection-start="3283" selection-end="3283" vertical-scroll-proportion="0.0">
+            <state line="105" column="0" selection-start="3270" selection-end="3270" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -194,16 +196,16 @@
       <list>
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" />
         <option value="$PROJECT_DIR$/androidNotes.txt" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/SwipeListener.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerDrawable.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/SwipeListener.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" />
       </list>
     </option>
   </component>
@@ -344,6 +346,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hextd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HexTD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HexTD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -450,7 +474,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="options.searchVisible" value="true" />
   </component>
-  <component name="RunManager" selected="Android Application.HexTD">
+  <component name="RunManager" selected="Android Application.HexTD - phone">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -706,12 +730,16 @@
       <created>1349033615676</created>
       <updated>1349033615677</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Draws a tower at (1, 0)">
+      <created>1349037133293</created>
+      <updated>1349037133293</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="846" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48255813" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -728,7 +756,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24935065" sideWeight="0.67005813" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24935065" sideWeight="0.67005813" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32994187" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -773,7 +801,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Draws entire grid as a single path. Hence when a change occurs only need to offset 1 path. This might increase performance, not sure. Decreases &quot;tearing&quot; when you drag to move the grid." />
+    <option name="LAST_COMMIT_MESSAGE" value="Draws a tower at (1, 0)" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -792,6 +820,7 @@
     <MESSAGE value="Made scrolling performance better. Still could look better / be faster." />
     <MESSAGE value="Took out pauses. Docs seem to say that you don't need to pause regularly. Just draw as fast as you want to. Instead made a &quot;needsDrawing&quot; variable. http://developer.android.com/guide/topics/graphics/2d-graphics.html" />
     <MESSAGE value="Draws entire grid as a single path. Hence when a change occurs only need to offset 1 path. This might increase performance, not sure. Decreases &quot;tearing&quot; when you drag to move the grid." />
+    <MESSAGE value="Draws a tower at (1, 0)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -816,11 +845,6 @@
         <state line="33" column="16" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="25" selection-start="854" selection-end="854" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="52" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0" />
@@ -838,46 +862,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/SwipeListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="19" selection-start="996" selection-end="996" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="54" selection-start="2743" selection-end="2743" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#GameView#0;class#GameView#0" expanded="false" />
-            <element signature="method#stopDrawing#0;class#GameView#0" expanded="false" />
-            <element signature="method#startDrawing#0;class#GameView#0" expanded="false" />
-            <element signature="method#onTouchEvent#0;class#GameView#0" expanded="false" />
-            <element signature="method#surfaceCreated#0;class#GameView#0" expanded="false" />
-            <element signature="method#surfaceChanged#0;class#GameView#0" expanded="false" />
-            <element signature="method#surfaceDestroyed#0;class#GameView#0" expanded="false" />
-            <element signature="docComment;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#GameThread#0;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#run#0;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#postSuspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#postShiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#pauseMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#suspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
-            <element signature="docComment;method#eventLoop#0;class#GameThread#0;class#GameView#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/com/ccapps/android/hextd/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="19" selection-start="236" selection-end="236" vertical-scroll-proportion="0.14492753">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="20" selection-start="1170" selection-end="1170" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -900,28 +887,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerDrawable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="57" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/SwipeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="920" selection-end="920" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="12" selection-start="3283" selection-end="3283" vertical-scroll-proportion="0.0">
+        <state line="105" column="0" selection-start="3270" selection-end="3270" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="904" selection-end="904" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="61" selection-start="1572" selection-end="1572" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#GameView#0;class#GameView#0" expanded="false" />
+            <element signature="method#stopDrawing#0;class#GameView#0" expanded="false" />
+            <element signature="method#onTouchEvent#0;class#GameView#0" expanded="false" />
+            <element signature="method#surfaceChanged#0;class#GameView#0" expanded="false" />
+            <element signature="method#surfaceDestroyed#0;class#GameView#0" expanded="false" />
+            <element signature="docComment;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#GameThread#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#run#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#postSuspendMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#postShiftGrid#0;class#GameThread#0;class#GameView#0" expanded="false" />
+            <element signature="method#pauseMe#0;class#GameThread#0;class#GameView#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="37" selection-start="634" selection-end="634" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="155" column="0" selection-start="5024" selection-end="5024" vertical-scroll-proportion="-39.3">
+        <state line="147" column="54" selection-start="5132" selection-end="5132" vertical-scroll-proportion="0.41483516">
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1349037009000" expanded="true" signature="5030:5153" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerDrawable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="57" selection-start="566" selection-end="566" vertical-scroll-proportion="0.07971015">
-          <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1349043943000" expanded="true" signature="5740:5863" placeholder="..." />
           </folding>
         </state>
       </provider>

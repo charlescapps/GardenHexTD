@@ -14,12 +14,12 @@ public class Hexagon extends Drawable {
 
     /********************STATICS****************************/
     public static final PointF[] hexPoints;
-    public static final float sqrt2;
+    public static final float sqrt3;
     private static float sideLength ;
     public static PointF globalOffset;
 
     static {
-        sqrt2 = (float)Math.sqrt(2.);
+        sqrt3 = (float)Math.sqrt(3.);
         hexPoints = new PointF[6];
         sideLength = 40.f; //initial side length value
         setGlobalSideLength(sideLength);
@@ -33,12 +33,15 @@ public class Hexagon extends Drawable {
      */
     public static void setGlobalSideLength(float newLength) {
         Hexagon.sideLength = newLength;
+        float h = sideLength*sqrt3/2.f;
         hexPoints[0] = new PointF(-sideLength, 0.f);
-        hexPoints[1] = new PointF((-sideLength/2.f), (float)(sideLength*sqrt2/2.));
-        hexPoints[2] = new PointF((sideLength/2.f), (float)(sideLength*sqrt2/2.));
+//        hexPoints[0] = new PointF(-h, 0.f);
+        hexPoints[1] = new PointF((-sideLength/2.f), (float)(sideLength*sqrt3/2.));
+        hexPoints[2] = new PointF((sideLength/2.f), (float)(sideLength*sqrt3/2.));
         hexPoints[3] = new PointF(sideLength, 0.f);
-        hexPoints[4] = new PointF((sideLength/2.f), (float)(-sideLength*sqrt2/2.));
-        hexPoints[5] = new PointF((-sideLength/2.f), (float)(-sideLength*sqrt2/2.));
+//        hexPoints[3] = new PointF(h, 0.f);
+        hexPoints[4] = new PointF((sideLength/2.f), (float)(-sideLength*sqrt3/2.));
+        hexPoints[5] = new PointF((-sideLength/2.f), (float)(-sideLength*sqrt3/2.));
 
         if (HexGrid.isInitialized()) {
             HexGrid.getInstance().initAllPaths();
@@ -47,14 +50,6 @@ public class Hexagon extends Drawable {
 
     public static float getGlobalSideLength() {
         return Hexagon.sideLength;
-    }
-
-    public static void setGlobalOffset(PointF offset) {
-        Hexagon.globalOffset = offset;
-    }
-
-    public static PointF getGlobalOffset() {
-        return Hexagon.globalOffset;
     }
 
     /************************NON-STATICS************************************/

@@ -31,9 +31,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void startDrawing() {
         if (this.gameThread != null) {
-            synchronized (gameThread) {
-                gameThread.notify();
-            }
+            gameThread.unSuspendMe();
         }
     }
 
@@ -58,6 +56,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
         requestFocusFromTouch();
         gameThread = new GameThread(getHolder());
         gestureDetector = new GestureDetector(this.getContext(), new SwipeListener(gameThread));
@@ -150,6 +149,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             } catch (InterruptedException e) {
                 //pwn
             }
+        }
+
+        public void unSuspendMe() {
+            this.isRunning = true;
+            synchronized (this) {
+                this.notify();
+            }
+
         }
 
         /**
