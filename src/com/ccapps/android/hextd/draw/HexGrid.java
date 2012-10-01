@@ -24,7 +24,7 @@ public class HexGrid extends Drawable {
     private static HexGrid GRID;
     public static PointF TOP_LEFT_EXTENT;
     public static PointF BOTTOM_RIGHT_EXTENT;
-    public static PointF MARGIN = new PointF(40.f, 40.f); //pixels
+    public static PointF MARGIN = new PointF(80.f, 80.f); //pixels
 
     /**
      * Must be called before getting an instance...
@@ -34,18 +34,18 @@ public class HexGrid extends Drawable {
      * @param numVertical
      */
     public static void initHexGrid(PointF topLeft, int numHorizontal, int numVertical, float sideLength, Point screenSize ) {
-        HexGrid.GRID = new HexGrid(numHorizontal, numVertical, screenSize);
         Hexagon.setGlobalSideLength(sideLength);
+        HexGrid.GRID = new HexGrid(numHorizontal, numVertical, screenSize);
     }
 
     public static void shiftTopLeft(PointF delta) {
 
         float newX = Hexagon.globalOffset.x + delta.x;
-        if (-newX < TOP_LEFT_EXTENT.x || -newX > BOTTOM_RIGHT_EXTENT.x) {
+        if ( -newX < TOP_LEFT_EXTENT.x || -newX > BOTTOM_RIGHT_EXTENT.x) {
             return;
         }
         float newY = Hexagon.globalOffset.y + delta.y;
-        if (-newY < TOP_LEFT_EXTENT.y || -newY > BOTTOM_RIGHT_EXTENT.y) {
+        if ( -newY < TOP_LEFT_EXTENT.y || -newY > BOTTOM_RIGHT_EXTENT.y) {
             return;
         }
         Hexagon.globalOffset.x = newX;
@@ -145,8 +145,9 @@ public class HexGrid extends Drawable {
         }
 
         TOP_LEFT_EXTENT = new PointF(-MARGIN.x - a, -MARGIN.y - 2*h);
-        BOTTOM_RIGHT_EXTENT = new PointF(2.f*a*(float)numHorizontal - a + MARGIN.x - (float)screenSize.x,
-                h*2.f*(float)(numVertical+1) + MARGIN.y - (float)screenSize.y);
+        BOTTOM_RIGHT_EXTENT = new PointF(
+                3.f*a*(float)numHorizontal/2.f - a/2.f + MARGIN.x - (float)screenSize.x,
+                2.f*h*(float)(numVertical+1) + MARGIN.y - (float)screenSize.y);
     }
 
     public void initAllPaths() {

@@ -21,8 +21,7 @@ public class Hexagon extends Drawable {
     static {
         sqrt3 = (float)Math.sqrt(3.);
         hexPoints = new PointF[6];
-        sideLength = 40.f; //initial side length value
-        setGlobalSideLength(sideLength);
+        setGlobalSideLength(40.f);
         globalOffset=new PointF(0.f, 0.f);
     }
 
@@ -35,11 +34,9 @@ public class Hexagon extends Drawable {
         Hexagon.sideLength = newLength;
         float h = sideLength*sqrt3/2.f;
         hexPoints[0] = new PointF(-sideLength, 0.f);
-//        hexPoints[0] = new PointF(-h, 0.f);
         hexPoints[1] = new PointF((-sideLength/2.f), (float)(sideLength*sqrt3/2.));
         hexPoints[2] = new PointF((sideLength/2.f), (float)(sideLength*sqrt3/2.));
         hexPoints[3] = new PointF(sideLength, 0.f);
-//        hexPoints[3] = new PointF(h, 0.f);
         hexPoints[4] = new PointF((sideLength/2.f), (float)(-sideLength*sqrt3/2.));
         hexPoints[5] = new PointF((-sideLength/2.f), (float)(-sideLength*sqrt3/2.));
 
