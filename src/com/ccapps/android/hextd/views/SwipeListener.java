@@ -31,11 +31,8 @@ public class SwipeListener extends GestureDetector.SimpleOnGestureListener {
     @Override
     public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
-        //Logger.getAnonymousLogger().log(Level.SEVERE, "EVENT IN SCROLL: X=" + distanceX + ", Y=" + distanceY);
-        PointF delta = new PointF(distanceX, distanceY);
-        delta.negate(); //shift opposite direction that scroll
-        gameThread.postShiftGrid(delta);
-        return false;
+        gameThread.postShiftGrid(-distanceX, -distanceY);
+        return true;
 
     }
 

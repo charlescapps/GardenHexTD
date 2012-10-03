@@ -95,7 +95,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private boolean needsDrawing;
         private PointF gridShiftValue;
         private boolean isRunning;
-        private static final long PAUSE_TIME = 20; // limit to 60 fps, reduce computations
+        private static final long PAUSE_TIME = 5; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
 
         public GameThread(SurfaceHolder sh) {
@@ -137,10 +137,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
-        public void postShiftGrid(PointF delta) {
-            delta.x *= VELOCITY_FACTOR;
-            delta.y *= VELOCITY_FACTOR;
-            this.gridShiftValue = delta;
+        public void postShiftGrid(float x, float y) {
+            x *= VELOCITY_FACTOR;
+            y *= VELOCITY_FACTOR;
+            this.gridShiftValue = new PointF(x, y);
         }
 
         private void pauseMe(long time) {
