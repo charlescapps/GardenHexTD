@@ -19,13 +19,17 @@ public class BasicTower implements Tower {
     private int dmgPerAttack;
     private Hexagon[] attackHexes;
     private int beatsToWait;
+    private int relativeBeat;
     private TowerDrawable towerDrawable;
+    private boolean isAttacking;
 
     public BasicTower(Hexagon hex) {
         this.dmgPerAttack = 20;
         this.hex = hex;
         Point pos = hex.getGridPosition();
         this.attackHexes = new Hexagon[1];
+        this.isAttacking = false;
+        this.beatsToWait = 2;
         HexGrid grid = HexGrid.getInstance();
         int numVertical = grid.getNumVertical();
 
@@ -88,11 +92,24 @@ public class BasicTower implements Tower {
 
     @Override
     public void attack() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        this.isAttacking = true;
+        ++relativeBeat;
+        for (Hexagon h: attackHexes) {
+            if (relativeBeat % beatsToWait == 0) {
+                h.attacked(dmgPerAttack, true);
+            } else {
+                h.attacked(0, false);
+            }
+        }
     }
 
     @Override
     public void draw(Canvas canvas) {
         this.towerDrawable.draw(canvas);
+        if (this.isAttacking) {
+            for (Hexagon h: this.getAttackHexes()) {
+                h.draw(canvas);
+            }
+        }
     }
 }

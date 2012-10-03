@@ -30,7 +30,7 @@ public class TowerDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(towerImg, imgTopLeft.x + Hexagon.globalOffset.x, imgTopLeft.y + Hexagon.globalOffset.y, null);
+        canvas.drawBitmap(towerImg, imgTopLeft.x + HexGrid.globalOffset.x, imgTopLeft.y + HexGrid.globalOffset.y, null);
     }
 
     @Override

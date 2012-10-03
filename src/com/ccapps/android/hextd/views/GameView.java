@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.ccapps.android.hextd.activities.GameLogicThread;
 import com.ccapps.android.hextd.draw.HexGrid;
 
 import java.util.logging.Logger;
@@ -17,12 +18,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
     private GestureDetector gestureDetector;
+    private GameLogicThread gameLogicThread;
     private Logger l = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
         getHolder().addCallback(this);
+    }
 
+    public void setGameLogicThread(GameLogicThread gameLogicThread) {
+        this.gameLogicThread = gameLogicThread;
     }
 
     public void stopDrawing() {
@@ -33,6 +38,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if (this.gameThread != null) {
             gameThread.unSuspendMe();
         }
+    }
+
+    public void postNeedsDrawing() {
+
+        this.gameThread.postNeedsDrawing();
+
     }
 
     @Override
@@ -61,6 +72,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameThread = new GameThread(getHolder());
         gestureDetector = new GestureDetector(this.getContext(), new SwipeListener(gameThread));
         gameThread.start();
+        gameLogicThread.start();
     }
 
     @Override
@@ -83,7 +95,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private boolean needsDrawing;
         private PointF gridShiftValue;
         private boolean isRunning;
-        private static final long PAUSE_TIME = 10; // limit to 60 fps, reduce computations
+        private static final long PAUSE_TIME = 20; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
 
         public GameThread(SurfaceHolder sh) {
@@ -157,6 +169,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 this.notify();
             }
 
+        }
+
+        public void postNeedsDrawing() {
+            this.needsDrawing = true;
         }
 
         /**

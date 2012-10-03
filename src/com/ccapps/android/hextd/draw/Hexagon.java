@@ -16,13 +16,12 @@ public class Hexagon extends Drawable {
     public static final PointF[] hexPoints;
     public static final float sqrt3;
     private static float sideLength ;
-    public static PointF globalOffset;
 
     static {
         sqrt3 = (float)Math.sqrt(3.);
         hexPoints = new PointF[6];
         setGlobalSideLength(40.f);
-        globalOffset=new PointF(0.f, 0.f);
+
     }
 
     /**
@@ -57,13 +56,14 @@ public class Hexagon extends Drawable {
     private Point gridPosition;
     private Hexagon[] neighbors;
     private Tower tower;
+    private boolean drawPath = false;
 
     public Hexagon(PointF center, Point gridPosition) {
         this.center = center;
         this.gridPosition = gridPosition;
         initPath();
         hexPaint = new Paint();
-        hexPaint.setColor(Color.GREEN);
+        hexPaint.setColor(Color.RED);
         hexPaint.setStrokeWidth(1);
         hexPaint.setStyle(Paint.Style.STROKE);
         //neighbors to be set by the HexGrid instance.
@@ -84,7 +84,7 @@ public class Hexagon extends Drawable {
             hexPath.lineTo(hexPoints[(i+1)%6].x, hexPoints[(i+1)%6].y);
         }
         hexPath.close();
-        hexPath.offset(center.x - Hexagon.globalOffset.x, center.y - Hexagon.globalOffset.y);
+        hexPath.offset(center.x - HexGrid.globalOffset.x, center.y - HexGrid.globalOffset.y);
 
     }
 
@@ -94,10 +94,14 @@ public class Hexagon extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-//        canvas.drawPath(hexPath, hexPaint);
-        if (this.getTower() != null) {
-            this.getTower().draw(canvas);
+        //Draw outline of hex or something else TBD
+        if (drawPath) {
+            hexPaint.setColor(Color.RED);
+        } else {
+            hexPaint.setColor(Color.GREEN);
         }
+        canvas.drawPath(this.hexPath, this.hexPaint);
+
     }
 
     @Override
@@ -142,6 +146,14 @@ public class Hexagon extends Drawable {
 
     public Tower getTower() {
         return this.tower;
+    }
+
+    /*****************************GAME LOGIC************************************/
+    /**
+     * Fire events when a square is attacked
+     */
+    public void attacked(int dmg, boolean drawPath) {
+        this.drawPath = drawPath;
     }
 
 }

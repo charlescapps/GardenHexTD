@@ -7,10 +7,18 @@ import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.views.GameView;
 
 public class GameActivity extends Activity {
+
+    private GameLogicThread gameLogicThread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        GameView v = (GameView)findViewById(R.id.gameView);
+
+        this.gameLogicThread = new GameLogicThread(v);
+
+        v.setGameLogicThread(gameLogicThread);
     }
 
     @Override
@@ -25,6 +33,7 @@ public class GameActivity extends Activity {
         super.onPause();
         GameView v = (GameView)findViewById(R.id.gameView);
         v.stopDrawing();
+        gameLogicThread.postSuspendMe();
     }
 
     @Override
@@ -32,5 +41,6 @@ public class GameActivity extends Activity {
         super.onResume();
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
+        gameLogicThread.unSuspendMe();
     }
 }

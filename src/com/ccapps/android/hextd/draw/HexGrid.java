@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.widget.GridLayout;
 import com.ccapps.android.hextd.gamedata.Tower;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +27,8 @@ public class HexGrid extends Drawable {
     public static PointF TOP_LEFT_EXTENT;
     public static PointF BOTTOM_RIGHT_EXTENT;
     public static PointF MARGIN = new PointF(80.f, 80.f); //pixels
+    public static PointF globalOffset = new PointF(0.f, 0.f);
+
 
     /**
      * Must be called before getting an instance...
@@ -40,19 +44,25 @@ public class HexGrid extends Drawable {
 
     public static void shiftTopLeft(PointF delta) {
 
-        float newX = Hexagon.globalOffset.x + delta.x;
+        float newX = HexGrid.globalOffset.x + delta.x;
         if ( -newX < TOP_LEFT_EXTENT.x || -newX > BOTTOM_RIGHT_EXTENT.x) {
             return;
         }
-        float newY = Hexagon.globalOffset.y + delta.y;
+        float newY = HexGrid.globalOffset.y + delta.y;
         if ( -newY < TOP_LEFT_EXTENT.y || -newY > BOTTOM_RIGHT_EXTENT.y) {
             return;
         }
-        Hexagon.globalOffset.x = newX;
-        Hexagon.globalOffset.y = newY;
+        HexGrid.globalOffset.x = newX;
+        HexGrid.globalOffset.y = newY;
 
         GRID.gridPath.offset(delta.x, delta.y);
-        //  GRID.invalidateAllPaths(delta);
+
+        for (Tower t: GRID.towersOnGrid) {
+            t.getHex().invalidatePath(delta);
+            for (Hexagon h: t.getAttackHexes()) {
+                h.invalidatePath(delta);
+            }
+        }
 
     }
 
@@ -69,7 +79,8 @@ public class HexGrid extends Drawable {
     private int numHorizontal;
     private int numVertical;
     private Path gridPath;
-    private Paint gridPaint; 
+    private Paint gridPaint;
+    private List<Tower> towersOnGrid;
     /**
      * A hex grid is laid out basically like a square grid w/ more connections.
      * Will create documentation eventually w/ pretty diagrams.
@@ -88,6 +99,7 @@ public class HexGrid extends Drawable {
         float a = Hexagon.getGlobalSideLength();
         float h = a*Hexagon.sqrt3/2.f;
         this.gridPath = new Path();
+        this.towersOnGrid = new ArrayList<Tower>();
         gridPaint = new Paint();
         gridPaint.setColor(Color.GREEN);
         gridPaint.setStrokeWidth(1);
@@ -169,10 +181,8 @@ public class HexGrid extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawPath(gridPath, gridPaint);
-        for (Hexagon[] hs: hexMatrix) {
-            for (Hexagon h: hs) {
-                h.draw(canvas);
-            }
+        for (Tower t: towersOnGrid) {
+            t.draw(canvas);
         }
     }
 
@@ -206,5 +216,10 @@ public class HexGrid extends Drawable {
 
     public void setTower(int r, int c, Tower tower) {
         hexMatrix[r][c].setTower(tower);
+        towersOnGrid.add(tower);
+    }
+
+    public List<Tower> getTowersOnGrid() {
+        return towersOnGrid;
     }
 }
