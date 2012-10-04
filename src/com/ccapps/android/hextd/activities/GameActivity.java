@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import com.ccapps.android.hextd.R;
+import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.views.GameView;
 
 public class GameActivity extends Activity {
@@ -19,6 +20,13 @@ public class GameActivity extends Activity {
         this.gameLogicThread = new GameLogicThread(v);
 
         v.setGameLogicThread(gameLogicThread);
+
+        HexGrid grid = HexGrid.getInstance();
+        int numVertical = grid.getNumVertical();
+        int numHorizontal = grid.getNumHorizontal();
+
+        grid.get(numVertical-1, numHorizontal/2).setGoal(true);
+
     }
 
     @Override

@@ -95,6 +95,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private boolean needsDrawing;
         private PointF gridShiftValue;
         private boolean isRunning;
+        private HexGrid gridInstance;
         private static final long PAUSE_TIME = 5; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
 
@@ -102,6 +103,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             super();
             this.sh = sh;
             this.needsDrawing = true;
+            this.gridInstance = HexGrid.getInstance();
         }
 
         @Override
@@ -119,14 +121,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             if (this.needsDrawing) {
                 Canvas c = sh.lockCanvas();
 
-                c.drawColor(Color.BLACK);
+                c.drawColor(Color.BLACK);  //avoid lingering artifacts from previous draw
 
-                HexGrid.getInstance().draw(c);
-
-                sh.unlockCanvasAndPost(c);
+                gridInstance.draw(c);
 
                 this.needsDrawing = false;
+
+                sh.unlockCanvasAndPost(c);
             }
+
         }
 
         private void shiftGrid() {

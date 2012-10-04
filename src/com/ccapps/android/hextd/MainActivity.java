@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 
         Display defaultDisplay = getWindowManager().getDefaultDisplay();
         Point screenSize = new Point(defaultDisplay.getWidth(), defaultDisplay.getHeight());
-        HexGrid.initHexGrid(new PointF(0.f, 0.f), 20, 20, 25.f, screenSize);
+        HexGrid.initHexGrid(new PointF(0.f, 0.f), 15, 15, 25.f, screenSize);
         HexGrid hexGrid = HexGrid.getInstance();
         Tower basicTower = new BasicTower(hexGrid.get(1,0));
         hexGrid.setTower(1, 0, basicTower);

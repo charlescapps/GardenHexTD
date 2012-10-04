@@ -58,10 +58,14 @@ public class HexGrid extends Drawable {
         GRID.gridPath.offset(delta.x, delta.y);
 
         for (Tower t: GRID.towersOnGrid) {
-            t.getHex().invalidatePath(delta);
+           // t.getHex().invalidatePath(delta);
             for (Hexagon h: t.getAttackHexes()) {
                 h.invalidatePath(delta);
             }
+        }
+
+        for (Hexagon h: GRID.goalHexes) {
+            h.invalidatePath(delta);
         }
 
     }
@@ -81,6 +85,7 @@ public class HexGrid extends Drawable {
     private Path gridPath;
     private Paint gridPaint;
     private List<Tower> towersOnGrid;
+    private List<Hexagon> goalHexes;
     /**
      * A hex grid is laid out basically like a square grid w/ more connections.
      * Will create documentation eventually w/ pretty diagrams.
@@ -96,16 +101,19 @@ public class HexGrid extends Drawable {
         this.topLeft = new PointF(0.f, 0.f);
         this.numHorizontal = numHorizontal;
         this.numVertical = numVertical;
-        float a = Hexagon.getGlobalSideLength();
-        float h = a*Hexagon.sqrt3/2.f;
+
         this.gridPath = new Path();
         this.towersOnGrid = new ArrayList<Tower>();
-        gridPaint = new Paint();
-        gridPaint.setColor(Color.GREEN);
-        gridPaint.setStrokeWidth(1);
-        gridPaint.setStyle(Paint.Style.STROKE);
+        this.goalHexes = new ArrayList<Hexagon>();
+        this.gridPaint = new Paint();
+        this.gridPaint.setColor(Color.GREEN);
+        this.gridPaint.setStrokeWidth(1);
+        this.gridPaint.setStyle(Paint.Style.STROKE);
         
-        hexMatrix = new Hexagon[numVertical][numHorizontal];  //rows / columns starting from top-left (math matrix style)
+        this.hexMatrix = new Hexagon[numVertical][numHorizontal];  //rows / columns starting from top-left (math matrix style)
+
+        float a = Hexagon.getGlobalSideLength();
+        float h = a*Hexagon.sqrt3/2.f;
 
         //Generate the appropriate hexagons
         for (int j = 0; j < numVertical; j++) {
@@ -184,6 +192,9 @@ public class HexGrid extends Drawable {
         for (Tower t: towersOnGrid) {
             t.draw(canvas);
         }
+        for (Hexagon h: goalHexes) {
+            h.draw(canvas);
+        }
     }
 
     @Override
@@ -208,6 +219,10 @@ public class HexGrid extends Drawable {
 
     public int getNumHorizontal() {
         return numHorizontal;
+    }
+
+    public List<Hexagon> getGoalHexes() {
+        return goalHexes;
     }
 
     public Hexagon get(int r, int c) {

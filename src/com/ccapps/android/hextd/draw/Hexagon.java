@@ -57,6 +57,7 @@ public class Hexagon extends Drawable {
     private Hexagon[] neighbors;
     private Tower tower;
     private boolean drawPath = false;
+    private boolean isGoal = false;
 
     public Hexagon(PointF center, Point gridPosition) {
         this.center = center;
@@ -77,6 +78,17 @@ public class Hexagon extends Drawable {
         hexPath.offset(delta.x, delta.y);
     }
 
+    public void setGoal(boolean isGoal) {
+        this.isGoal = isGoal;
+        if (isGoal) {
+            this.hexPaint.setColor(Color.BLUE);
+            HexGrid.getInstance().getGoalHexes().add(this);
+            this.drawPath = true;
+        }
+        else
+            this.hexPaint.setColor(Color.GREEN);
+    }
+
     public void initPath() {
         hexPath = new Path();
         hexPath.moveTo(hexPoints[0].x, hexPoints[0].y);
@@ -95,7 +107,9 @@ public class Hexagon extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         //Draw outline of hex or something else TBD
-        if (drawPath) {
+        if (isGoal) {
+            hexPaint.setColor(Color.BLUE);
+        } else if (drawPath) {
             hexPaint.setColor(Color.RED);
         } else {
             hexPaint.setColor(Color.GREEN);
