@@ -33,15 +33,11 @@ public class Hexagon extends Drawable {
         Hexagon.sideLength = newLength;
         float h = sideLength*sqrt3/2.f;
         hexPoints[0] = new PointF(-sideLength, 0.f);
-        hexPoints[1] = new PointF((-sideLength/2.f), (float)(sideLength*sqrt3/2.));
-        hexPoints[2] = new PointF((sideLength/2.f), (float)(sideLength*sqrt3/2.));
+        hexPoints[1] = new PointF((-sideLength/2.f), h);
+        hexPoints[2] = new PointF((sideLength/2.f), h);
         hexPoints[3] = new PointF(sideLength, 0.f);
-        hexPoints[4] = new PointF((sideLength/2.f), (float)(-sideLength*sqrt3/2.));
-        hexPoints[5] = new PointF((-sideLength/2.f), (float)(-sideLength*sqrt3/2.));
-
-        if (HexGrid.isInitialized()) {
-            HexGrid.getInstance().initAllPaths();
-        }
+        hexPoints[4] = new PointF((sideLength/2.f), -h);
+        hexPoints[5] = new PointF((-sideLength/2.f), -h);
     }
 
     public static float getGlobalSideLength() {
@@ -96,8 +92,7 @@ public class Hexagon extends Drawable {
             hexPath.lineTo(hexPoints[(i+1)%6].x, hexPoints[(i+1)%6].y);
         }
         hexPath.close();
-        hexPath.offset(center.x - HexGrid.globalOffset.x, center.y - HexGrid.globalOffset.y);
-
+        hexPath.offset(center.x - HexGrid.GLOBAL_OFFSET.x, center.y - HexGrid.GLOBAL_OFFSET.y);
     }
 
     public void addPathTo(Path p) {

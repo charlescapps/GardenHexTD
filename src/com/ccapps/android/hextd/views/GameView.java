@@ -37,6 +37,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void startDrawing() {
         if (this.gameThread != null) {
             gameThread.unSuspendMe();
+            gameThread.postNeedsDrawing();
         }
     }
 

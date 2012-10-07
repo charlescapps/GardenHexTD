@@ -1,6 +1,7 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Menu;
 import com.ccapps.android.hextd.R;
@@ -47,8 +48,10 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        HexGrid.getInstance().reset();
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();
+
     }
 }

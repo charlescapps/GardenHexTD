@@ -31,7 +31,7 @@ public class SwipeListener extends GestureDetector.SimpleOnGestureListener {
     @Override
     public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
-        gameThread.postShiftGrid(-distanceX, -distanceY);
+        gameThread.postShiftGrid(0.f, -distanceY);
         return true;
 
     }

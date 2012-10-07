@@ -2,13 +2,10 @@ package com.ccapps.android.hextd.draw;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
-import android.widget.GridLayout;
 import com.ccapps.android.hextd.gamedata.Tower;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,10 +21,10 @@ public class HexGrid extends Drawable {
 
     //STATICS
     private static HexGrid GRID;
-    public static PointF TOP_LEFT_EXTENT;
-    public static PointF BOTTOM_RIGHT_EXTENT;
-    public static PointF MARGIN = new PointF(80.f, 80.f); //pixels
-    public static PointF globalOffset = new PointF(0.f, 0.f);
+    public static float Y_MIN = -5.f;
+    public static float Y_MAX;
+    public static PointF MARGIN = new PointF(5.f, 25.f); //pixels
+    public static PointF GLOBAL_OFFSET = new PointF(0.f, 0.f);
 
 
     /**
@@ -37,23 +34,25 @@ public class HexGrid extends Drawable {
      * @param numHorizontal
      * @param numVertical
      */
-    public static void initHexGrid(PointF topLeft, int numHorizontal, int numVertical, float sideLength, Point screenSize ) {
+    public static void initHexGrid(PointF topLeft, int numHorizontal, int numVertical, float sideLength, Point screenSize, PointF margin ) {
+
         Hexagon.setGlobalSideLength(sideLength);
-        HexGrid.GRID = new HexGrid(numHorizontal, numVertical, screenSize);
+        HexGrid.GRID = new HexGrid(numHorizontal, numVertical, screenSize, topLeft);
+        shiftTopLeft(topLeft);
     }
+
 
     public static void shiftTopLeft(PointF delta) {
 
-        float newX = HexGrid.globalOffset.x + delta.x;
-        if ( -newX < TOP_LEFT_EXTENT.x || -newX > BOTTOM_RIGHT_EXTENT.x) {
+        float newX = HexGrid.GLOBAL_OFFSET.x + delta.x;
+
+        float newY = HexGrid.GLOBAL_OFFSET.y + delta.y;
+
+        if ( -newY < Y_MIN || -newY > Y_MAX) {
             return;
         }
-        float newY = HexGrid.globalOffset.y + delta.y;
-        if ( -newY < TOP_LEFT_EXTENT.y || -newY > BOTTOM_RIGHT_EXTENT.y) {
-            return;
-        }
-        HexGrid.globalOffset.x = newX;
-        HexGrid.globalOffset.y = newY;
+        HexGrid.GLOBAL_OFFSET.x = newX;
+        HexGrid.GLOBAL_OFFSET.y = newY;
 
         GRID.gridPath.offset(delta.x, delta.y);
 
@@ -96,9 +95,9 @@ public class HexGrid extends Drawable {
      * @param numHorizontal - the number of hexagons left-to-right
      * @param numVertical - the number of hexagons top-to-bottom
      */
-    private HexGrid(int numHorizontal, int numVertical, Point screenSize) {
+    private HexGrid(int numHorizontal, int numVertical, Point screenSize, PointF topLeft) {
 
-        this.topLeft = new PointF(0.f, 0.f);
+        this.topLeft = topLeft;
         this.numHorizontal = numHorizontal;
         this.numVertical = numVertical;
 
@@ -164,16 +163,17 @@ public class HexGrid extends Drawable {
             }
         }
 
-        TOP_LEFT_EXTENT = new PointF(-MARGIN.x - a, -MARGIN.y - 2*h);
-        BOTTOM_RIGHT_EXTENT = new PointF(
-                3.f*a*(float)numHorizontal/2.f - a/2.f + MARGIN.x - (float)screenSize.x,
-                2.f*h*(float)(numVertical+1) + MARGIN.y - (float)screenSize.y);
+        float gridHeight = (float)numVertical*2.f*h + h ;
+        Y_MIN = -h - (float)MARGIN.y;
+        Y_MAX = gridHeight + HexGrid.MARGIN.y*7.f + 2.f*h - (float)screenSize.y;
     }
 
     public void initAllPaths() {
+        this.gridPath = new Path();
         for (Hexagon[] hs: hexMatrix) {
             for (Hexagon h: hs) {
                 h.initPath();
+                h.addPathTo(gridPath);
             }
         }
     }
@@ -184,6 +184,12 @@ public class HexGrid extends Drawable {
                 h.invalidatePath(delta);
             }
         }
+    }
+
+    public void reset() {
+        shiftTopLeft(new PointF(-GLOBAL_OFFSET.x, -GLOBAL_OFFSET.y));
+        initAllPaths();
+        shiftTopLeft(topLeft);
     }
 
     @Override
