@@ -1,12 +1,20 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
+import com.ccapps.android.hextd.draw.TowerDrawable;
+import com.ccapps.android.hextd.gamedata.BasicTower;
+import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.views.GameView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameActivity extends Activity {
 
@@ -26,7 +34,15 @@ public class GameActivity extends Activity {
         int numVertical = grid.getNumVertical();
         int numHorizontal = grid.getNumHorizontal();
 
-        grid.get(numVertical-1, numHorizontal/2).setGoal(true);
+        grid.setGoalHex(numVertical-1, numHorizontal/2, true);
+
+        /**
+         * Set a tower at (5,5)
+         */
+        HexGrid hexGrid = HexGrid.getInstance();
+
+        Tower basicTower = new BasicTower(hexGrid.get(5,5));
+        hexGrid.setTower(5, 5, basicTower);
 
     }
 
@@ -48,7 +64,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        HexGrid.getInstance().reset();
+     //   HexGrid.getInstance().reset();
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();

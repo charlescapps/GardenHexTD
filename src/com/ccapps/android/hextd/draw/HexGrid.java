@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import com.ccapps.android.hextd.gamedata.Tower;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -56,16 +57,25 @@ public class HexGrid extends Drawable {
 
         GRID.gridPath.offset(delta.x, delta.y);
 
-        for (Tower t: GRID.towersOnGrid) {
-           // t.getHex().invalidatePath(delta);
-            for (Hexagon h: t.getAttackHexes()) {
-                h.invalidatePath(delta);
+        synchronized (GRID.towersOnGrid) {
+            //Shift the path of the hexes every tower is attacking
+            for (Tower t: GRID.towersOnGrid) {
+                 t.invalidatePaths(delta);
+
+            }
+
+            synchronized (GRID.goalHexes) {
+                for (Hexagon h: GRID.goalHexes) {
+                    h.invalidatePath(delta);
+                }
+            }
+
+            for (Tower t: GRID.towersOnGrid) {
+                t.clearWasInvalidated();
             }
         }
 
-        for (Hexagon h: GRID.goalHexes) {
-            h.invalidatePath(delta);
-        }
+
 
     }
 
@@ -85,6 +95,8 @@ public class HexGrid extends Drawable {
     private Paint gridPaint;
     private List<Tower> towersOnGrid;
     private List<Hexagon> goalHexes;
+    public final float gridHeight;
+    public final float gridWidth;
     /**
      * A hex grid is laid out basically like a square grid w/ more connections.
      * Will create documentation eventually w/ pretty diagrams.
@@ -102,8 +114,8 @@ public class HexGrid extends Drawable {
         this.numVertical = numVertical;
 
         this.gridPath = new Path();
-        this.towersOnGrid = new ArrayList<Tower>();
-        this.goalHexes = new ArrayList<Hexagon>();
+        this.towersOnGrid = Collections.synchronizedList(new ArrayList<Tower>());
+        this.goalHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         this.gridPaint = new Paint();
         this.gridPaint.setColor(Color.GREEN);
         this.gridPaint.setStrokeWidth(1);
@@ -124,7 +136,7 @@ public class HexGrid extends Drawable {
                 } else {
                     vOffset = 2.f*h*(float)j - h;
                 }
-                hexMatrix[j][i] = new Hexagon(new PointF(topLeft.x + hOffset, topLeft.y + vOffset),
+                hexMatrix[j][i] = new Hexagon(new PointF(hOffset, vOffset),
                         new Point(j, i));
                 hexMatrix[j][i].addPathTo(this.gridPath);
             }
@@ -163,9 +175,49 @@ public class HexGrid extends Drawable {
             }
         }
 
-        float gridHeight = (float)numVertical*2.f*h + h ;
-        Y_MIN = -h - (float)MARGIN.y;
-        Y_MAX = gridHeight + HexGrid.MARGIN.y*7.f + 2.f*h - (float)screenSize.y;
+        this.gridHeight = (float)numVertical*2.f*h + h ;
+        this.gridWidth = (float)screenSize.x - 2.f*MARGIN.x;
+
+        Y_MIN = -topLeft.y - (float)MARGIN.y;
+        Y_MAX = gridHeight + HexGrid.MARGIN.y*3.f + 2.f*h - (float)screenSize.y;
+    }
+
+    /************************DRAWING RELATED**********************************/
+
+    public Hexagon getHexFromCoords(float x, float y) {
+        if (x < GLOBAL_OFFSET.x || y < GLOBAL_OFFSET.y) {
+            return null;
+        }
+
+        if (x > GLOBAL_OFFSET.x + gridWidth || y > GLOBAL_OFFSET.y + gridHeight) {
+            return null;
+        }
+
+        float intoGridByX = x - GLOBAL_OFFSET.x;
+        float intoGridByY = y - GLOBAL_OFFSET.y;
+
+        float h = Hexagon.height;
+        float a = Hexagon.getGlobalSideLength();
+        int approxRow = (int) (intoGridByY / (2.f*h));
+        int approxCol = (int) (intoGridByX / (3.f*a/2.f));
+
+        for (int i = approxRow - 1; i <= approxRow + 1; i++) {
+            for (int j = approxCol - 1; j <= approxCol + 1; j++) {
+                if (i < 0 || j < 0 || i >= numVertical || j >= numHorizontal) {
+                    continue;
+                }
+                Hexagon hex = get(i,j);
+                PointF center = hex.getCenter();
+                float xDiff = center.x - intoGridByX;
+                float yDiff = center.y - intoGridByY;
+                if (Math.sqrt(xDiff*xDiff + yDiff*yDiff  ) < a)  {
+                    return hex;
+                }
+            }
+        }
+
+        return null;
+
     }
 
     public void initAllPaths() {
@@ -174,14 +226,6 @@ public class HexGrid extends Drawable {
             for (Hexagon h: hs) {
                 h.initPath();
                 h.addPathTo(gridPath);
-            }
-        }
-    }
-
-    public void invalidateAllPaths(PointF delta) {
-        for (Hexagon[] hs: hexMatrix) {
-            for (Hexagon h: hs) {
-                h.invalidatePath(delta);
             }
         }
     }
@@ -195,11 +239,15 @@ public class HexGrid extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawPath(gridPath, gridPaint);
-        for (Tower t: towersOnGrid) {
-            t.draw(canvas);
+        synchronized (towersOnGrid) {
+            for (Tower t: towersOnGrid) {
+                t.draw(canvas);
+            }
         }
-        for (Hexagon h: goalHexes) {
-            h.draw(canvas);
+        synchronized (goalHexes) {
+            for (Hexagon h: goalHexes) {
+                h.draw(canvas);
+            }
         }
     }
 
@@ -237,10 +285,21 @@ public class HexGrid extends Drawable {
 
     public void setTower(int r, int c, Tower tower) {
         hexMatrix[r][c].setTower(tower);
-        towersOnGrid.add(tower);
+        synchronized (towersOnGrid) {
+            towersOnGrid.add(tower);
+        }
+        tower.initPaths();
     }
 
     public List<Tower> getTowersOnGrid() {
         return towersOnGrid;
+    }
+
+    /*********************GAME LOGIC RELATED*******************************/
+
+    public void setGoalHex(int r, int c, boolean isGoal) {
+        hexMatrix[r][c].setGoal(isGoal);
+        goalHexes.add(hexMatrix[r][c]);
+        hexMatrix[r][c].initPath();
     }
 }

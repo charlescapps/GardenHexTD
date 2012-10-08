@@ -1,7 +1,10 @@
 package com.ccapps.android.hextd.gamedata;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.PointF;
+import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
@@ -23,22 +26,75 @@ public class BasicTower implements Tower {
     private TowerDrawable towerDrawable;
     private boolean isAttacking;
 
+
     public BasicTower(Hexagon hex) {
         this.dmgPerAttack = 20;
         this.hex = hex;
-        Point pos = hex.getGridPosition();
-        this.attackHexes = new Hexagon[1];
+        this.attackHexes = new Hexagon[4];
         this.isAttacking = false;
         this.beatsToWait = 2;
+
+        Point pos = hex.getGridPosition();
         HexGrid grid = HexGrid.getInstance();
         int numVertical = grid.getNumVertical();
+        int numHorizontal = grid.getNumHorizontal();
 
         if (pos.x + 1 < numVertical) {
             attackHexes[0] = grid.get(pos.x + 1, pos.y);
         } else {
             attackHexes[0] = null;
         }
+
+        if (pos.x - 1 >= 0) {
+            attackHexes[1] = grid.get(pos.x - 1, pos.y);
+        } else {
+            attackHexes[1] = null;
+        }
+
+        if (pos.y + 1 < numHorizontal) {
+            attackHexes[2] = grid.get(pos.x, pos.y+1);
+        } else {
+            attackHexes[2] = null;
+        }
+
+        if (pos.y - 1 >= 0) {
+            attackHexes[3] = grid.get(pos.x, pos.y-1);
+        } else {
+            attackHexes[3] = null;
+        }
+
+        this.towerDrawable = new TowerDrawable(this, StaticData.BASIC_TOWER_IMAGE);
+
     }
+
+    @Override
+    public void initPaths() {
+        this.hex.initPath();
+        for (Hexagon h: this.attackHexes) {
+            if (h != null) {
+                h.initPath();
+            }
+        }
+    }
+
+    public void invalidatePaths(PointF delta) {
+
+        for (Hexagon h: attackHexes) {
+            if (h != null) {
+                h.invalidatePath(delta);
+            }
+        }
+
+    }
+
+    public void clearWasInvalidated() {
+        for (Hexagon h: attackHexes) {
+            if (h != null) {
+                h.clearWasInvalidated();
+            }
+        }
+    }
+
 
     @Override
     public Hexagon getHex() {
@@ -95,10 +151,12 @@ public class BasicTower implements Tower {
         this.isAttacking = true;
         ++relativeBeat;
         for (Hexagon h: attackHexes) {
-            if (relativeBeat % beatsToWait == 0) {
-                h.attacked(dmgPerAttack, true);
-            } else {
-                h.attacked(0, false);
+            if (h != null) {
+                if (relativeBeat % beatsToWait == 0) {
+                    h.attacked(dmgPerAttack, true);
+                } else {
+                    h.attacked(0, false);
+                }
             }
         }
     }
@@ -108,7 +166,9 @@ public class BasicTower implements Tower {
         this.towerDrawable.draw(canvas);
         if (this.isAttacking) {
             for (Hexagon h: this.getAttackHexes()) {
-                h.draw(canvas);
+                if (h != null) {
+                    h.draw(canvas);
+                }
             }
         }
     }

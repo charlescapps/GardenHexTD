@@ -16,6 +16,7 @@ public class Hexagon extends Drawable {
     public static final PointF[] hexPoints;
     public static final float sqrt3;
     private static float sideLength ;
+    public static float height;
 
     static {
         sqrt3 = (float)Math.sqrt(3.);
@@ -31,13 +32,13 @@ public class Hexagon extends Drawable {
      */
     public static void setGlobalSideLength(float newLength) {
         Hexagon.sideLength = newLength;
-        float h = sideLength*sqrt3/2.f;
+        height = sideLength*sqrt3/2.f;
         hexPoints[0] = new PointF(-sideLength, 0.f);
-        hexPoints[1] = new PointF((-sideLength/2.f), h);
-        hexPoints[2] = new PointF((sideLength/2.f), h);
+        hexPoints[1] = new PointF((-sideLength/2.f), height);
+        hexPoints[2] = new PointF((sideLength/2.f), height);
         hexPoints[3] = new PointF(sideLength, 0.f);
-        hexPoints[4] = new PointF((sideLength/2.f), -h);
-        hexPoints[5] = new PointF((-sideLength/2.f), -h);
+        hexPoints[4] = new PointF((sideLength/2.f), -height);
+        hexPoints[5] = new PointF((-sideLength/2.f), -height);
     }
 
     public static float getGlobalSideLength() {
@@ -49,11 +50,13 @@ public class Hexagon extends Drawable {
     private Path hexPath;
     private Paint hexPaint;
     private PointF center;
+    private PointF topLeft;
     private Point gridPosition;
     private Hexagon[] neighbors;
     private Tower tower;
     private boolean drawPath = false;
     private boolean isGoal = false;
+    private boolean wasInvalidated = false;
 
     public Hexagon(PointF center, Point gridPosition) {
         this.center = center;
@@ -71,14 +74,21 @@ public class Hexagon extends Drawable {
      * Determines path based on current side length and center
      */
     public void invalidatePath(PointF delta) {
-        hexPath.offset(delta.x, delta.y);
+        if (!wasInvalidated) {
+            hexPath.offset(delta.x, delta.y);
+            wasInvalidated = true;
+        }
+    }
+
+    public void clearWasInvalidated() {
+        this.wasInvalidated = false;
     }
 
     public void setGoal(boolean isGoal) {
         this.isGoal = isGoal;
         if (isGoal) {
             this.hexPaint.setColor(Color.BLUE);
-            HexGrid.getInstance().getGoalHexes().add(this);
+           // HexGrid.getInstance().getGoalHexes().add(this);
             this.drawPath = true;
         }
         else
@@ -92,7 +102,7 @@ public class Hexagon extends Drawable {
             hexPath.lineTo(hexPoints[(i+1)%6].x, hexPoints[(i+1)%6].y);
         }
         hexPath.close();
-        hexPath.offset(center.x - HexGrid.GLOBAL_OFFSET.x, center.y - HexGrid.GLOBAL_OFFSET.y);
+        hexPath.offset(center.x + HexGrid.GLOBAL_OFFSET.x, center.y + HexGrid.GLOBAL_OFFSET.y);
     }
 
     public void addPathTo(Path p) {

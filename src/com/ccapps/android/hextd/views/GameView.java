@@ -24,6 +24,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
         getHolder().addCallback(this);
+
     }
 
     public void setGameLogicThread(GameLogicThread gameLogicThread) {
@@ -60,18 +61,20 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             if (e.getActionMasked() == MotionEvent.ACTION_CANCEL){
                 return true;
             }
+
         }
 
         return result;
 
     }
 
+
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
         requestFocusFromTouch();
         gameThread = new GameThread(getHolder());
-        gestureDetector = new GestureDetector(this.getContext(), new SwipeListener(gameThread));
+        gestureDetector = new GestureDetector(this.getContext(), new GameTouchListener(gameThread));
         gameThread.start();
         gameLogicThread.start();
     }

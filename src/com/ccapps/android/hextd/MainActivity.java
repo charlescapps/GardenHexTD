@@ -4,11 +4,13 @@ import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import com.ccapps.android.hextd.activities.GameActivity;
@@ -16,7 +18,10 @@ import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 import com.ccapps.android.hextd.gamedata.BasicTower;
+import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
+
+import java.util.zip.Inflater;
 
 public class MainActivity extends Activity {
 
@@ -41,23 +46,21 @@ public class MainActivity extends Activity {
 
         PointF margin = new PointF(5.f, 5.f + (float)R.integer.drawer_menu_size);
         HexGrid.initHexGrid(
-                new PointF(a/2.f + HexGrid.MARGIN.x, h + HexGrid.MARGIN.y),
+                new PointF(a + HexGrid.MARGIN.x, 2.f*h + HexGrid.MARGIN.y),
                 NUM_HORIZONTAL_HEXES,
                 NUM_VERTICAL_HEXES,
                 a,
                 screenSize,
                 margin);
 
-        /**
-         * Set a tower at (5,5)
-         */
-        HexGrid hexGrid = HexGrid.getInstance();
+        setupStaticData();
 
-        Tower basicTower = new BasicTower(hexGrid.get(5,5));
-        hexGrid.setTower(5, 5, basicTower);
-        TowerDrawable towerDrawable = new TowerDrawable(basicTower,
-                BitmapFactory.decodeResource(getResources(), R.drawable.tower));
-        hexGrid.get(5, 5).getTower().setTowerDrawable(towerDrawable);
+
+    }
+
+    private void setupStaticData() {
+        StaticData.BASIC_TOWER_IMAGE =
+                BitmapFactory.decodeResource(getResources(), R.drawable.tower);
 
     }
 

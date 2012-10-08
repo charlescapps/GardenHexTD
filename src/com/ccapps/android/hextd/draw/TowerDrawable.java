@@ -1,8 +1,17 @@
 package com.ccapps.android.hextd.draw;
 
+import android.content.Context;
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import com.ccapps.android.hextd.gamedata.Tower;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +27,7 @@ public class TowerDrawable extends Drawable {
     private PointF imgTopLeft;
 
     public TowerDrawable(Tower tower, Bitmap towerImg) {
+        super();
         this.tower = tower;
         this.towerImg = towerImg;
         PointF center = tower.getHex().getCenter();

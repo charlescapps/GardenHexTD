@@ -1,6 +1,7 @@
 package com.ccapps.android.hextd.gamedata;
 
 import android.graphics.Canvas;
+import android.graphics.PointF;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 
@@ -28,5 +29,10 @@ public interface Tower {
     public void rotateClockwise(int numHexes);
     public void attack();
     public void draw(Canvas canvas);
+
+    public void initPaths();
+    public void invalidatePaths(PointF delta); //
+    public void clearWasInvalidated(); //Call this after invalidating to guarantee it only happens once
+
 
 }
