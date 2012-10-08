@@ -88,7 +88,6 @@ public class Hexagon extends Drawable {
         this.isGoal = isGoal;
         if (isGoal) {
             this.hexPaint.setColor(Color.BLUE);
-           // HexGrid.getInstance().getGoalHexes().add(this);
             this.drawPath = true;
         }
         else

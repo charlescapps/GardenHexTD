@@ -63,15 +63,23 @@ public class HexGrid extends Drawable {
                  t.invalidatePaths(delta);
 
             }
+        }
 
-            synchronized (GRID.goalHexes) {
-                for (Hexagon h: GRID.goalHexes) {
-                    h.invalidatePath(delta);
-                }
+        synchronized (GRID.goalHexes) {
+            for (Hexagon h: GRID.goalHexes) {
+                h.invalidatePath(delta);
             }
+        }
 
+        synchronized (GRID.towersOnGrid) {
             for (Tower t: GRID.towersOnGrid) {
                 t.clearWasInvalidated();
+            }
+        }
+
+        synchronized (GRID.goalHexes) {
+            for (Hexagon h: GRID.goalHexes) {
+                h.clearWasInvalidated();
             }
         }
 
@@ -231,9 +239,9 @@ public class HexGrid extends Drawable {
     }
 
     public void reset() {
-        shiftTopLeft(new PointF(-GLOBAL_OFFSET.x, -GLOBAL_OFFSET.y));
-        initAllPaths();
-        shiftTopLeft(topLeft);
+//        shiftTopLeft(new PointF(-GLOBAL_OFFSET.x, -GLOBAL_OFFSET.y));
+//        shiftTopLeft(topLeft);
+  //      initAllPaths();
     }
 
     @Override
@@ -299,7 +307,9 @@ public class HexGrid extends Drawable {
 
     public void setGoalHex(int r, int c, boolean isGoal) {
         hexMatrix[r][c].setGoal(isGoal);
-        goalHexes.add(hexMatrix[r][c]);
+        synchronized (goalHexes) {
+            goalHexes.add(hexMatrix[r][c]);
+        }
         hexMatrix[r][c].initPath();
     }
 }

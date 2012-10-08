@@ -64,7 +64,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-     //   HexGrid.getInstance().reset();
+        HexGrid.getInstance().reset();
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();

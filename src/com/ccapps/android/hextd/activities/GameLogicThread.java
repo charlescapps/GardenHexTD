@@ -51,6 +51,9 @@ public class GameLogicThread extends Thread {
                 t.attack();
             }
             gameView.postNeedsDrawing();
+            if (!this.isRunning) {
+                suspendMe();
+            }
         }
 
     }
@@ -76,8 +79,8 @@ public class GameLogicThread extends Thread {
     }
 
     public void unSuspendMe() {
-        this.isRunning = true;
         synchronized (this) {
+            this.isRunning = true;
             this.notify();
         }
     }
