@@ -193,11 +193,11 @@ public class HexGrid extends Drawable {
     /************************DRAWING RELATED**********************************/
 
     public Hexagon getHexFromCoords(float x, float y) {
-        if (x < GLOBAL_OFFSET.x || y < GLOBAL_OFFSET.y) {
+        if (x - GLOBAL_OFFSET.x + topLeft.x < 0 || y - GLOBAL_OFFSET.y + topLeft.y < 0 ) {
             return null;
         }
 
-        if (x > GLOBAL_OFFSET.x + gridWidth || y > GLOBAL_OFFSET.y + gridHeight) {
+        if (x - GLOBAL_OFFSET.x - gridWidth > 0 || y - GLOBAL_OFFSET.y - gridHeight > 0) {
             return null;
         }
 
@@ -238,10 +238,8 @@ public class HexGrid extends Drawable {
         }
     }
 
-    public void reset() {
-//        shiftTopLeft(new PointF(-GLOBAL_OFFSET.x, -GLOBAL_OFFSET.y));
-//        shiftTopLeft(topLeft);
-  //      initAllPaths();
+    public static void reset() {
+        GLOBAL_OFFSET = new PointF(0.f, 0.f);
     }
 
     @Override

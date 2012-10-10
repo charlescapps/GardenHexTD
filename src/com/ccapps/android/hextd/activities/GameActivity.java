@@ -24,25 +24,6 @@ public class GameActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        GameView v = (GameView)findViewById(R.id.gameView);
-
-        this.gameLogicThread = new GameLogicThread(v);
-
-        v.setGameLogicThread(gameLogicThread);
-
-        HexGrid grid = HexGrid.getInstance();
-        int numVertical = grid.getNumVertical();
-        int numHorizontal = grid.getNumHorizontal();
-
-        grid.setGoalHex(numVertical-1, numHorizontal/2, true);
-
-        /**
-         * Set a tower at (5,5)
-         */
-        HexGrid hexGrid = HexGrid.getInstance();
-
-        Tower basicTower = new BasicTower(hexGrid.get(5,5));
-        hexGrid.setTower(5, 5, basicTower);
 
     }
 
@@ -62,12 +43,40 @@ public class GameActivity extends Activity {
     }
 
     @Override
+    protected void  onStart() {
+       super.onStart();
+        setupTowersAndGoals();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        HexGrid.getInstance().reset();
+       // HexGrid.getInstance().reset();
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();
 
+    }
+
+    private void setupTowersAndGoals() {
+        GameView v = (GameView)findViewById(R.id.gameView);
+
+        this.gameLogicThread = new GameLogicThread(v);
+
+        v.setGameLogicThread(gameLogicThread);
+
+        HexGrid grid = HexGrid.getInstance();
+        int numVertical = grid.getNumVertical();
+        int numHorizontal = grid.getNumHorizontal();
+
+        grid.setGoalHex(numVertical-1, numHorizontal/2, true);
+
+        /**
+         * Set a tower at (5,5)
+         */
+        HexGrid hexGrid = HexGrid.getInstance();
+
+        Tower basicTower = new BasicTower(hexGrid.get(5,5));
+        hexGrid.setTower(5, 5, basicTower);
     }
 }

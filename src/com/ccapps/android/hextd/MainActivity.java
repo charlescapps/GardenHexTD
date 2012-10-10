@@ -33,34 +33,25 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Display defaultDisplay = getWindowManager().getDefaultDisplay();
-        Point screenSize = new Point(defaultDisplay.getWidth(), defaultDisplay.getHeight());
-
-        float gridWidth =  (float)(screenSize.x - 2*HexGrid.MARGIN.x);
-
-        /**
-         * Calculate the side of a hexagon, a and the height from the center to top, h
-         */
-        float a = gridWidth * 1.f / ( (3.f/2.f) * (float)NUM_HORIZONTAL_HEXES + 1.f/2.f);
-        float h = a*Hexagon.sqrt3/2.f;
-
-        PointF margin = new PointF(5.f, 5.f + (float)R.integer.drawer_menu_size);
-        HexGrid.initHexGrid(
-                new PointF(a + HexGrid.MARGIN.x, 2.f*h + HexGrid.MARGIN.y),
-                NUM_HORIZONTAL_HEXES,
-                NUM_VERTICAL_HEXES,
-                a,
-                screenSize,
-                margin);
-
         setupStaticData();
 
+        setupHexGrid();
 
     }
 
-    private void setupStaticData() {
-        StaticData.BASIC_TOWER_IMAGE =
-                BitmapFactory.decodeResource(getResources(), R.drawable.tower);
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
     }
 
@@ -82,9 +73,37 @@ public class MainActivity extends Activity {
     public void onResume() {
         super.onResume();
 
+    }
 
+    private void setupHexGrid() {
+
+        HexGrid.reset();
+        Display defaultDisplay = getWindowManager().getDefaultDisplay();
+        Point screenSize = new Point(defaultDisplay.getWidth(), defaultDisplay.getHeight());
+
+        float gridWidth =  (float)(screenSize.x - 2*HexGrid.MARGIN.x);
+
+        /**
+         * Calculate the side of a hexagon, a and the height from the center to top, h
+         */
+        float a = gridWidth * 1.f / ( (3.f/2.f) * (float)NUM_HORIZONTAL_HEXES + 1.f/2.f);
+        float h = a*Hexagon.sqrt3/2.f;
+
+        PointF margin = new PointF(5.f, 5.f + (float)R.integer.drawer_menu_size);
+        HexGrid.initHexGrid(
+                new PointF(a + HexGrid.MARGIN.x, 2.f*h + HexGrid.MARGIN.y),
+                NUM_HORIZONTAL_HEXES,
+                NUM_VERTICAL_HEXES,
+                a,
+                screenSize,
+                margin);
 
     }
 
+    private void setupStaticData() {
+        StaticData.BASIC_TOWER_IMAGE =
+                BitmapFactory.decodeResource(getResources(), R.drawable.tower);
+
+    }
     
 }
