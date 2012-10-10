@@ -6,8 +6,13 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
+import com.ccapps.android.hextd.draw.ImageAdapter;
+import com.ccapps.android.hextd.draw.TextViewAdapter;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.Tower;
@@ -24,6 +29,7 @@ public class GameActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
 
     }
 
@@ -45,7 +51,9 @@ public class GameActivity extends Activity {
     @Override
     protected void  onStart() {
        super.onStart();
-        setupTowersAndGoals();
+       setupTowersAndGoals();
+       setupTowerSelectMenu();
+
     }
 
     @Override
@@ -55,6 +63,7 @@ public class GameActivity extends Activity {
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();
+
 
     }
 
@@ -78,5 +87,19 @@ public class GameActivity extends Activity {
 
         Tower basicTower = new BasicTower(hexGrid.get(5,5));
         hexGrid.setTower(5, 5, basicTower);
+    }
+
+    private void setupTowerSelectMenu() {
+        GridView gridView = (GridView) findViewById(R.id.tower_grid_menu);
+        gridView.setAdapter(new TextViewAdapter(this));
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        gridView.setVisibility(View.VISIBLE);
+        gridView.bringToFront();
     }
 }

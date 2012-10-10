@@ -5,7 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:layout_margin="0dp">
+
+    <!--<include layout="@layout/tower_select_menu"-->
+             <!--android:visibility="visible"-->
+            <!--android:layout_alignParentTop="true"/>-->
+
+    <GridView android:id="@+id/tower_grid_menu"
+              android:numColumns="2"
+              android:layout_height="160dp"
+              android:layout_width="160dp"
+              android:layout_margin="0dp"
+              android:columnWidth="80dp"
+              android:verticalSpacing="5dp"
+              android:horizontalSpacing="-45dp"
+              />
 
     <com.ccapps.android.hextd.views.GameView
             android:id="@+id/gameView"
