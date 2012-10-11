@@ -26,8 +26,13 @@ public class BasicTower implements Tower {
     private TowerDrawable towerDrawable;
     private boolean isAttacking;
 
+    public BasicTower() {
+       //Call initTower after this.
 
-    public BasicTower(Hexagon hex) {
+    }
+
+    public void initTower(Hexagon hex) {
+
         this.dmgPerAttack = 20;
         this.hex = hex;
         this.attackHexes = new Hexagon[4];
@@ -65,6 +70,11 @@ public class BasicTower implements Tower {
 
         this.towerDrawable = new TowerDrawable(this, StaticData.BASIC_TOWER_IMAGE);
 
+    }
+
+
+    public BasicTower(Hexagon hex) {
+        initTower(hex);
     }
 
     @Override

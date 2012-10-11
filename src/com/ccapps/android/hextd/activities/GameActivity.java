@@ -99,7 +99,6 @@ public class GameActivity extends Activity {
             }
         });
 
-        gridView.setVisibility(View.VISIBLE);
         gridView.bringToFront();
     }
 }

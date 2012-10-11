@@ -20,6 +20,7 @@
               android:columnWidth="80dp"
               android:verticalSpacing="5dp"
               android:horizontalSpacing="-45dp"
+              android:visibility="gone"
               />
 
     <com.ccapps.android.hextd.views.GameView
