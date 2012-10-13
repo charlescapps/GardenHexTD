@@ -1,27 +1,19 @@
 package com.ccapps.android.hextd;
 
-import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import com.ccapps.android.hextd.activities.GameActivity;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-import com.ccapps.android.hextd.draw.TowerDrawable;
-import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.StaticData;
-import com.ccapps.android.hextd.gamedata.Tower;
-
-import java.util.zip.Inflater;
 
 public class MainActivity extends Activity {
 
@@ -104,6 +96,17 @@ public class MainActivity extends Activity {
     private void setupStaticData() {
         StaticData.BASIC_TOWER_IMAGE =
                 BitmapFactory.decodeResource(getResources(), R.drawable.tower);
+
+        StaticData.SUNFLOWER =
+                BitmapFactory.decodeResource(getResources(), R.drawable.sunflower_tower);
+
+        StaticData.EGGPLANT =
+                BitmapFactory.decodeResource(getResources(), R.drawable.eggplant_tower);
+
+        StaticData.CARNIVOROUS =
+                BitmapFactory.decodeResource(getResources(), R.drawable.carnivorous_tower);
+
+
 
     }
     

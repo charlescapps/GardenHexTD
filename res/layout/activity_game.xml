@@ -9,13 +9,6 @@
     android:layout_margin="0dp"
     android:padding="0dp"   >
 
-    <!--<include layout="@layout/tower_select_menu"-->
-             <!--android:visibility="visible"-->
-            <!--android:layout_alignParentTop="true"/>-->
-
-    <!--<RelativeLayout android:id="@+id/gridViewParent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="wrap_content">-->
   <com.ccapps.android.hextd.views.TowerMenuView android:id="@+id/towerMenuTable"
                android:layout_height="wrap_content"
                android:layout_width="wrap_content"
@@ -32,9 +25,7 @@
                 android:layout_width="wrap_content"
                 />
 
-
   </com.ccapps.android.hextd.views.TowerMenuView>
-        <!--</RelativeLayout>-->
 
     <com.ccapps.android.hextd.views.GameView
             android:id="@+id/gameView"
@@ -45,56 +36,56 @@
             android:focusableInTouchMode="true"
             android:focusable="true"/>
 
-    <SlidingDrawer
-        android:id="@+id/gameSlidingDrawer"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:allowSingleTap="@bool/single_tap"
-        android:animateOnClick="@bool/single_tap"
-        android:orientation="vertical"
-        android:content="@+id/towersLinearLayout"
-        android:handle="@+id/handle"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:layout_alignBottom="@id/gameView"
-        android:layout_alignLeft="@id/gameView"
-        android:background="#00000000">
+    <!--<SlidingDrawer-->
+        <!--android:id="@+id/gameSlidingDrawer"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="90dp"-->
+        <!--android:allowSingleTap="@bool/single_tap"-->
+        <!--android:animateOnClick="@bool/single_tap"-->
+        <!--android:orientation="vertical"-->
+        <!--android:content="@+id/towersLinearLayout"-->
+        <!--android:handle="@+id/handle"-->
+        <!--android:scrollbarAlwaysDrawVerticalTrack="false"-->
+        <!--android:layout_alignBottom="@id/gameView"-->
+        <!--android:layout_alignLeft="@id/gameView"-->
+        <!--android:background="#00000000">-->
 
-        <ImageButton
-            android:id="@+id/handle"
-            style="@style/HandleTheme" />
-        
-	        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	            android:id="@+id/towersLinearLayout"
-	            android:layout_gravity="bottom"
-		    	android:layout_width="match_parent"
-		    	android:layout_height="45dp"
-		    	android:orientation="horizontal" >
-		    	
-	            <ImageButton
-            android:id="@+id/tower1"
-            style="@style/HandleTheme" />
-	            <ImageButton
-            android:id="@+id/tower2"
-            style="@style/HandleTheme" />
-	            <ImageButton
-            android:id="@+id/tower3"
-            style="@style/HandleTheme" />
-            <ImageButton
-                android:id="@+id/tower4"
-                style="@style/HandleTheme" />
-            <ImageButton
-                android:id="@+id/tower5"
-                style="@style/HandleTheme" />
-            <ImageButton
-                android:id="@+id/tower6"
-                style="@style/HandleTheme" />
-            <ImageButton
-                android:id="@+id/tower7"
-                style="@style/HandleTheme" />
-		    	
-	        </LinearLayout>
-        	
-    </SlidingDrawer>
+        <!--<ImageButton-->
+            <!--android:id="@+id/handle"-->
+            <!--style="@style/HandleTheme" />-->
+        <!---->
+	        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+	            <!--android:id="@+id/towersLinearLayout"-->
+	            <!--android:layout_gravity="bottom"-->
+		    	<!--android:layout_width="match_parent"-->
+		    	<!--android:layout_height="45dp"-->
+		    	<!--android:orientation="horizontal" >-->
+		    	<!---->
+	            <!--<ImageButton-->
+            <!--android:id="@+id/tower1"-->
+            <!--style="@style/HandleTheme" />-->
+	            <!--<ImageButton-->
+            <!--android:id="@+id/tower2"-->
+            <!--style="@style/HandleTheme" />-->
+	            <!--<ImageButton-->
+            <!--android:id="@+id/tower3"-->
+            <!--style="@style/HandleTheme" />-->
+            <!--<ImageButton-->
+                <!--android:id="@+id/tower4"-->
+                <!--style="@style/HandleTheme" />-->
+            <!--<ImageButton-->
+                <!--android:id="@+id/tower5"-->
+                <!--style="@style/HandleTheme" />-->
+            <!--<ImageButton-->
+                <!--android:id="@+id/tower6"-->
+                <!--style="@style/HandleTheme" />-->
+            <!--<ImageButton-->
+                <!--android:id="@+id/tower7"-->
+                <!--style="@style/HandleTheme" />-->
+		    	<!---->
+	        <!--</LinearLayout>-->
+        	<!---->
+    <!--</SlidingDrawer>-->
 
 
     

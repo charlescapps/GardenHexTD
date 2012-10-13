@@ -1,12 +1,8 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.*;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.gamedata.BasicTower;
@@ -90,10 +86,10 @@ public class GameActivity extends Activity {
 
 
         List<Integer> mThumbIds = Arrays.asList(new Integer[]{
-                R.drawable.sunflowericon_menu,
-                R.drawable.carnivorousplant_menu,
-                R.drawable.eggplant_menu,
-                R.drawable.flower_menu
+                R.drawable.sunflower_tower,
+                R.drawable.carnivorous_tower,
+                R.drawable.eggplant_tower,
+                R.drawable.rose_tower
         });
 
         List<Class<? extends Tower>> mTowerClasses = new ArrayList<Class<? extends Tower>>();

@@ -1,7 +1,6 @@
 package com.ccapps.android.hextd.draw;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -47,9 +46,9 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
-            R.drawable.sunflowericon_menu,
-            R.drawable.carnivorousplant_menu,
-            R.drawable.eggplant_menu,
-            R.drawable.flower_menu
+            R.drawable.sunflower_tower,
+            R.drawable.carnivorous_tower,
+            R.drawable.eggplant_tower,
+            R.drawable.rose_tower
     };
 }

@@ -13,6 +13,9 @@ import android.view.Display;
  */
 public class StaticData {
     public static Bitmap BASIC_TOWER_IMAGE;
+    public static Bitmap SUNFLOWER;
+    public static Bitmap EGGPLANT;
+    public static Bitmap CARNIVOROUS;
 
     public static Display DEFAULT_SCREEN_SIZE;
 
