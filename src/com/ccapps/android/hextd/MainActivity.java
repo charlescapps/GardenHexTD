@@ -79,6 +79,7 @@ public class MainActivity extends Activity {
 
         HexGrid.reset();
         Display defaultDisplay = getWindowManager().getDefaultDisplay();
+        StaticData.DEFAULT_SCREEN_SIZE = defaultDisplay;
         Point screenSize = new Point(defaultDisplay.getWidth(), defaultDisplay.getHeight());
 
         float gridWidth =  (float)(screenSize.x - 2*HexGrid.MARGIN.x);

@@ -3,16 +3,15 @@ package com.ccapps.android.hextd.views;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.PointF;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.BasicTower;
+import com.ccapps.android.hextd.gamedata.StaticData;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,15 +27,14 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
     private GameView.GameThread gameThread;
     private View gameActivityView;
-    private GridView towerMenu;
+    private TableLayout towerMenu;
+    private Display defaultScreenSize;
 
     public GameTouchListener(GameView.GameThread gameThread, View gameActivityView) {
         super();
         this.gameThread = gameThread;
         this.gameActivityView = gameActivityView;
-        this.towerMenu = (GridView)gameActivityView.findViewById(R.id.tower_grid_menu);
-
-
+        this.towerMenu = (TableLayout)gameActivityView.findViewById(R.id.towerMenuTable);
     }
 
     /**
@@ -56,22 +54,25 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         if (clickedHex == null) {
 //             l.log(Level.SEVERE, "Clicked OFF grid");
         } else {
-//            l.log(Level.SEVERE, "Clicked ON grid");
-//            l.log(Level.SEVERE, "Center = " + clickedHex.getGridPosition().x + " " + clickedHex.getGridPosition().y);
+
             int row = clickedHex.getGridPosition().x;
             int col = clickedHex.getGridPosition().y;
-//            BasicTower basicTower = new BasicTower(clickedHex);
-//            GRID.setTower(row, col, basicTower);
+
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
-            lp.leftMargin = (int)x;
-            lp.topMargin = (int)y;
+            int leftMargin = (int)(x + Hexagon.getGlobalSideLength()/2.f);
+            int topMargin = (int)(y + Hexagon.getGlobalSideLength()/2.f);
+            if (leftMargin + towerMenu.getWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
+                leftMargin  -= (towerMenu.getWidth() + Hexagon.getGlobalSideLength() );
+            }
+            if (topMargin + towerMenu.getHeight() > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+                topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
+            }
+            lp.leftMargin = leftMargin;
+            lp.topMargin = topMargin;
             lp.bottomMargin = 0;
             lp.rightMargin = 0;
             towerMenu.setLayoutParams(lp);
-//            towerMenu.offsetLeftAndRight((int)x - towerMenu.getLeft());
-//            towerMenu.offsetTopAndBottom((int)y - towerMenu.getTop());
 
-//            gameActivityView.invalidate();
             towerMenu.setVisibility(View.VISIBLE);
             towerMenu.bringToFront();
 

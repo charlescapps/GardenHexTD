@@ -1,18 +1,22 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.Toast;
+import android.widget.*;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
-import com.ccapps.android.hextd.draw.TowerMenuAdapter;
 import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.views.GameView;
+import com.ccapps.android.hextd.views.TowerMenuView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GameActivity extends Activity {
 
@@ -83,14 +87,27 @@ public class GameActivity extends Activity {
     }
 
     private void setupTowerSelectMenu() {
-        GridView gridView = (GridView) findViewById(R.id.tower_grid_menu);
-        gridView.setAdapter(new TowerMenuAdapter(this));
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-            }
+
+        List<Integer> mThumbIds = Arrays.asList(new Integer[]{
+                R.drawable.sunflowericon_menu,
+                R.drawable.carnivorousplant_menu,
+                R.drawable.eggplant_menu,
+                R.drawable.flower_menu
         });
+
+        List<Class<? extends Tower>> mTowerClasses = new ArrayList<Class<? extends Tower>>();
+        mTowerClasses.add(BasicTower.class);
+        mTowerClasses.add(BasicTower.class);
+        mTowerClasses.add(BasicTower.class);
+        mTowerClasses.add(BasicTower.class);
+
+        int numPerRow = 2;
+        int imageSize = 70;
+        int padding = 5;
+
+        TowerMenuView menu = (TowerMenuView)findViewById(R.id.towerMenuTable);
+        menu.init(mThumbIds,mTowerClasses, numPerRow, imageSize, padding);
 
 
     }

@@ -2,6 +2,7 @@ package com.ccapps.android.hextd.gamedata;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.view.Display;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,5 +13,7 @@ import android.graphics.drawable.Drawable;
  */
 public class StaticData {
     public static Bitmap BASIC_TOWER_IMAGE;
+
+    public static Display DEFAULT_SCREEN_SIZE;
 
 }
