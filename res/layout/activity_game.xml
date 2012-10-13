@@ -12,7 +12,7 @@
   <com.ccapps.android.hextd.views.TowerMenuView android:id="@+id/towerMenuTable"
                android:layout_height="wrap_content"
                android:layout_width="wrap_content"
-
+               android:alpha="0.8"
           >
       <TableRow android:id="@+id/towerMenuRow1"
                 android:layout_height="wrap_content"

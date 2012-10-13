@@ -286,6 +286,9 @@ public class HexGrid extends Drawable {
     }
 
     public Hexagon get(int r, int c) {
+        if (r < 0 || c < 0 || r >= numVertical || c >= numHorizontal) {
+            return null;
+        }
         return hexMatrix[r][c];
     }
 

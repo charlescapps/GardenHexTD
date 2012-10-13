@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
-import com.ccapps.android.hextd.gamedata.BasicTower;
-import com.ccapps.android.hextd.gamedata.Tower;
+import com.ccapps.android.hextd.gamedata.*;
+import com.ccapps.android.hextd.gamedata.SunflowerTower;
 import com.ccapps.android.hextd.views.GameView;
 import com.ccapps.android.hextd.views.TowerMenuView;
 
@@ -76,10 +76,7 @@ public class GameActivity extends Activity {
         /**
          * Set a tower at (5,5)
          */
-        HexGrid hexGrid = HexGrid.getInstance();
-
-        Tower basicTower = new BasicTower(hexGrid.get(5,5));
-        hexGrid.setTower(5, 5, basicTower);
+        TowerUtils.addTower(SunflowerTower.class, 7, 6);
     }
 
     private void setupTowerSelectMenu() {
@@ -93,10 +90,10 @@ public class GameActivity extends Activity {
         });
 
         List<Class<? extends Tower>> mTowerClasses = new ArrayList<Class<? extends Tower>>();
-        mTowerClasses.add(BasicTower.class);
-        mTowerClasses.add(BasicTower.class);
-        mTowerClasses.add(BasicTower.class);
-        mTowerClasses.add(BasicTower.class);
+        mTowerClasses.add(SunflowerTower.class);
+        mTowerClasses.add(SunflowerTower.class);
+        mTowerClasses.add(EggplantTower.class);
+        mTowerClasses.add(SunflowerTower.class);
 
         int numPerRow = 2;
         int imageSize = 70;

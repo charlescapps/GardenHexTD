@@ -5,6 +5,8 @@ import android.graphics.PointF;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: charles
@@ -16,7 +18,7 @@ public interface Tower {
     /***********GETTERS / SETTERS***************/
     public Hexagon getHex();
     public int getDmgPerAttack();
-    public Hexagon[] getAttackHexes(); //Read-only, not set directly
+    public List<Hexagon> getAttackHexes(); //Read-only, not set directly
     public int getBeatsToWait();
     public TowerDrawable getTowerDrawable();
 

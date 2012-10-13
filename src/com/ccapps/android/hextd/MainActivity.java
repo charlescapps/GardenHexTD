@@ -1,5 +1,6 @@
 package com.ccapps.android.hextd;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -25,7 +26,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupStaticData();
 
         setupHexGrid();
 
@@ -82,7 +82,10 @@ public class MainActivity extends Activity {
         float a = gridWidth * 1.f / ( (3.f/2.f) * (float)NUM_HORIZONTAL_HEXES + 1.f/2.f);
         float h = a*Hexagon.sqrt3/2.f;
 
-        PointF margin = new PointF(5.f, 5.f + (float)R.integer.drawer_menu_size);
+        setupStaticData((int)(a*2.f));
+
+
+        PointF margin = new PointF(5.f, 5.f);
         HexGrid.initHexGrid(
                 new PointF(a + HexGrid.MARGIN.x, 2.f*h + HexGrid.MARGIN.y),
                 NUM_HORIZONTAL_HEXES,
@@ -93,18 +96,21 @@ public class MainActivity extends Activity {
 
     }
 
-    private void setupStaticData() {
+    private void setupStaticData(int a) {
         StaticData.BASIC_TOWER_IMAGE =
-                BitmapFactory.decodeResource(getResources(), R.drawable.tower);
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.tower), a, a, false) ;
 
         StaticData.SUNFLOWER =
-                BitmapFactory.decodeResource(getResources(), R.drawable.sunflower_tower);
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunflower_tower), a, a, false) ;
+
 
         StaticData.EGGPLANT =
-                BitmapFactory.decodeResource(getResources(), R.drawable.eggplant_tower);
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.eggplant_tower), a, a, false) ;
+
 
         StaticData.CARNIVOROUS =
-                BitmapFactory.decodeResource(getResources(), R.drawable.carnivorous_tower);
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.carnivorous_tower), a, a, false) ;
+
 
 
 

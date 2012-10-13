@@ -9,6 +9,10 @@ import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: charles
@@ -18,24 +22,18 @@ import com.ccapps.android.hextd.draw.TowerDrawable;
  */
 public class BasicTower implements Tower {
 
-    private Hexagon hex;
+    protected Hexagon hex;
     private int dmgPerAttack;
-    private Hexagon[] attackHexes;
+    protected List<Hexagon> attackHexes;
     private int beatsToWait;
     private int relativeBeat;
-    private TowerDrawable towerDrawable;
+    protected TowerDrawable towerDrawable;
     private boolean isAttacking;
 
-    public BasicTower() {
-       //Call initTower after this.
-
-    }
-
-    public void initTower(Hexagon hex) {
-
+    public BasicTower(Hexagon hex) {
         this.dmgPerAttack = 20;
         this.hex = hex;
-        this.attackHexes = new Hexagon[4];
+        this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         this.isAttacking = false;
         this.beatsToWait = 2;
 
@@ -45,36 +43,19 @@ public class BasicTower implements Tower {
         int numHorizontal = grid.getNumHorizontal();
 
         if (pos.x + 1 < numVertical) {
-            attackHexes[0] = grid.get(pos.x + 1, pos.y);
-        } else {
-            attackHexes[0] = null;
+            attackHexes.add(grid.get(pos.x + 1, pos.y));
         }
-
         if (pos.x - 1 >= 0) {
-            attackHexes[1] = grid.get(pos.x - 1, pos.y);
-        } else {
-            attackHexes[1] = null;
+            attackHexes.add(grid.get(pos.x - 1, pos.y));
         }
-
         if (pos.y + 1 < numHorizontal) {
-            attackHexes[2] = grid.get(pos.x, pos.y+1);
-        } else {
-            attackHexes[2] = null;
+            attackHexes.add(grid.get(pos.x, pos.y+1));
         }
-
         if (pos.y - 1 >= 0) {
-            attackHexes[3] = grid.get(pos.x, pos.y-1);
-        } else {
-            attackHexes[3] = null;
+            attackHexes.add(grid.get(pos.x, pos.y-1));
         }
 
         this.towerDrawable = new TowerDrawable(this, StaticData.BASIC_TOWER_IMAGE);
-
-    }
-
-
-    public BasicTower(Hexagon hex) {
-        initTower(hex);
     }
 
     @Override
@@ -127,7 +108,7 @@ public class BasicTower implements Tower {
     }
 
     @Override
-    public Hexagon[] getAttackHexes() {
+    public List<Hexagon> getAttackHexes() {
         return attackHexes;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -180,6 +161,12 @@ public class BasicTower implements Tower {
                     h.draw(canvas);
                 }
             }
+        }
+    }
+
+    protected void addSafe(Hexagon h) {
+        if (h != null) {
+            attackHexes.add(h);
         }
     }
 

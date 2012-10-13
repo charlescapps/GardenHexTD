@@ -2,6 +2,7 @@ package com.ccapps.android.hextd.views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.view.*;
 import android.widget.GridView;
@@ -27,14 +28,14 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
     private GameView.GameThread gameThread;
     private View gameActivityView;
-    private TableLayout towerMenu;
+    private TowerMenuView towerMenu;
     private Display defaultScreenSize;
 
     public GameTouchListener(GameView.GameThread gameThread, View gameActivityView) {
         super();
         this.gameThread = gameThread;
         this.gameActivityView = gameActivityView;
-        this.towerMenu = (TableLayout)gameActivityView.findViewById(R.id.towerMenuTable);
+        this.towerMenu = (TowerMenuView)gameActivityView.findViewById(R.id.towerMenuTable);
     }
 
     /**
@@ -44,19 +45,22 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
      */
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-//        Logger l = Logger.getAnonymousLogger();
-//        Logger.getAnonymousLogger().log(Level.SEVERE, "Single tap happened!");
+        Logger l = Logger.getAnonymousLogger();
+        Logger.getAnonymousLogger().log(Level.SEVERE, "Single tap happened!");
         float x = e.getX();
         float y = e.getY();
         HexGrid GRID = HexGrid.getInstance();
         Hexagon clickedHex = GRID.getHexFromCoords(x, y);
 
         if (clickedHex == null) {
-//             l.log(Level.SEVERE, "Clicked OFF grid");
+             l.log(Level.SEVERE, "Clicked OFF grid");
         } else {
 
             int row = clickedHex.getGridPosition().x;
             int col = clickedHex.getGridPosition().y;
+            towerMenu.setLastClickedHex(new Point(row, col));
+
+            l.log(Level.SEVERE, "Clicked hex (" + row + ", " + col + ")");
 
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
             int leftMargin = (int)(x + Hexagon.getGlobalSideLength()/2.f);
@@ -91,14 +95,6 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         gameThread.postShiftGrid(0.f, -distanceY);
         return true;
 
-    }
-
-    private static class MenuClickListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View view) {
-//            (View)view.getParent().;
-        }
     }
 
 }

@@ -2,15 +2,19 @@ package com.ccapps.android.hextd.views;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import com.ccapps.android.hextd.R;
+import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Tower;
+import com.ccapps.android.hextd.gamedata.TowerUtils;
 
 import java.util.List;
 
@@ -30,6 +34,7 @@ public class TowerMenuView extends TableLayout {
     private int imageSize;
     private int padding;
     List<Class<? extends Tower>> towerClasses;
+    private Point lastClickedHex;
 
     public TowerMenuView(Context context) {
         super(context);
@@ -64,36 +69,53 @@ public class TowerMenuView extends TableLayout {
 
 
             Drawable drawable = this.getResources().getDrawable(thumb);
+            drawable.setAlpha(180);
             drawable.setBounds(new Rect(0, 0, imageSize, imageSize));
             textView.setCompoundDrawables(null, drawable, null, null);
             textView.setBackgroundColor(Color.YELLOW);
             textView.setBackgroundResource(R.drawable.grid_background);
 
-            textView.setOnClickListener(new OnClickTower());
+            textView.setOnClickListener(new OnClickTower(towerClasses.get(i)));
 
             currentRow.addView(textView);
         }
         invalidate();
     }
 
-    private class OnClickTower implements OnClickListener {
-        public OnClickTower() {
+    public void setLastClickedHex(Point p) {
+        this.lastClickedHex = p;
+    }
 
+    private class OnClickTower implements OnClickListener {
+        private Class<? extends Tower> towerClass;
+        public OnClickTower(Class<? extends Tower> towerClass) {
+            this.towerClass = towerClass;
         }
 
         @Override
         public void onClick(View view) {
             final TextView textView = (TextView) view;
+            final TowerMenuView towerMenu = TowerMenuView.this;
+            TowerUtils.addTower(towerClass, lastClickedHex.x, lastClickedHex.y);
+
             textView.setBackgroundResource(R.drawable.grid_background_touched);
-            TowerMenuView.this.invalidate();
+            towerMenu.invalidate();
 
             postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     textView.setBackgroundResource(R.drawable.grid_background);
-                    TowerMenuView.this.invalidate();
+                    towerMenu.invalidate();
                 }
-            }, 500);
+            }, 150);
+
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    towerMenu.setVisibility(View.GONE);
+                    towerMenu.invalidate();
+                }
+            }, 300);
 
         }
     }
