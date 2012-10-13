@@ -10,10 +10,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.Tower;
@@ -23,12 +20,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class TextViewAdapter extends BaseAdapter {
+public class TowerMenuAdapter extends BaseAdapter {
     private Context mContext;
     private List<Integer> mThumbIds;
     private List<Class<? extends Tower>> mTowerClasses;
 
-    public TextViewAdapter(Context c) {
+    public TowerMenuAdapter(Context c) {
         mContext = c;
         mThumbIds = Arrays.asList(new Integer[] {
                 R.drawable.sunflowericon_menu,
@@ -61,6 +58,7 @@ public class TextViewAdapter extends BaseAdapter {
         TextView textView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
             textView = new TextView(mContext);
+
             textView.setLayoutParams(new GridView.LayoutParams(70, 70));
             textView.setPadding(0, 0, 0, 0);
 

@@ -5,10 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.view.*;
+import android.widget.RelativeLayout;
+import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.activities.GameLogicThread;
 import com.ccapps.android.hextd.draw.HexGrid;
 
@@ -20,11 +19,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GestureDetector gestureDetector;
     private GameLogicThread gameLogicThread;
     private Logger l = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private Context context;
+    private View gameActivityView;
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
         getHolder().addCallback(this);
-
+        this.context = context;
     }
 
     public void setGameLogicThread(GameLogicThread gameLogicThread) {
@@ -72,11 +73,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
-        requestFocusFromTouch();
+        this.gameActivityView = (RelativeLayout)getParent();
         gameThread = new GameThread(getHolder());
-        gestureDetector = new GestureDetector(this.getContext(), new GameTouchListener(gameThread));
+        gestureDetector = new GestureDetector(this.getContext(), new GameTouchListener(gameThread, gameActivityView));
+        requestFocusFromTouch();
+        this.bringToFront();
         gameThread.start();
         gameLogicThread.start();
+
     }
 
     @Override

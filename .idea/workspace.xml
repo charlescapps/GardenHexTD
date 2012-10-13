@@ -16,19 +16,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610e256e-d5d5-41fc-880b-368893e5f860" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HexTD.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HexTdGame.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ant.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hextd.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hextd.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module_testgame.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/proguard-project.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerUtils.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TextViewAdapter.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerMenuAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_game.xml" afterPath="$PROJECT_DIR$/res/layout/activity_game.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TextViewAdapter.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TextViewAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
     </list>
     <ignored path="HexTD.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,71 +105,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tower_select_menu.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/tower_select_menu.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="8" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GameActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="0" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#2659#2907#0" expanded="true" />
-                <element signature="e#2896#2897#0" expanded="true" />
-              </folding>
+            <state line="72" column="132" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_game.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="activity_game.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/activity_game.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="38" selection-start="918" selection-end="918" vertical-scroll-proportion="0.0">
+            <state line="26" column="43" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.6183206">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/ImageAdapter.java">
+      <file leaf-file-name="TowerMenuAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerMenuAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="73" selection-start="970" selection-end="1031" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="62" column="44" selection-start="2003" selection-end="2003" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextViewAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TextViewAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="10" selection-start="1680" selection-end="1680" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameTouchListener.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GameTouchListener.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="30" selection-start="771" selection-end="771" vertical-scroll-proportion="0.47826087">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicTower.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="36" selection-start="843" selection-end="843" vertical-scroll-proportion="0.0">
+            <state line="36" column="87" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -183,7 +144,34 @@
       <file leaf-file-name="GameView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="0" selection-start="3652" selection-end="3652" vertical-scroll-proportion="0.0">
+            <state line="79" column="28" selection-start="2282" selection-end="2282" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasicTower.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="184" column="0" selection-start="4470" selection-end="4470" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TowerUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="26" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tower.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="17" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -222,22 +210,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/StaticData.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameLogicThread.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/BackgroundGridView.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/ImageAdapter.java" />
         <option value="$PROJECT_DIR$/res/layout/tower_select_menu.xml" />
         <option value="$PROJECT_DIR$/res/drawable-hdpi/grid_background.xml" />
-        <option value="$PROJECT_DIR$/res/layout/activity_game.xml" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" />
         <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TextViewAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerStaticMethods.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerMenuAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_game.xml" />
       </list>
     </option>
   </component>
@@ -546,14 +534,14 @@
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="176" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="178" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="178" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="176" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="181" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="975" />
@@ -627,6 +615,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -652,24 +658,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -873,7 +861,11 @@
       <created>1349913524907</created>
       <updated>1349913524907</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added intelliJ shit&#10;">
+      <created>1349914415529</created>
+      <updated>1349914415529</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -882,7 +874,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4127907" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987013" sideWeight="0.67005813" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27467534" sideWeight="0.67005813" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27467534" sideWeight="0.67005813" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -941,7 +933,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial popup is shown on grid&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="added intelliJ shit&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -969,6 +961,7 @@
     <MESSAGE value="Can touch to place towers. Attack different area." />
     <MESSAGE value="Fix serious bugz" />
     <MESSAGE value="initial popup is shown on grid&#10;" />
+    <MESSAGE value="added intelliJ shit&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -978,16 +971,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="29" selection-start="391" selection-end="391" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameLogicThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="16" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="97" column="22" selection-start="2860" selection-end="2860" vertical-scroll-proportion="0.0" />
@@ -995,100 +978,85 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="37" column="0" selection-start="1220" selection-end="1220" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/BackgroundGridView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="26" column="0" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/ImageAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="73" selection-start="970" selection-end="1031" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="35" column="73" selection-start="970" selection-end="1031" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/tower_select_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="8" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/tower_select_grid.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="38" selection-start="581" selection-end="581" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="184" column="0" selection-start="4470" selection-end="4470" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="26" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="17" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/grid_background.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="7" selection-start="184" selection-end="184" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TowerMenuAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="44" selection-start="2003" selection-end="2003" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="87" selection-start="1206" selection-end="1206" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="0" selection-start="3652" selection-end="3652" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/tower_select_menu.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="8" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/tower_select_grid.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="38" selection-start="581" selection-end="581" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/grid_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="7" selection-start="184" selection-end="184" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_game.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="38" selection-start="918" selection-end="918" vertical-scroll-proportion="0.0">
+        <state line="79" column="28" selection-start="2282" selection-end="2282" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#2659#2907#0" expanded="true" />
-            <element signature="e#2896#2897#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="36" selection-start="843" selection-end="843" vertical-scroll-proportion="0.0">
+        <state line="72" column="132" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/TextViewAdapter.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_game.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="10" selection-start="1680" selection-end="1680" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="30" selection-start="771" selection-end="771" vertical-scroll-proportion="0.47826087">
+        <state line="26" column="43" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.6183206">
           <folding />
         </state>
       </provider>

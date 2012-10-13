@@ -1,8 +1,6 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
-import android.graphics.BitmapFactory;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -11,15 +9,10 @@ import android.widget.GridView;
 import android.widget.Toast;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
-import com.ccapps.android.hextd.draw.ImageAdapter;
-import com.ccapps.android.hextd.draw.TextViewAdapter;
-import com.ccapps.android.hextd.draw.TowerDrawable;
+import com.ccapps.android.hextd.draw.TowerMenuAdapter;
 import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.views.GameView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameActivity extends Activity {
 
@@ -91,7 +84,7 @@ public class GameActivity extends Activity {
 
     private void setupTowerSelectMenu() {
         GridView gridView = (GridView) findViewById(R.id.tower_grid_menu);
-        gridView.setAdapter(new TextViewAdapter(this));
+        gridView.setAdapter(new TowerMenuAdapter(this));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -99,6 +92,6 @@ public class GameActivity extends Activity {
             }
         });
 
-        gridView.bringToFront();
+
     }
 }
