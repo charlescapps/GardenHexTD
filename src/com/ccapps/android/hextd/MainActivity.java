@@ -114,6 +114,9 @@ public class MainActivity extends Activity {
         StaticData.ROSE =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rose_tower), a, a, false) ;
 
+        StaticData.ANT =
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ant), a, a, false) ;
+
 
 
 

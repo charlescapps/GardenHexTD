@@ -44,8 +44,14 @@ public class GameActivity extends Activity {
     @Override
     protected void  onStart() {
        super.onStart();
+
+       GameView v = (GameView)findViewById(R.id.gameView);
+       this.gameLogicThread = new GameLogicThread(v);
+       v.setGameLogicThread(gameLogicThread);
+
        setupTowersAndGoals();
        setupTowerSelectMenu();
+       setupCreeps();
 
     }
 
@@ -60,12 +66,8 @@ public class GameActivity extends Activity {
 
     }
 
+
     private void setupTowersAndGoals() {
-        GameView v = (GameView)findViewById(R.id.gameView);
-
-        this.gameLogicThread = new GameLogicThread(v);
-
-        v.setGameLogicThread(gameLogicThread);
 
         HexGrid grid = HexGrid.getInstance();
         int numVertical = grid.getNumVertical();
@@ -73,10 +75,11 @@ public class GameActivity extends Activity {
 
         grid.setGoalHex(numVertical-1, numHorizontal/2, true);
 
-        /**
-         * Set a tower at (5,5)
-         */
-        TowerUtils.addTower(SunflowerTower.class, 7, 6);
+    }
+
+    private void setupCreeps() {
+        HexGrid GRID = HexGrid.getInstance();
+        CreepUtils.addCreep(AntCreep.class, 0, 5, GRID.getGoalHexes().get(0));
     }
 
     private void setupTowerSelectMenu() {

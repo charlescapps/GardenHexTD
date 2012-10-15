@@ -2,11 +2,14 @@ package com.ccapps.android.hextd.draw;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import com.ccapps.android.hextd.gamedata.Creep;
+import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * Created with IntelliJ IDEA.
@@ -83,8 +86,6 @@ public class HexGrid extends Drawable {
             }
         }
 
-
-
     }
 
     public static boolean isInitialized() {
@@ -101,8 +102,11 @@ public class HexGrid extends Drawable {
     private int numVertical;
     private Path gridPath;
     private Paint gridPaint;
+
     private List<Tower> towersOnGrid;
     private List<Hexagon> goalHexes;
+    private List<Creep> creepsOnGrid;
+
     public final float gridHeight;
     public final float gridWidth;
     /**
@@ -123,6 +127,7 @@ public class HexGrid extends Drawable {
 
         this.gridPath = new Path();
         this.towersOnGrid = Collections.synchronizedList(new ArrayList<Tower>());
+        this.creepsOnGrid = Collections.synchronizedList(new ArrayList<Creep>());
         this.goalHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         this.gridPaint = new Paint();
         this.gridPaint.setColor(Color.GREEN);
@@ -255,6 +260,11 @@ public class HexGrid extends Drawable {
                 h.draw(canvas);
             }
         }
+        synchronized (creepsOnGrid) {
+            for (Creep c: creepsOnGrid) {
+                c.draw(canvas);
+            }
+        }
     }
 
     @Override
@@ -292,6 +302,14 @@ public class HexGrid extends Drawable {
         return hexMatrix[r][c];
     }
 
+    public Hexagon get(Point pos) {
+        int r = pos.x; int c = pos.y;
+        if (r < 0 || c < 0 || r >= numVertical || c >= numHorizontal) {
+            return null;
+        }
+        return hexMatrix[r][c];
+    }
+
     public void setTower(int r, int c, Tower tower) {
         hexMatrix[r][c].setTower(tower);
         synchronized (towersOnGrid) {
@@ -300,8 +318,24 @@ public class HexGrid extends Drawable {
         tower.initPaths();
     }
 
+    public void setCreep(int r, int c, Creep creep) {
+        if (hexMatrix[r][c].getTower() != null) {
+            StaticData.l.log(Level.SEVERE, "Attempt to place creep on hex with a tower! (" + r + ", " + c + ")");
+            return;
+        }
+        hexMatrix[r][c].setCreep(creep);
+        synchronized (creepsOnGrid) {
+            creepsOnGrid.add(creep);
+        }
+        creep.initRoute();
+    }
+
     public List<Tower> getTowersOnGrid() {
         return towersOnGrid;
+    }
+
+    public List<Creep> getCreepsOnGrid() {
+        return creepsOnGrid;
     }
 
     /*********************GAME LOGIC RELATED*******************************/

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.view.SurfaceHolder;
 import com.ccapps.android.hextd.draw.HexGrid;
+import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.views.GameView;
 
@@ -25,6 +26,7 @@ public class GameLogicThread extends Thread {
     private GameView gameView;
     private HexGrid theGrid;
     private List<Tower> towersOnGrid;
+    private List<Creep> creepsOnGrid;
 
     public GameLogicThread(GameView gameView) {
         super();
@@ -47,10 +49,18 @@ public class GameLogicThread extends Thread {
     private void eventLoop() {
         while(true) {
             pauseMe(GAME_TICK);
+            towersOnGrid = theGrid.getTowersOnGrid();
+            creepsOnGrid = theGrid.getCreepsOnGrid();
+
             for (Tower t: towersOnGrid) {
                 t.attack();
             }
+            for (Creep c: creepsOnGrid) {
+                c.move();
+            }
+
             gameView.postNeedsDrawing();
+
             if (!this.isRunning) {
                 suspendMe();
             }

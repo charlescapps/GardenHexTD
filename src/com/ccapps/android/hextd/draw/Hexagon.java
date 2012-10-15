@@ -2,6 +2,7 @@ package com.ccapps.android.hextd.draw;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
 
 /**
@@ -50,10 +51,10 @@ public class Hexagon extends Drawable {
     private Path hexPath;
     private Paint hexPaint;
     private PointF center;
-    private PointF topLeft;
     private Point gridPosition;
     private Hexagon[] neighbors;
     private Tower tower;
+    private Creep creep;
     private boolean drawPath = false;
     private boolean isGoal = false;
     private boolean wasInvalidated = false;
@@ -166,12 +167,24 @@ public class Hexagon extends Drawable {
         return this.tower;
     }
 
+    public void setCreep(Creep creep) {
+        this.creep = creep;
+    }
+
+    public Creep getCreep() {
+        return this.creep;
+    }
     /*****************************GAME LOGIC************************************/
     /**
      * Fire events when a square is attacked
      */
     public void attacked(int dmg, boolean drawPath) {
         this.drawPath = drawPath;
+    }
+
+    public boolean isEmpty() {
+        return tower == null && creep == null;
+
     }
 
 }
