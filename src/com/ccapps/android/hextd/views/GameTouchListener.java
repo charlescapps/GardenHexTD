@@ -29,7 +29,6 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
     private GameView.GameThread gameThread;
     private View gameActivityView;
     private TowerMenuView towerMenu;
-    private Display defaultScreenSize;
 
     public GameTouchListener(GameView.GameThread gameThread, View gameActivityView) {
         super();
@@ -68,7 +67,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
             if (leftMargin + towerMenu.getWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
                 leftMargin  -= (towerMenu.getWidth() + Hexagon.getGlobalSideLength() );
             }
-            if (topMargin + towerMenu.getHeight() > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+            if (topMargin + towerMenu.getHeight() - HexGrid.GLOBAL_OFFSET.y > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
                 topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
             }
             lp.leftMargin = leftMargin;

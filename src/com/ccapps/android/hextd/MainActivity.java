@@ -111,6 +111,10 @@ public class MainActivity extends Activity {
         StaticData.CARNIVOROUS =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.carnivorous_tower), a, a, false) ;
 
+        StaticData.ROSE =
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rose_tower), a, a, false) ;
+
+
 
 
 

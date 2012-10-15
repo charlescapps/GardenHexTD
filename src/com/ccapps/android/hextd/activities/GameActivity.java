@@ -91,12 +91,12 @@ public class GameActivity extends Activity {
 
         List<Class<? extends Tower>> mTowerClasses = new ArrayList<Class<? extends Tower>>();
         mTowerClasses.add(SunflowerTower.class);
-        mTowerClasses.add(SunflowerTower.class);
+        mTowerClasses.add(CarnivorousTower.class);
         mTowerClasses.add(EggplantTower.class);
-        mTowerClasses.add(SunflowerTower.class);
+        mTowerClasses.add(RoseTower.class);
 
         int numPerRow = 2;
-        int imageSize = 70;
+        int imageSize = 65;
         int padding = 5;
 
         TowerMenuView menu = (TowerMenuView)findViewById(R.id.towerMenuTable);

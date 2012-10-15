@@ -15,15 +15,23 @@ import java.util.Collections;
  * Time: 2:07 PM
  * To change this template use File | Settings | File Templates.
  */
-public class EggplantTower extends BasicTower{
-    public EggplantTower(Hexagon hex) {
+public class RoseTower extends BasicTower{
+    public RoseTower(Hexagon hex) {
         super(hex);
-        this.towerDrawable = new TowerDrawable(this, StaticData.EGGPLANT);
+        this.towerDrawable = new TowerDrawable(this, StaticData.ROSE);
         this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         HexGrid GRID = HexGrid.getInstance();
 
-        for (int i = 0; i < 6; i++) {
-            addSafe(hex.getNeighbors()[i]);
+        Point pos = hex.getGridPosition();
+        addSafe(GRID.get(pos.x-1, pos.y));
+
+        if (pos.y % 2 == 0) {
+            addSafe(GRID.get(pos.x+1, pos.y+1));
+            addSafe(GRID.get(pos.x+1, pos.y-1));
+        }
+        else {
+            addSafe(GRID.get(pos.x, pos.y+1));
+            addSafe(GRID.get(pos.x, pos.y-1));
         }
 
     }

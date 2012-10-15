@@ -21,6 +21,8 @@ public interface Tower {
     public List<Hexagon> getAttackHexes(); //Read-only, not set directly
     public int getBeatsToWait();
     public TowerDrawable getTowerDrawable();
+    public int getDirection();
+    public void setDirection(int direction);
 
     public void setHex(Hexagon hex);
     public void setDmgPerAttack(int dmgPerAttack);
@@ -28,7 +30,7 @@ public interface Tower {
     public void setTowerDrawable(TowerDrawable towerDrawable);
 
     /*************ACTIONS************************/
-    public void rotateClockwise(int numHexes);
+    public void rotateClockwise(int num);
     public void attack();
     public void draw(Canvas canvas);
 

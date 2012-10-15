@@ -20,7 +20,7 @@ import java.util.List;
  * Time: 12:37 PM
  * To change this template use File | Settings | File Templates.
  */
-public class BasicTower implements Tower {
+public abstract class BasicTower implements Tower {
 
     protected Hexagon hex;
     private int dmgPerAttack;
@@ -29,33 +29,14 @@ public class BasicTower implements Tower {
     private int relativeBeat;
     protected TowerDrawable towerDrawable;
     private boolean isAttacking;
+    protected int direction;
 
     public BasicTower(Hexagon hex) {
         this.dmgPerAttack = 20;
         this.hex = hex;
-        this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         this.isAttacking = false;
         this.beatsToWait = 2;
-
-        Point pos = hex.getGridPosition();
-        HexGrid grid = HexGrid.getInstance();
-        int numVertical = grid.getNumVertical();
-        int numHorizontal = grid.getNumHorizontal();
-
-        if (pos.x + 1 < numVertical) {
-            attackHexes.add(grid.get(pos.x + 1, pos.y));
-        }
-        if (pos.x - 1 >= 0) {
-            attackHexes.add(grid.get(pos.x - 1, pos.y));
-        }
-        if (pos.y + 1 < numHorizontal) {
-            attackHexes.add(grid.get(pos.x, pos.y+1));
-        }
-        if (pos.y - 1 >= 0) {
-            attackHexes.add(grid.get(pos.x, pos.y-1));
-        }
-
-        this.towerDrawable = new TowerDrawable(this, StaticData.BASIC_TOWER_IMAGE);
+        this.direction = 0;
     }
 
     @Override
@@ -128,12 +109,26 @@ public class BasicTower implements Tower {
     }
 
     @Override
+    public int getDirection() {
+        return direction;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void setDirection(int direction) {
+        reEvaluateAttackHexes(direction, this.direction);
+
+        this.direction = direction;
+    }
+
+    @Override
     public void setTowerDrawable(TowerDrawable towerDrawable) {
         this.towerDrawable = towerDrawable;
     }
 
     @Override
-    public void rotateClockwise(int numHexes) {
+    public void rotateClockwise(int num) {
+        reEvaluateAttackHexes(this.direction, this.direction+num);
+        direction += num;
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -169,5 +164,8 @@ public class BasicTower implements Tower {
             attackHexes.add(h);
         }
     }
+
+    abstract public void reEvaluateAttackHexes(int oldDir, int newDir); //Called after setting the direction
+
 
 }

@@ -19,6 +19,7 @@ public class StaticData {
     public static Bitmap SUNFLOWER;
     public static Bitmap EGGPLANT;
     public static Bitmap CARNIVOROUS;
+    public static Bitmap ROSE;
 
     public static Display DEFAULT_SCREEN_SIZE;
 
