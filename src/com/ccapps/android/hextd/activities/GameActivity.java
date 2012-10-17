@@ -78,8 +78,9 @@ public class GameActivity extends Activity {
     }
 
     private void setupCreeps() {
+        //yo dawg
         HexGrid GRID = HexGrid.getInstance();
-        CreepUtils.addCreep(AntCreep.class, 0, 5, GRID.getGoalHexes().get(0));
+        CreepUtils.addCreep(AntCreep.class, 0, 0, GRID.getGoalHexes().get(0));
     }
 
     private void setupTowerSelectMenu() {
