@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import com.ccapps.android.hextd.activities.GameActivity;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
@@ -26,8 +27,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         setupHexGrid();
+
+        setupStartGameButton();
+
 
     }
 
@@ -53,17 +56,41 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void startGame(View v) {
+    public void setupStartGameButton() {
 
-        Log.i("Test", "starting GameActivity");
-    	Intent intent = new Intent(this, GameActivity.class);
-    	this.startActivity(intent);
-    	
+        View button = findViewById(R.id.startGameButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                MainActivity.this.startActivity(intent);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean changed) {
+        super.onWindowFocusChanged(changed);
+        View button = findViewById(R.id.startGameButton);
+        View root = findViewById(R.id.mainActivityRootView);
+        root.callOnClick();
+        root.requestFocus();
+
 
     }
 
