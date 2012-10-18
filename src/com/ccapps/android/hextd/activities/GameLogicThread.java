@@ -31,7 +31,7 @@ public class GameLogicThread extends Thread {
     public GameLogicThread(GameView gameView) {
         super();
         this.gameView = gameView;
-        this.isRunning = true;
+        this.isRunning = false;
         this.theGrid = HexGrid.getInstance();
         this.towersOnGrid = theGrid.getTowersOnGrid();
     }
@@ -89,9 +89,10 @@ public class GameLogicThread extends Thread {
     }
 
     public void unSuspendMe() {
+        this.isRunning = true;
+
         synchronized (this) {
-            this.isRunning = true;
-            this.notify();
+            this.interrupt();
         }
     }
 }

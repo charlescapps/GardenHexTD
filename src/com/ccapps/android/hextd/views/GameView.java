@@ -38,8 +38,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void startDrawing() {
         if (this.gameThread != null) {
-            gameThread.unSuspendMe();
             gameThread.postNeedsDrawing();
+            gameThread.unSuspendMe();
         }
     }
 
@@ -112,6 +112,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             this.sh = sh;
             this.needsDrawing = true;
             this.gridInstance = HexGrid.getInstance();
+            this.isRunning = false;
         }
 
         @Override
@@ -177,7 +178,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         public void unSuspendMe() {
             this.isRunning = true;
             synchronized (this) {
-                this.notify();
+                this.interrupt();
             }
 
         }

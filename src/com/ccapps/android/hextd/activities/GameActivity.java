@@ -23,6 +23,13 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        setupTowersAndGoals();
+        setupTowerSelectMenu();
+        setupCreeps();
+
+        GameView v = (GameView)findViewById(R.id.gameView);
+        this.gameLogicThread = new GameLogicThread(v);
+        v.setGameLogicThread(gameLogicThread);
 
     }
 
@@ -45,14 +52,6 @@ public class GameActivity extends Activity {
     protected void  onStart() {
        super.onStart();
 
-       GameView v = (GameView)findViewById(R.id.gameView);
-       this.gameLogicThread = new GameLogicThread(v);
-       v.setGameLogicThread(gameLogicThread);
-
-       setupTowersAndGoals();
-       setupTowerSelectMenu();
-       setupCreeps();
-
     }
 
     @Override
@@ -62,10 +61,7 @@ public class GameActivity extends Activity {
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();
-
-
     }
-
 
     private void setupTowersAndGoals() {
 
@@ -84,7 +80,6 @@ public class GameActivity extends Activity {
     }
 
     private void setupTowerSelectMenu() {
-
 
         List<Integer> mThumbIds = Arrays.asList(new Integer[]{
                 R.drawable.sunflower_tower,
