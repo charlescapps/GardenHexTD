@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import com.ccapps.android.hextd.draw.CreepDrawable;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.ai.Pathfinder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,4 +134,13 @@ public class AntCreep implements Creep {
     public void draw(Canvas canvas) {
         creepDrawable.draw(canvas);
     }
+
+    private class AntCreepPathfinder implements Pathfinder {
+
+        @Override
+        public List<Hexagon> getPath() {
+            return null;
+        }
+    }
+
 }
