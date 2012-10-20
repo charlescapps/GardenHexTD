@@ -7,6 +7,7 @@ import com.ccapps.android.hextd.draw.CreepDrawable;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.ai.Pathfinder;
+import com.ccapps.android.hextd.ai.AntCreepPathfinder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class AntCreep implements Creep {
     private Hexagon hex;
     private Hexagon goalHex;
     private int hitpoints;
+    private AntCreepPathfinder pathfinder;
 
     public AntCreep(Hexagon hex, Hexagon goalHex) {
         this.hex = hex;
@@ -34,6 +36,8 @@ public class AntCreep implements Creep {
         this.hitpoints = 100;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT);
+
+        this.pathfinder = new AntCreepPathfinder();
 
         initRoute();
     }
@@ -100,7 +104,7 @@ public class AntCreep implements Creep {
 
     @Override
     public void initRoute() {
-        path = new ArrayList<Hexagon>();
+        /*this.path = new ArrayList<Hexagon>();
         HexGrid GRID = HexGrid.getInstance();
         Hexagon tmp = hex;
         Point goalPos = goalHex.getGridPosition();
@@ -118,7 +122,9 @@ public class AntCreep implements Creep {
 
             path.add(GRID.get(newPos));
             tmp = GRID.get(newPos);
-        }
+
+        }*/
+        this.path = this.pathfinder.getPath(this.hex, this.goalHex);
     }
 
     @Override
@@ -133,14 +139,6 @@ public class AntCreep implements Creep {
     @Override
     public void draw(Canvas canvas) {
         creepDrawable.draw(canvas);
-    }
-
-    private class AntCreepPathfinder implements Pathfinder {
-
-        @Override
-        public List<Hexagon> getPath() {
-            return null;
-        }
     }
 
 }

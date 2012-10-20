@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface Pathfinder {
 
-    List<Hexagon> getPath();
+    List<Hexagon> getPath(Hexagon curHex, Hexagon goalHex);
 
 }
