@@ -187,4 +187,17 @@ public class Hexagon extends Drawable {
 
     }
 
+    /************************STANDARD METHODS**************************************/
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Hexagon)) {
+            return false;
+        }
+        Hexagon hex = (Hexagon)o;
+        if (hex.getCenter().equals(this.center)) {
+            return true;
+        }
+        return false;
+    }
+
 }

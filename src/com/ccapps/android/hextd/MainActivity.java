@@ -86,10 +86,6 @@ public class MainActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean changed) {
         super.onWindowFocusChanged(changed);
-        View button = findViewById(R.id.startGameButton);
-        View root = findViewById(R.id.mainActivityRootView);
-        root.callOnClick();
-        root.requestFocus();
 
 
     }

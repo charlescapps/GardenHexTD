@@ -327,7 +327,7 @@ public class HexGrid extends Drawable {
         synchronized (creepsOnGrid) {
             creepsOnGrid.add(creep);
         }
-        creep.initRoute();
+        creep.evaluateRoute();
     }
 
     public List<Tower> getTowersOnGrid() {

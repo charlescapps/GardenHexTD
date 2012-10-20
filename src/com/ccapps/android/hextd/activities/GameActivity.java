@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import com.ccapps.android.hextd.R;
+import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.gamedata.*;
 import com.ccapps.android.hextd.gamedata.SunflowerTower;
@@ -79,9 +80,8 @@ public class GameActivity extends Activity {
     }
 
     private void setupCreeps() {
-        //yo dawg
         HexGrid GRID = HexGrid.getInstance();
-        CreepUtils.addCreep(AntCreep.class, 0, 0, GRID.getGoalHexes().get(0));
+        CreepUtils.addCreep(AntCreep.class, 0, 0, GRID.getGoalHexes().get(0), RandomWalkAlgorithm.class);
     }
 
     private void setupTowerSelectMenu() {
