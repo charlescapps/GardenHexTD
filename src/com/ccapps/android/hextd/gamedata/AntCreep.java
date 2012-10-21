@@ -1,15 +1,10 @@
 package com.ccapps.android.hextd.gamedata;
 
 import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
+import com.ccapps.android.hextd.algorithm.CreepAlgorithm;
 import com.ccapps.android.hextd.draw.CreepDrawable;
-import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-import com.ccapps.android.hextd.ai.Pathfinder;
-import com.ccapps.android.hextd.ai.AntCreepPathfinder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,25 +17,28 @@ import java.util.List;
 public class AntCreep implements Creep {
 
     private int direction;
+    private int speed;
     private CreepDrawable creepDrawable;
     private List<Hexagon> path;
     private Hexagon hex;
     private Hexagon goalHex;
     private int hitpoints;
-    private AntCreepPathfinder pathfinder;
+    private CreepAlgorithm algorithm;
+    private int tick;
 
-    public AntCreep(Hexagon hex, Hexagon goalHex) {
+    public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
         this.goalHex = goalHex;
+        this.algorithm = algorithm;
+        this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 100;
+        this.hitpoints = 500;
 
-        this.creepDrawable = new CreepDrawable(this, StaticData.ANT);
+        this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
+        this.tick = 0;
+        this.speed = 4;
 
-        this.path = new ArrayList<Hexagon>();
-        this.pathfinder = new AntCreepPathfinder();
-
-        this.initRoute();
+        evaluateRoute();
     }
 
     @Override
@@ -51,6 +49,16 @@ public class AntCreep implements Creep {
     @Override
     public void setDirection(int direction) {
         this.direction = direction;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     @Override
@@ -104,46 +112,48 @@ public class AntCreep implements Creep {
     }
 
     @Override
-    public void initRoute() {
+    public void loseHitpoints(int hp) {
+        this.hitpoints -= hp;
+    }
 
-        /* begin old algorithm
-        //this.path = new ArrayList<Hexagon>();
-        HexGrid GRID = HexGrid.getInstance();
-        Hexagon tmp = hex;
-        Point goalPos = goalHex.getGridPosition();
-        while (tmp != goalHex) {
-            Point tmpPos = tmp.getGridPosition();
-            Point newPos = new Point();
-            if (tmpPos.x != goalPos.x) {
-                newPos.y = tmpPos.y;
-                newPos.x = tmpPos.x + (goalPos.x - tmpPos.x) / Math.abs(goalPos.x - tmpPos.x);
-            } else {
-                newPos.x = goalPos.x;
-                newPos.y = tmpPos.y + (goalPos.y - tmpPos.y) / Math.abs(goalPos.y - tmpPos.y);
-            }
-            Hexagon candidate = GRID.get(newPos);
+    @Override
+    public boolean isDead() {
+        return hitpoints <= 0;
+    }
 
-            path.add(GRID.get(newPos));
-            tmp = GRID.get(newPos);
+    @Override
+    public CreepAlgorithm getAlgorithm() {
+        return algorithm;
+    }
 
+    @Override
+    public void setAlgorithm(CreepAlgorithm creepAlgorithm) {
+        this.algorithm = algorithm;
+    }
+
+    @Override
+    public void evaluateRoute() {
+        if (hitpoints > 0 && algorithm.pathNeedsEvaluation()) {
+            this.path = algorithm.getPath(hex, goalHex);
         }
-         end old algorithm */
-
-        this.path = this.pathfinder.getPath(this.hex, this.goalHex);
     }
 
     @Override
     public void move() {
-        if (path.size() <= 0) {
-            return;
+        if (++tick % speed == 0 && hitpoints > 0) {
+            if (path.size() <= 0) {
+                return;
+            }
+            evaluateRoute();
+            hex.setCreep(null);
+            hex = path.remove(0);
+            hex.setCreep(this);
+            creepDrawable.updateLocation();
         }
-        hex = path.remove(0);
-        creepDrawable.updateLocation();
     }
 
     @Override
     public void draw(Canvas canvas) {
         creepDrawable.draw(canvas);
     }
-
 }

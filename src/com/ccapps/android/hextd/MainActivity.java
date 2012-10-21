@@ -11,24 +11,27 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import com.ccapps.android.hextd.activities.GameActivity;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-import com.ccapps.android.hextd.gamedata.StaticData;
+import com.ccapps.android.hextd.gamedata.*;
+
+import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
     public static final int NUM_VERTICAL_HEXES = 16;                  //test values for now...
-    public static final int NUM_HORIZONTAL_HEXES = 10;
+    public static final int NUM_HORIZONTAL_HEXES = 11;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         setupHexGrid();
 
+        setupStartGameButton();
     }
 
     @Override
@@ -53,17 +56,37 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void startGame(View v) {
+    public void setupStartGameButton() {
 
-        Log.i("Test", "starting GameActivity");
-    	Intent intent = new Intent(this, GameActivity.class);
-    	this.startActivity(intent);
-    	
+        View button = findViewById(R.id.startGameButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                MainActivity.this.startActivity(intent);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean changed) {
+        super.onWindowFocusChanged(changed);
+
 
     }
 
@@ -82,7 +105,7 @@ public class MainActivity extends Activity {
         float a = gridWidth * 1.f / ( (3.f/2.f) * (float)NUM_HORIZONTAL_HEXES + 1.f/2.f);
         float h = a*Hexagon.sqrt3/2.f;
 
-        setupStaticData((int)(a*2.f));
+        setupStaticData((int)(a*1.6f));
 
 
         PointF margin = new PointF(5.f, 5.f);
@@ -107,7 +130,6 @@ public class MainActivity extends Activity {
         StaticData.EGGPLANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.eggplant_tower), a, a, false) ;
 
-
         StaticData.CARNIVOROUS =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.carnivorous_tower), a, a, false) ;
 
@@ -116,6 +138,15 @@ public class MainActivity extends Activity {
 
         StaticData.ANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ant), a, a, false) ;
+
+        StaticData.DEAD_ANT =
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
+
+        StaticData.TOWER_COSTS = new HashMap<Class<? extends Tower>, Integer>();
+        StaticData.TOWER_COSTS.put(SunflowerTower.class, 100);
+        StaticData.TOWER_COSTS.put(CarnivorousTower.class, 20);
+        StaticData.TOWER_COSTS.put(RoseTower.class, 10);
+        StaticData.TOWER_COSTS.put(EggplantTower.class, 40);
 
 
 

@@ -19,14 +19,14 @@ public interface Tower {
     public Hexagon getHex();
     public int getDmgPerAttack();
     public List<Hexagon> getAttackHexes(); //Read-only, not set directly
-    public int getBeatsToWait();
+    public int getAttackSpeed();
     public TowerDrawable getTowerDrawable();
     public int getDirection();
     public void setDirection(int direction);
 
     public void setHex(Hexagon hex);
     public void setDmgPerAttack(int dmgPerAttack);
-    public void setBeatsToWait(int beatsToWait);
+    public void setAttackSpeed(int beatsToWait);
     public void setTowerDrawable(TowerDrawable towerDrawable);
 
     /*************ACTIONS************************/

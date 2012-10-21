@@ -18,12 +18,14 @@ public class CreepDrawable extends Drawable {
 
     private Creep creep;
     private Bitmap creepImg;
+    private Bitmap deadCreepImg;
     private PointF imgTopLeft;
 
-    public CreepDrawable(Creep creep, Bitmap creepImg) {
+    public CreepDrawable(Creep creep, Bitmap creepImg, Bitmap deadCreepImg) {
         super();
         this.creep = creep;
         this.creepImg = creepImg;
+        this.deadCreepImg = deadCreepImg;
         PointF center = creep.getHex().getCenter();
         this.imgTopLeft = new PointF(
                 center.x - creepImg.getWidth() / 2.f,
@@ -34,7 +36,11 @@ public class CreepDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(creepImg, imgTopLeft.x + HexGrid.GLOBAL_OFFSET.x, imgTopLeft.y + HexGrid.GLOBAL_OFFSET.y, null);
+        if (creep.isDead()) {
+            canvas.drawBitmap(deadCreepImg, imgTopLeft.x + HexGrid.GLOBAL_OFFSET.x, imgTopLeft.y + HexGrid.GLOBAL_OFFSET.y, null);
+        } else {
+            canvas.drawBitmap(creepImg, imgTopLeft.x + HexGrid.GLOBAL_OFFSET.x, imgTopLeft.y + HexGrid.GLOBAL_OFFSET.y, null);
+        }
     }
 
     @Override

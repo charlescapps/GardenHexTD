@@ -5,13 +5,19 @@ import android.graphics.drawable.Drawable;
 import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
 
+import javax.xml.transform.Source;
+
 /**
  * Created with IntelliJ IDEA.
  * User: charles
  * Date: 9/26/12
  * Time: 9:04 AM
  */
-public class Hexagon extends Drawable {
+public class Hexagon extends Drawable implements Comparable<Hexagon> {
+
+    public static enum STATE {
+        NORMAL, NORMAL_DRAW, GOAL, SOURCE, SELECTED, ATTACKED
+    }
 
     /********************STATICS****************************/
     public static final PointF[] hexPoints;
@@ -55,18 +61,19 @@ public class Hexagon extends Drawable {
     private Hexagon[] neighbors;
     private Tower tower;
     private Creep creep;
-    private boolean drawPath = false;
-    private boolean isGoal = false;
     private boolean wasInvalidated = false;
+    private STATE myState;
+    private STATE myDefaultState;
 
     public Hexagon(PointF center, Point gridPosition) {
         this.center = center;
         this.gridPosition = gridPosition;
         initPath();
         hexPaint = new Paint();
-        hexPaint.setColor(Color.RED);
+        hexPaint.setColor(Color.GREEN);
         hexPaint.setStrokeWidth(1);
         hexPaint.setStyle(Paint.Style.STROKE);
+        this.myState = this.myDefaultState = STATE.NORMAL;
         //neighbors to be set by the HexGrid instance.
     }
 
@@ -85,14 +92,22 @@ public class Hexagon extends Drawable {
         this.wasInvalidated = false;
     }
 
-    public void setGoal(boolean isGoal) {
-        this.isGoal = isGoal;
-        if (isGoal) {
-            this.hexPaint.setColor(Color.BLUE);
-            this.drawPath = true;
+    public void setState(STATE myState) {
+        this.myState = myState;
+        switch ( myState ) {
+            case NORMAL: hexPaint.setColor(Color.GREEN); break;
+            case GOAL: hexPaint.setColor(Color.BLUE); myDefaultState = STATE.GOAL; break;
+            case SELECTED: hexPaint.setColor(Color.YELLOW); break;
+            case ATTACKED: if (myDefaultState == STATE.NORMAL) hexPaint.setColor(Color.RED); break;
         }
-        else
-            this.hexPaint.setColor(Color.GREEN);
+    }
+
+    public void setStateToDefault() {
+        myState = myDefaultState;
+        switch ( myDefaultState ) {
+            case NORMAL: hexPaint.setColor(Color.GREEN); break;
+            case GOAL: hexPaint.setColor(Color.BLUE); break;
+        }
     }
 
     public void initPath() {
@@ -112,15 +127,9 @@ public class Hexagon extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         //Draw outline of hex or something else TBD
-        if (isGoal) {
-            hexPaint.setColor(Color.BLUE);
-        } else if (drawPath) {
-            hexPaint.setColor(Color.RED);
-        } else {
-            hexPaint.setColor(Color.GREEN);
+        if (myState != STATE.NORMAL) {
+            canvas.drawPath(this.hexPath, this.hexPaint);
         }
-        canvas.drawPath(this.hexPath, this.hexPaint);
-
     }
 
     @Override
@@ -172,14 +181,22 @@ public class Hexagon extends Drawable {
     }
 
     public Creep getCreep() {
-        return this.creep;
+        return creep;
     }
     /*****************************GAME LOGIC************************************/
     /**
      * Fire events when a square is attacked
      */
-    public void attacked(int dmg, boolean drawPath) {
-        this.drawPath = drawPath;
+    public void attacked(int dmg) {
+        if (dmg > 0) {
+            setState(STATE.ATTACKED);
+        }
+        else {
+            setStateToDefault();
+        }
+        if (this.getCreep() != null) {
+            this.getCreep().loseHitpoints(dmg);
+        }
     }
 
     public boolean isEmpty() {
@@ -187,4 +204,27 @@ public class Hexagon extends Drawable {
 
     }
 
+    /************************STANDARD METHODS**************************************/
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Hexagon)) {
+            return false;
+        }
+        Hexagon h = (Hexagon)o;
+        if (h.getCenter().equals(this.center)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(Hexagon hexagon) {
+        if (this.equals(hexagon)) {
+            return 0;
+        }
+        if (this.center.x < hexagon.center.x || this.center.y < hexagon.center.y) {
+            return -1;
+        }
+        return 1;
+    }
 }

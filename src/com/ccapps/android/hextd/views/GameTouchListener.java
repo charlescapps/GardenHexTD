@@ -1,17 +1,12 @@
 package com.ccapps.android.hextd.views;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.view.*;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
+import android.widget.TextView;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.StaticData;
 
 import java.util.logging.Level;
@@ -26,15 +21,48 @@ import java.util.logging.Logger;
  */
 public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
-    private GameView.GameThread gameThread;
+    private GameView.GameViewThread gameViewThread;
     private View gameActivityView;
     private TowerMenuView towerMenu;
 
-    public GameTouchListener(GameView.GameThread gameThread, View gameActivityView) {
+    public GameTouchListener(GameView.GameViewThread gameViewThread, View gameActivityView) {
         super();
-        this.gameThread = gameThread;
+        this.gameViewThread = gameViewThread;
         this.gameActivityView = gameActivityView;
         this.towerMenu = (TowerMenuView)gameActivityView.findViewById(R.id.towerMenuTable);
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e) {
+        float x = e.getX();
+        float y = e.getY();
+        HexGrid GRID = HexGrid.getInstance();
+        Hexagon clickedHex = GRID.getHexFromCoords(e.getX(), e.getY());
+        if (clickedHex.getTower() == null) {
+            return false;
+        }
+        TextView towerInfoView = (TextView)gameActivityView.findViewById(R.id.towerInfoTextView);
+
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
+        int leftMargin = (int)(x + Hexagon.getGlobalSideLength()/2.f);
+        int topMargin = (int)(y + Hexagon.getGlobalSideLength()/2.f);
+        if (leftMargin + towerMenu.getWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
+            leftMargin  -= (towerMenu.getWidth() + Hexagon.getGlobalSideLength() );
+        }
+        if (topMargin + towerMenu.getHeight() - HexGrid.GLOBAL_OFFSET.y > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+            topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
+        }
+        lp.leftMargin = leftMargin;
+        lp.topMargin = topMargin + towerMenu.getYOffset();
+        lp.bottomMargin = 0;
+        lp.rightMargin = 0;
+        towerInfoView.setLayoutParams(lp);
+
+        towerInfoView.setVisibility(View.VISIBLE);
+        towerInfoView.bringToFront();
+        GRID.setSelectedHexagon(clickedHex);
+
+        return true;
     }
 
     /**
@@ -43,7 +71,8 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
      * @return
      */
     @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
+    public void onLongPress(MotionEvent e) {
+        towerMenu.clearDelayedEvents();
         Logger l = Logger.getAnonymousLogger();
         Logger.getAnonymousLogger().log(Level.SEVERE, "Single tap happened!");
         float x = e.getX();
@@ -71,7 +100,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
                 topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
             }
             lp.leftMargin = leftMargin;
-            lp.topMargin = topMargin;
+            lp.topMargin = topMargin + towerMenu.getYOffset();
             lp.bottomMargin = 0;
             lp.rightMargin = 0;
             towerMenu.setLayoutParams(lp);
@@ -79,19 +108,30 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
             towerMenu.setVisibility(View.VISIBLE);
             towerMenu.bringToFront();
 
+            GRID.setSelectedHexagon(clickedHex);
+            clickedHex.setState(Hexagon.STATE.SELECTED);
+
             gameActivityView.invalidate();
 
+            towerMenu.postDelayed(towerMenu.addDelayedEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (towerMenu.containsEvent(this)) {
+                            towerMenu.setVisibility(View.GONE);
+                            towerMenu.invalidate();
+                        }
+                    }
+                })
+            , 3000);
 
 
         }
-
-        return true;
     }
 
     @Override
     public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
-        gameThread.postShiftGrid(0.f, -distanceY);
+        gameViewThread.postShiftGrid(0.f, -distanceY);
         return true;
 
     }

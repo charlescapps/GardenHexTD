@@ -16,9 +16,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="610e256e-d5d5-41fc-880b-368893e5f860" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/ai/Pathfinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/dead_ant.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/start_game_button.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/start_game_pressed.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/start_game_unpressed.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/tower_info_background.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/algorithm/CreepAlgorithm.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/algorithm/RandomWalkAlgorithm.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/metagame/BasicCreepGenerator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/metagame/CreepGenerator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/metagame/Player.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/tower_select_grid.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/layout/tower_select_menu.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/ai/AntCreepPathfinder.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/algorithm/AntCreepPathfinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/sunflower_tower.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/sunflower_tower.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_game.xml" afterPath="$PROJECT_DIR$/res/layout/activity_game.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameLogicThread.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameLogicThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/CreepDrawable.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/CreepDrawable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/AntCreep.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/AntCreep.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/BasicTower.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Creep.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Creep.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/CreepUtils.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/CreepUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/StaticData.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/StaticData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/SunflowerTower.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/SunflowerTower.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Tower.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerUtils.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/TowerUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameTouchListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/TowerMenuView.java" afterPath="$PROJECT_DIR$/src/com/ccapps/android/hextd/views/TowerMenuView.java" />
     </list>
     <ignored path="HexTD.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,7 +151,7 @@
       <file leaf-file-name="Hexagon.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="24" selection-start="1681" selection-end="1681" vertical-scroll-proportion="0.0">
+            <state line="55" column="24" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,7 +160,7 @@
       <file leaf-file-name="HexGrid.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="29" selection-start="3011" selection-end="3011" vertical-scroll-proportion="0.0">
+            <state line="115" column="29" selection-start="3001" selection-end="3001" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -138,7 +169,7 @@
       <file leaf-file-name="Creep.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Creep.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="34" selection-start="633" selection-end="633" vertical-scroll-proportion="0.0">
+            <state line="23" column="34" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -147,7 +178,7 @@
       <file leaf-file-name="AntCreep.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/AntCreep.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="5" selection-start="3222" selection-end="3222" vertical-scroll-proportion="1.1530173">
+            <state line="135" column="5" selection-start="2846" selection-end="2846" vertical-scroll-proportion="0.53351957">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -158,7 +189,7 @@
       <file leaf-file-name="Pathfinder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/ai/Pathfinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="4" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
+            <state line="16" column="4" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -176,7 +207,7 @@
       <file leaf-file-name="CreepDrawable.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/CreepDrawable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="17" selection-start="707" selection-end="707" vertical-scroll-proportion="0.0">
+            <state line="26" column="17" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -185,7 +216,7 @@
       <file leaf-file-name="GameLogicThread.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameLogicThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="0" selection-start="1516" selection-end="1516" vertical-scroll-proportion="0.0">
+            <state line="53" column="0" selection-start="1554" selection-end="1554" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -194,7 +225,7 @@
       <file leaf-file-name="GameActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="0" selection-start="2061" selection-end="2061" vertical-scroll-proportion="0.0">
+            <state line="81" column="0" selection-start="2469" selection-end="2469" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -203,7 +234,7 @@
       <file leaf-file-name="GameView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="20" selection-start="5154" selection-end="5154" vertical-scroll-proportion="0.0">
+            <state line="184" column="20" selection-start="5340" selection-end="5340" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -266,10 +297,9 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="600" />
-    <option name="y" value="1" />
-    <option name="width" value="1320" />
-    <option name="height" value="1033" />
+    <option name="y" value="27" />
+    <option name="width" value="1600" />
+    <option name="height" value="846" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -313,6 +343,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HexTD" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -337,145 +377,19 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GardenHexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GardenHexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hextd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GardenHexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hextd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GardenHexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hextd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gamedata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GardenHexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hextd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="draw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GardenHexTD" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hextd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="176" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="178" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="178" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="176" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="181" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="975" />
@@ -553,6 +467,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -578,24 +510,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -831,10 +745,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="600" y="1" width="1320" height="1033" extended-state="0" />
+    <frame x="0" y="27" width="1600" height="846" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41237113" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4113372" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987013" sideWeight="0.67005813" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -847,7 +761,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32987013" sideWeight="0.67005813" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20717132" sideWeight="0.58762884" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20714286" sideWeight="0.5886628" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994187" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27467534" sideWeight="0.67005813" order="3" side_tool="false" content_ui="tabs" />
@@ -970,22 +884,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/Hexagon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="24" selection-start="1681" selection-end="1681" vertical-scroll-proportion="0.0" />
+        <state line="55" column="24" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/HexGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="29" selection-start="3011" selection-end="3011" vertical-scroll-proportion="0.0" />
+        <state line="115" column="29" selection-start="3001" selection-end="3001" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/Creep.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="34" selection-start="633" selection-end="633" vertical-scroll-proportion="0.0" />
+        <state line="23" column="34" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/ai/Pathfinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="4" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0" />
+        <state line="16" column="4" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
@@ -995,27 +917,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/draw/CreepDrawable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="17" selection-start="707" selection-end="707" vertical-scroll-proportion="0.0" />
+        <state line="26" column="17" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameLogicThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="1516" selection-end="1516" vertical-scroll-proportion="0.0" />
+        <state line="53" column="0" selection-start="1554" selection-end="1554" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/activities/GameActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="0" selection-start="2061" selection-end="2061" vertical-scroll-proportion="0.0" />
+        <state line="81" column="0" selection-start="2469" selection-end="2469" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/views/GameView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="20" selection-start="5154" selection-end="5154" vertical-scroll-proportion="0.0" />
+        <state line="184" column="20" selection-start="5340" selection-end="5340" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ccapps/android/hextd/gamedata/AntCreep.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="5" selection-start="3222" selection-end="3222" vertical-scroll-proportion="1.1530173">
+        <state line="135" column="5" selection-start="2846" selection-end="2846" vertical-scroll-proportion="0.53351957">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

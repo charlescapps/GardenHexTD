@@ -1,12 +1,19 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import com.ccapps.android.hextd.R;
+import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
+import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.*;
 import com.ccapps.android.hextd.gamedata.SunflowerTower;
+import com.ccapps.android.hextd.metagame.BasicCreepGenerator;
+import com.ccapps.android.hextd.metagame.CreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 import com.ccapps.android.hextd.views.TowerMenuView;
 
@@ -23,7 +30,25 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        HexGrid GRID = HexGrid.getInstance();
+        List<Hexagon> sourceHexes = new ArrayList<Hexagon>();
 
+        Hexagon goalHex = GRID.get(GRID.getNumVertical() - 1, 5);
+        GRID.setGoalHex(goalHex.getGridPosition().x, goalHex.getGridPosition().y, true);
+
+        sourceHexes.add(GRID.get(0,5));
+        CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
+
+        GameView v = (GameView)findViewById(R.id.gameView);
+        this.gameLogicThread = new GameLogicThread(v, creepGenerator);
+        v.setGameLogicThread(gameLogicThread);
+
+        setupTowerSelectMenu();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -45,14 +70,6 @@ public class GameActivity extends Activity {
     protected void  onStart() {
        super.onStart();
 
-       GameView v = (GameView)findViewById(R.id.gameView);
-       this.gameLogicThread = new GameLogicThread(v);
-       v.setGameLogicThread(gameLogicThread);
-
-       setupTowersAndGoals();
-       setupTowerSelectMenu();
-       setupCreeps();
-
     }
 
     @Override
@@ -62,28 +79,9 @@ public class GameActivity extends Activity {
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();
-
-
-    }
-
-
-    private void setupTowersAndGoals() {
-
-        HexGrid grid = HexGrid.getInstance();
-        int numVertical = grid.getNumVertical();
-        int numHorizontal = grid.getNumHorizontal();
-
-        grid.setGoalHex(numVertical-1, numHorizontal/2, true);
-
-    }
-
-    private void setupCreeps() {
-        HexGrid GRID = HexGrid.getInstance();
-        CreepUtils.addCreep(AntCreep.class, 0, 5, GRID.getGoalHexes().get(0));
     }
 
     private void setupTowerSelectMenu() {
-
 
         List<Integer> mThumbIds = Arrays.asList(new Integer[]{
                 R.drawable.sunflower_tower,
@@ -103,6 +101,7 @@ public class GameActivity extends Activity {
         int padding = 5;
 
         TowerMenuView menu = (TowerMenuView)findViewById(R.id.towerMenuTable);
+        GameView.towerMenu = menu;
         menu.init(mThumbIds,mTowerClasses, numPerRow, imageSize, padding);
 
 
