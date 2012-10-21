@@ -3,6 +3,7 @@ package com.ccapps.android.hextd.views;
 import android.graphics.Point;
 import android.view.*;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
@@ -29,6 +30,39 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         this.gameViewThread = gameViewThread;
         this.gameActivityView = gameActivityView;
         this.towerMenu = (TowerMenuView)gameActivityView.findViewById(R.id.towerMenuTable);
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e) {
+        float x = e.getX();
+        float y = e.getY();
+        HexGrid GRID = HexGrid.getInstance();
+        Hexagon clickedHex = GRID.getHexFromCoords(e.getX(), e.getY());
+        if (clickedHex.getTower() == null) {
+            return false;
+        }
+        TextView towerInfoView = (TextView)gameActivityView.findViewById(R.id.towerInfoTextView);
+
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
+        int leftMargin = (int)(x + Hexagon.getGlobalSideLength()/2.f);
+        int topMargin = (int)(y + Hexagon.getGlobalSideLength()/2.f);
+        if (leftMargin + towerMenu.getWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
+            leftMargin  -= (towerMenu.getWidth() + Hexagon.getGlobalSideLength() );
+        }
+        if (topMargin + towerMenu.getHeight() - HexGrid.GLOBAL_OFFSET.y > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+            topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
+        }
+        lp.leftMargin = leftMargin;
+        lp.topMargin = topMargin + towerMenu.getYOffset();
+        lp.bottomMargin = 0;
+        lp.rightMargin = 0;
+        towerInfoView.setLayoutParams(lp);
+
+        towerInfoView.setVisibility(View.VISIBLE);
+        towerInfoView.bringToFront();
+        GRID.setSelectedHexagon(clickedHex);
+
+        return true;
     }
 
     /**

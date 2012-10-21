@@ -9,6 +9,18 @@
     android:layout_margin="0dp"
     android:padding="0dp"   >
 
+
+        <TextView android:id="@+id/towerInfoTextView"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:text="Test this shit"
+                  android:textColor="#000000"
+                  android:textSize="16dp"
+                  android:padding="6dp"
+                  android:background="@drawable/tower_info_background"
+                  android:alpha="0.9"
+                />
+
   <com.ccapps.android.hextd.views.TowerMenuView android:id="@+id/towerMenuTable"
                android:layout_height="wrap_content"
                android:layout_width="wrap_content"
@@ -26,6 +38,7 @@
                 />
 
   </com.ccapps.android.hextd.views.TowerMenuView>
+
 
     <com.ccapps.android.hextd.views.GameView
             android:id="@+id/gameView"

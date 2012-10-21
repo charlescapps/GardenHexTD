@@ -1,8 +1,11 @@
 package com.ccapps.android.hextd.activities;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
@@ -36,13 +39,11 @@ public class GameActivity extends Activity {
         sourceHexes.add(GRID.get(0,5));
         CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
 
-
         GameView v = (GameView)findViewById(R.id.gameView);
         this.gameLogicThread = new GameLogicThread(v, creepGenerator);
         v.setGameLogicThread(gameLogicThread);
 
         setupTowerSelectMenu();
-
     }
 
     @Override
