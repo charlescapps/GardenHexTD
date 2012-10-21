@@ -6,6 +6,8 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -13,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.gamedata.TowerUtils;
 
@@ -67,20 +70,29 @@ public class TowerMenuView extends TableLayout {
             TableRow currentRow = i / numPerRow == 0 ? row1 : row2;
             TextView textView = new TextView(context);
 
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(imageSize + 2*padding, imageSize + 2*padding);
+            int height = (int)((float)(imageSize + 2*padding)*1.25f);
+            int textSize = (int)((float)height*0.2f);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(imageSize + 2*padding, height + 2*padding);
             lp.setMargins(0, 0, padding, 0);
             textView.setLayoutParams(lp);
             textView.setPadding(padding, padding, padding, padding);
 
-
             Drawable drawable = this.getResources().getDrawable(thumb);
             drawable.setAlpha(180);
             drawable.setBounds(new Rect(0, 0, imageSize, imageSize));
+
             textView.setCompoundDrawables(null, drawable, null, null);
             textView.setBackgroundColor(Color.YELLOW);
             textView.setBackgroundResource(R.drawable.grid_background);
 
             textView.setOnClickListener(new OnClickTower(towerClasses.get(i)));
+            int towerCost = StaticData.TOWER_COSTS.get(towerClasses.get(i));
+            textView.setText("$" + towerCost);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+            textView.setTextColor(Color.WHITE);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            textView.scrollTo(0,0);
+
 
             currentRow.addView(textView);
         }

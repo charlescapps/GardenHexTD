@@ -15,7 +15,9 @@ import android.widget.Button;
 import com.ccapps.android.hextd.activities.GameActivity;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-import com.ccapps.android.hextd.gamedata.StaticData;
+import com.ccapps.android.hextd.gamedata.*;
+
+import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
@@ -139,6 +141,12 @@ public class MainActivity extends Activity {
 
         StaticData.DEAD_ANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
+
+        StaticData.TOWER_COSTS = new HashMap<Class<? extends Tower>, Integer>();
+        StaticData.TOWER_COSTS.put(SunflowerTower.class, 100);
+        StaticData.TOWER_COSTS.put(CarnivorousTower.class, 20);
+        StaticData.TOWER_COSTS.put(RoseTower.class, 10);
+        StaticData.TOWER_COSTS.put(EggplantTower.class, 40);
 
 
 

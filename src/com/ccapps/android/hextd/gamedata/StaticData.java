@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.Display;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -25,6 +26,8 @@ public class StaticData {
     public static Bitmap DEAD_ANT;
 
     public static Display DEFAULT_SCREEN_SIZE;
+
+    public static Map<Class<? extends Tower>, Integer> TOWER_COSTS;
 
     public static Logger l = Logger.getAnonymousLogger();
 
