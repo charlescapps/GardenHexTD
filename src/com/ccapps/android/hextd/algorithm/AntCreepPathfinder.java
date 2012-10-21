@@ -22,9 +22,8 @@ public class AntCreepPathfinder implements CreepAlgorithm {
     private int pathCost[][];   // lowest path cost to point
     private Creep creep;
 
-    public AntCreepPathfinder(Creep creep) {
+    public AntCreepPathfinder() {
         this.GRID = HexGrid.getInstance();
-        this.creep = creep;
 
         int h = this.GRID.getNumHorizontal();
         int v = this.GRID.getNumVertical();

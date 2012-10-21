@@ -1,5 +1,6 @@
 package com.ccapps.android.hextd.metagame;
 
+import com.ccapps.android.hextd.algorithm.AntCreepPathfinder;
 import com.ccapps.android.hextd.algorithm.CreepAlgorithm;
 import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
 import com.ccapps.android.hextd.draw.Hexagon;
@@ -28,7 +29,7 @@ public class BasicCreepGenerator implements CreepGenerator{
         this.sourceHexes = sourceHexes;
         this.goalHex = goalHex;
         this.creepClass = AntCreep.class;
-        this.creepAlgorithm = RandomWalkAlgorithm.class;
+        this.creepAlgorithm = AntCreepPathfinder.class;
     }
 
     @Override
