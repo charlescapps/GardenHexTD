@@ -23,10 +23,10 @@ import java.util.List;
 public abstract class BasicTower implements Tower {
 
     protected Hexagon hex;
-    private int dmgPerAttack;
+    protected int dmgPerAttack;
     protected List<Hexagon> attackHexes;
-    private int beatsToWait;
-    private int relativeBeat;
+    protected int beatsToWait;
+    protected int relativeBeat;
     protected TowerDrawable towerDrawable;
     private boolean isAttacking;
     protected int direction;

@@ -32,7 +32,7 @@ public class AntCreep implements Creep {
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 100;
+        this.hitpoints = 1000;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT);
         this.tick = 0;
@@ -112,6 +112,11 @@ public class AntCreep implements Creep {
     }
 
     @Override
+    public void loseHitpoints(int hp) {
+        this.hitpoints -= hp;
+    }
+
+    @Override
     public CreepAlgorithm getAlgorithm() {
         return algorithm;
     }
@@ -123,19 +128,21 @@ public class AntCreep implements Creep {
 
     @Override
     public void evaluateRoute() {
-        if (algorithm.pathNeedsEvaluation()) {
+        if (hitpoints > 0 && algorithm.pathNeedsEvaluation()) {
             this.path = algorithm.buildPath(hex, goalHex);
         }
     }
 
     @Override
     public void move() {
-        if (++tick % speed == 0) {
+        if (++tick % speed == 0 && hitpoints > 0) {
             if (path.size() <= 0) {
                 return;
             }
             evaluateRoute();
+            hex.setCreep(null);
             hex = path.remove(0);
+            hex.setCreep(this);
             creepDrawable.updateLocation();
         }
     }

@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
+import com.ccapps.android.hextd.views.GameView;
+import com.ccapps.android.hextd.views.TowerMenuView;
 
 import java.util.ArrayList;
 import java.util.Collections;

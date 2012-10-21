@@ -43,7 +43,8 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
      * @return
      */
     @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
+    public void onLongPress(MotionEvent e) {
+        towerMenu.clearDelayedEvents();
         Logger l = Logger.getAnonymousLogger();
         Logger.getAnonymousLogger().log(Level.SEVERE, "Single tap happened!");
         float x = e.getX();
@@ -71,7 +72,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
                 topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
             }
             lp.leftMargin = leftMargin;
-            lp.topMargin = topMargin;
+            lp.topMargin = topMargin + towerMenu.getYOffset();
             lp.bottomMargin = 0;
             lp.rightMargin = 0;
             towerMenu.setLayoutParams(lp);
@@ -81,11 +82,17 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
             gameActivityView.invalidate();
 
-
-
+            towerMenu.postDelayed(towerMenu.addDelayedEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (towerMenu.containsEvent(this)) {
+                            towerMenu.setVisibility(View.GONE);
+                            towerMenu.invalidate();
+                        }
+                    }
+                })
+            , 3000);
         }
-
-        return true;
     }
 
     @Override

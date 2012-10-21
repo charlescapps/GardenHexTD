@@ -11,7 +11,7 @@ import com.ccapps.android.hextd.gamedata.Tower;
  * Date: 9/26/12
  * Time: 9:04 AM
  */
-public class Hexagon extends Drawable {
+public class Hexagon extends Drawable implements Comparable<Hexagon> {
 
     /********************STATICS****************************/
     public static final PointF[] hexPoints;
@@ -172,7 +172,7 @@ public class Hexagon extends Drawable {
     }
 
     public Creep getCreep() {
-        return this.creep;
+        return creep;
     }
     /*****************************GAME LOGIC************************************/
     /**
@@ -180,6 +180,9 @@ public class Hexagon extends Drawable {
      */
     public void attacked(int dmg, boolean drawPath) {
         this.drawPath = drawPath;
+        if (this.getCreep() != null) {
+            this.getCreep().loseHitpoints(dmg);
+        }
     }
 
     public boolean isEmpty() {
@@ -193,11 +196,21 @@ public class Hexagon extends Drawable {
         if (!(o instanceof Hexagon)) {
             return false;
         }
-        Hexagon hex = (Hexagon)o;
-        if (hex.getCenter().equals(this.center)) {
+        Hexagon h = (Hexagon)o;
+        if (h.getCenter().equals(this.center)) {
             return true;
         }
         return false;
     }
 
+    @Override
+    public int compareTo(Hexagon hexagon) {
+        if (this.equals(hexagon)) {
+            return 0;
+        }
+        if (this.center.x < hexagon.center.x || this.center.y < hexagon.center.y) {
+            return -1;
+        }
+        return 1;
+    }
 }

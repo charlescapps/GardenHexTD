@@ -104,6 +104,7 @@ public class GameActivity extends Activity {
         int padding = 5;
 
         TowerMenuView menu = (TowerMenuView)findViewById(R.id.towerMenuTable);
+        GameView.towerMenu = menu;
         menu.init(mThumbIds,mTowerClasses, numPerRow, imageSize, padding);
 
 

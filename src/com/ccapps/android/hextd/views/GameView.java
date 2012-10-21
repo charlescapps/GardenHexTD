@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
+    public static TowerMenuView towerMenu = null;
+
     private GameThread gameThread;
     private GestureDetector gestureDetector;
     private GameLogicThread gameLogicThread;
@@ -62,11 +64,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             if (e.getActionMasked() == MotionEvent.ACTION_CANCEL){
                 return true;
             }
-
         }
-
         return result;
-
     }
 
 
@@ -80,7 +79,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.bringToFront();
         gameThread.start();
         gameLogicThread.start();
-
     }
 
     @Override

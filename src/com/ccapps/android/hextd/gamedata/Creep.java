@@ -36,6 +36,7 @@ public interface Creep {
 
     public int getHitpoints();
     public void setHitpoints(int hp);
+    public void loseHitpoints(int hp);
 
     public CreepAlgorithm getAlgorithm();
     public void setAlgorithm(CreepAlgorithm creepAlgorithm);

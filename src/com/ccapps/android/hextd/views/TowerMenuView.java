@@ -16,6 +16,7 @@ import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.gamedata.TowerUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,16 +36,20 @@ public class TowerMenuView extends TableLayout {
     private int padding;
     List<Class<? extends Tower>> towerClasses;
     private Point lastClickedHex;
+    private List<Runnable> currentDelayEvents;
+    private float yOffset;
 
     public TowerMenuView(Context context) {
         super(context);
         this.context = context;
-
+        this.currentDelayEvents = new ArrayList<Runnable>();
     }
 
     public TowerMenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        this.currentDelayEvents = new ArrayList<Runnable>();
+        this.yOffset = 0.f;
     }
 
     public void init(List<Integer> drawableIds, List<Class<? extends Tower>> towerClasses, int numPerRow,
@@ -82,8 +87,43 @@ public class TowerMenuView extends TableLayout {
         invalidate();
     }
 
+    public int getYOffset() {
+        return (int)yOffset;
+    }
+
+    public void shiftYOffset(float pix) {
+        this.yOffset += pix;
+    }
+
     public void setLastClickedHex(Point p) {
         this.lastClickedHex = p;
+    }
+
+    @Override
+    public void onVisibilityChanged(View v, int visibility) {
+        super.onVisibilityChanged(v, visibility);
+        if (visibility == View.GONE || visibility == View.VISIBLE) {
+            this.currentDelayEvents.clear();
+            this.yOffset = 0.f;
+        }
+    }
+
+    public void clearDelayedEvents() {
+        this.currentDelayEvents.clear();
+    }
+
+    public Runnable addDelayedEvent(Runnable r) {
+        this.currentDelayEvents.add(r);
+        return r;
+    }
+
+    public boolean containsEvent(Runnable runnable) {
+        for (Runnable r: currentDelayEvents) {
+            if (r == runnable) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private class OnClickTower implements OnClickListener {
@@ -118,5 +158,6 @@ public class TowerMenuView extends TableLayout {
             }, 300);
 
         }
+
     }
 }
