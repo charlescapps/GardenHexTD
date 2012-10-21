@@ -41,4 +41,8 @@ public class CreepUtils {
             GRID.setCreep(row, col, instance);
         }
     }
+
+    public static void addCreep(Class<? extends Creep> creepClass, Hexagon src, Hexagon goalHex, Class<? extends CreepAlgorithm> algorithmClass) {
+        addCreep(creepClass, src.getGridPosition().x, src.getGridPosition().y, goalHex, algorithmClass);
+    }
 }

@@ -38,6 +38,8 @@ public interface Creep {
     public void setHitpoints(int hp);
     public void loseHitpoints(int hp);
 
+    public boolean isDead();
+
     public CreepAlgorithm getAlgorithm();
     public void setAlgorithm(CreepAlgorithm creepAlgorithm);
 

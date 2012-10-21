@@ -20,7 +20,7 @@ import com.ccapps.android.hextd.gamedata.StaticData;
 public class MainActivity extends Activity {
 
     public static final int NUM_VERTICAL_HEXES = 16;                  //test values for now...
-    public static final int NUM_HORIZONTAL_HEXES = 10;
+    public static final int NUM_HORIZONTAL_HEXES = 11;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,6 @@ public class MainActivity extends Activity {
         setupHexGrid();
 
         setupStartGameButton();
-
-
     }
 
     @Override
@@ -105,7 +103,7 @@ public class MainActivity extends Activity {
         float a = gridWidth * 1.f / ( (3.f/2.f) * (float)NUM_HORIZONTAL_HEXES + 1.f/2.f);
         float h = a*Hexagon.sqrt3/2.f;
 
-        setupStaticData((int)(a*2.f));
+        setupStaticData((int)(a*1.6f));
 
 
         PointF margin = new PointF(5.f, 5.f);
@@ -130,7 +128,6 @@ public class MainActivity extends Activity {
         StaticData.EGGPLANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.eggplant_tower), a, a, false) ;
 
-
         StaticData.CARNIVOROUS =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.carnivorous_tower), a, a, false) ;
 
@@ -139,6 +136,9 @@ public class MainActivity extends Activity {
 
         StaticData.ANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ant), a, a, false) ;
+
+        StaticData.DEAD_ANT =
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
 
 
 

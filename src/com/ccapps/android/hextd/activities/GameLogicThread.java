@@ -7,6 +7,7 @@ import android.view.SurfaceHolder;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
+import com.ccapps.android.hextd.metagame.CreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 
 import java.util.List;
@@ -27,10 +28,12 @@ public class GameLogicThread extends Thread {
     private HexGrid theGrid;
     private List<Tower> towersOnGrid;
     private List<Creep> creepsOnGrid;
+    private CreepGenerator creepGenerator;
 
-    public GameLogicThread(GameView gameView) {
+    public GameLogicThread(GameView gameView, CreepGenerator creepGenerator) {
         super();
         this.gameView = gameView;
+        this.creepGenerator = creepGenerator;
         this.isRunning = false;
         this.theGrid = HexGrid.getInstance();
         this.towersOnGrid = theGrid.getTowersOnGrid();
@@ -58,6 +61,7 @@ public class GameLogicThread extends Thread {
             for (Creep c: creepsOnGrid) {
                 c.move();
             }
+            creepGenerator.tick();
 
             gameView.postNeedsDrawing();
 

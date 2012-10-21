@@ -6,8 +6,11 @@ import android.view.Menu;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
+import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.*;
 import com.ccapps.android.hextd.gamedata.SunflowerTower;
+import com.ccapps.android.hextd.metagame.BasicCreepGenerator;
+import com.ccapps.android.hextd.metagame.CreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 import com.ccapps.android.hextd.views.TowerMenuView;
 
@@ -24,13 +27,21 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        setupTowersAndGoals();
-        setupTowerSelectMenu();
-        setupCreeps();
+        HexGrid GRID = HexGrid.getInstance();
+        List<Hexagon> sourceHexes = new ArrayList<Hexagon>();
+
+        Hexagon goalHex = GRID.get(GRID.getNumVertical() - 1, 5);
+        GRID.setGoalHex(goalHex.getGridPosition().x, goalHex.getGridPosition().y, true);
+
+        sourceHexes.add(GRID.get(0,5));
+        CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
+
 
         GameView v = (GameView)findViewById(R.id.gameView);
-        this.gameLogicThread = new GameLogicThread(v);
+        this.gameLogicThread = new GameLogicThread(v, creepGenerator);
         v.setGameLogicThread(gameLogicThread);
+
+        setupTowerSelectMenu();
 
     }
 
@@ -67,21 +78,6 @@ public class GameActivity extends Activity {
         GameView v = (GameView)findViewById(R.id.gameView);
         v.startDrawing();
         gameLogicThread.unSuspendMe();
-    }
-
-    private void setupTowersAndGoals() {
-
-        HexGrid grid = HexGrid.getInstance();
-        int numVertical = grid.getNumVertical();
-        int numHorizontal = grid.getNumHorizontal();
-
-        grid.setGoalHex(numVertical-1, numHorizontal/2, true);
-
-    }
-
-    private void setupCreeps() {
-        HexGrid GRID = HexGrid.getInstance();
-        CreepUtils.addCreep(AntCreep.class, 0, 0, GRID.getGoalHexes().get(0), RandomWalkAlgorithm.class);
     }
 
     private void setupTowerSelectMenu() {

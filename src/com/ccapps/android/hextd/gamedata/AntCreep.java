@@ -32,9 +32,9 @@ public class AntCreep implements Creep {
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 1000;
+        this.hitpoints = 500;
 
-        this.creepDrawable = new CreepDrawable(this, StaticData.ANT);
+        this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
         this.speed = 4;
 
@@ -114,6 +114,11 @@ public class AntCreep implements Creep {
     @Override
     public void loseHitpoints(int hp) {
         this.hitpoints -= hp;
+    }
+
+    @Override
+    public boolean isDead() {
+        return hitpoints <= 0;
     }
 
     @Override

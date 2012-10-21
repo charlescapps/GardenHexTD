@@ -22,11 +22,13 @@ public class RandomWalkAlgorithm implements CreepAlgorithm{
 
     public RandomWalkAlgorithm() {
         this.random = new Random();
+        visited = new TreeSet<Hexagon>();
     }
 
     public RandomWalkAlgorithm(Creep creep) {
         this.creep = creep;
         this.random = new Random();
+        visited = new TreeSet<Hexagon>();
     }
 
     /**
@@ -53,7 +55,6 @@ public class RandomWalkAlgorithm implements CreepAlgorithm{
     public List<Hexagon> buildPath(Hexagon src, Hexagon goal) {
         Hexagon next = null, previous = src;
         List<Hexagon> path = Collections.synchronizedList(new ArrayList<Hexagon>());
-        visited = new TreeSet<Hexagon>();
         HexGrid GRID = HexGrid.getInstance();
 
         while (next == null || !next.equals(goal)) {
