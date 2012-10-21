@@ -1,8 +1,6 @@
 package com.ccapps.android.hextd.ai;
 
-import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-
 import java.util.List;
 
 /**

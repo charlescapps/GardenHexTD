@@ -1,12 +1,10 @@
 package com.ccapps.android.hextd.ai;
 
-import android.graphics.Point;
-import com.ccapps.android.hextd.draw.HexGrid;
-import com.ccapps.android.hextd.draw.Hexagon;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
+import android.graphics.Point;
+import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.draw.HexGrid;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,27 +21,32 @@ public class AntCreepPathfinder implements Pathfinder {
 
     public AntCreepPathfinder() {
         this.GRID = HexGrid.getInstance();
-        this.pathCount = new int[this.GRID.getNumHorizontal()][this.GRID.getNumVertical()];
-        this.pathCost = new int[this.GRID.getNumHorizontal()][this.GRID.getNumVertical()];
+
+        int h = this.GRID.getNumHorizontal();
+        int v = this.GRID.getNumVertical();
+
+        this.pathCount = new int[h][v];
+        this.pathCost = new int[h][v];
         // initialize path cost, count to zeroes
-        for (int i = 0; i < this.GRID.getNumHorizontal(); i++) {
-            for (int j = 0; i < this.GRID.getNumVertical(); j++) {
-                pathCount[i][j] = 0;
-                pathCost[i][j] = 0;
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < v; j++) {
+                this.pathCount[i][j] = 0;
+                this.pathCost[i][j] = 0;
             }
         }
-
-
     }
 
     // A* implementation of creep pathfind
     @Override
     public List<Hexagon> getPath(Hexagon curHex, Hexagon goalHex) {
-        ArrayList<Hexagon> path = new ArrayList<Hexagon>();
+        List<Hexagon> path = new ArrayList<Hexagon>();
+
+        /* begin old algorithm
         Hexagon tempHex = curHex;
         Hexagon nextHex;
         int g = 0;  // path-cost estimate of A*
         int count = 0;
+        HexGrid grid = HexGrid.getInstance();
 
         while (tempHex != goalHex && count < 40) {
             count++;
@@ -85,25 +88,23 @@ public class AntCreepPathfinder implements Pathfinder {
             }
         }
         return path;
-        //return this.Astar(curHex, goalHex, 0);
+         end old algorithm */
+
+        return this.Astar(curHex, goalHex, 0);
     }
 
     // update game's hexgrid
     public void updateGrid(HexGrid newGrid) {
-
         this.GRID = newGrid;
-
     }
 
     // Heuristic estimate function of A*
     // make a shortest-path estimate to goal
     private int H(Hexagon curHex, Hexagon goalHex) {
-
         // heuristic estimate distance
         int distX,
             distY,
             distT;
-
         Point curPos = curHex.getGridPosition(),
                 goalPos = goalHex.getGridPosition();
 
@@ -119,9 +120,9 @@ public class AntCreepPathfinder implements Pathfinder {
     }
 
     // recursive a-star function
-    private ArrayList<Hexagon> Astar(Hexagon current, Hexagon goal, int g) {
+    private List<Hexagon> Astar(Hexagon current, Hexagon goal, int g) {
         Hexagon neighbors[] = current.getNeighbors();
-        ArrayList<Hexagon> shortestPath = new ArrayList<Hexagon>();
+        List<Hexagon> shortestPath = new ArrayList<Hexagon>();
 
         // found goal
         if (current == goal) {
@@ -129,32 +130,33 @@ public class AntCreepPathfinder implements Pathfinder {
             return shortestPath;
         }
 
-
         // add neighbor hexagons to an ordered list, ascending by Heuristic Estimate
-        ArrayList<Hexagon> hRankN = new ArrayList<Hexagon>();
-        for (int i = 0; i < neighbors.length; i++) {
-            int hVal = this.H(neighbors[i], goal);
+        List<Hexagon> hRankN = new ArrayList<Hexagon>();
+        for (Hexagon hexN : neighbors) {
+        //for (int i = 0; i < neighbors.length; i++) {
+            int hVal = this.H(hexN, goal);
             if (hRankN.isEmpty()) {
-                hRankN.add(neighbors[i]);
+                hRankN.add(hexN);
             }
             else {
                 boolean added = false;
-                for (int j = 0; j < hRankN.size(); j++) {
+                for (int j = 0; j < hRankN.size() && !added; j++) {
                     if (hVal <= this.H(hRankN.get(j), goal)) {
-                        hRankN.add(j, neighbors[i]);
+                        hRankN.add(j, hexN);
                         added = true;
+                        //break;
                     }
                 }
-                if (added == false) {   // add to end
-                    hRankN.add(neighbors[i]);
+                if (!added) {   // add to end
+                    hRankN.add(hexN);
                 }
             }
         }
 
         // visit every neighbor
-        for (int i = 0; i < hRankN.size(); i++) {
-            Point n = hRankN.get(i).getGridPosition();
-            ArrayList<Hexagon> tempPath = new ArrayList<Hexagon>();
+        for (Hexagon hexI : hRankN) {
+            Point n = hexI.getGridPosition();
+            List<Hexagon> tempPath = new ArrayList<Hexagon>();
 
             // TODO: add logical expression for "traversability" or "vacancy" of hex path
             if (pathCount[n.x][n.y] < 6) {  // open hex
@@ -162,7 +164,7 @@ public class AntCreepPathfinder implements Pathfinder {
                     pathCost[n.x][n.y] = g;
 
                     // visit neighbor in ascending order of heuristic estimate
-                    tempPath.addAll(this.Astar(hRankN.get(i), goal, g + 1));
+                    tempPath.addAll(this.Astar(hexI, goal, g + 1));
                 }
                 pathCount[n.x][n.y]++;      // increment location count
             }
@@ -170,6 +172,7 @@ public class AntCreepPathfinder implements Pathfinder {
                 shortestPath = tempPath;
             }
         }
+
         // path to goal found
         if (shortestPath.size() > 0 && shortestPath.get(shortestPath.size() - 1) == goal) {
             return shortestPath;

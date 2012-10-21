@@ -37,9 +37,10 @@ public class AntCreep implements Creep {
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT);
 
+        this.path = new ArrayList<Hexagon>();
         this.pathfinder = new AntCreepPathfinder();
 
-        initRoute();
+        this.initRoute();
     }
 
     @Override
@@ -104,7 +105,9 @@ public class AntCreep implements Creep {
 
     @Override
     public void initRoute() {
-        /*this.path = new ArrayList<Hexagon>();
+
+        /* begin old algorithm
+        //this.path = new ArrayList<Hexagon>();
         HexGrid GRID = HexGrid.getInstance();
         Hexagon tmp = hex;
         Point goalPos = goalHex.getGridPosition();
@@ -123,7 +126,9 @@ public class AntCreep implements Creep {
             path.add(GRID.get(newPos));
             tmp = GRID.get(newPos);
 
-        }*/
+        }
+         end old algorithm */
+
         this.path = this.pathfinder.getPath(this.hex, this.goalHex);
     }
 
