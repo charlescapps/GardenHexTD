@@ -74,6 +74,9 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
             towerMenu.setVisibility(View.VISIBLE);
             towerMenu.bringToFront();
 
+            GRID.setSelectedHexagon(clickedHex);
+            clickedHex.setState(Hexagon.STATE.SELECTED);
+
             gameActivityView.invalidate();
 
             towerMenu.postDelayed(towerMenu.addDelayedEvent(new Runnable() {
@@ -87,8 +90,6 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
                 })
             , 3000);
 
-            clickedHex.setState(Hexagon.STATE.SELECTED);
-            GRID.setSelectedHexagon(clickedHex);
 
         }
     }

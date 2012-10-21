@@ -138,6 +138,7 @@ public class HexGrid extends Drawable {
         this.goalHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         this.gridPaint = new Paint();
         this.gridPaint.setColor(Color.GREEN);
+        this.gridPaint.setAlpha(128);
         this.gridPaint.setStrokeWidth(1);
         this.gridPaint.setStyle(Paint.Style.STROKE);
         

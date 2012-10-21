@@ -1,16 +1,10 @@
 package com.ccapps.android.hextd.gamedata;
 
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Point;
 import android.graphics.PointF;
-import com.ccapps.android.hextd.R;
-import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +19,7 @@ public abstract class BasicTower implements Tower {
     protected Hexagon hex;
     protected int dmgPerAttack;
     protected List<Hexagon> attackHexes;
-    protected int beatsToWait;
+    protected int attackSpeed;
     protected int relativeBeat;
     protected TowerDrawable towerDrawable;
     private boolean isAttacking;
@@ -35,7 +29,7 @@ public abstract class BasicTower implements Tower {
         this.dmgPerAttack = 20;
         this.hex = hex;
         this.isAttacking = false;
-        this.beatsToWait = 2;
+        this.attackSpeed = 4;
         this.direction = 0;
     }
 
@@ -94,13 +88,13 @@ public abstract class BasicTower implements Tower {
     }
 
     @Override
-    public int getBeatsToWait() {
-        return beatsToWait;
+    public int getAttackSpeed() {
+        return attackSpeed;
     }
 
     @Override
-    public void setBeatsToWait(int beatsToWait) {
-        this.beatsToWait = beatsToWait;
+    public void setAttackSpeed(int attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 
     @Override
@@ -138,7 +132,7 @@ public abstract class BasicTower implements Tower {
         ++relativeBeat;
         for (Hexagon h: attackHexes) {
             if (h != null) {
-                if (relativeBeat % beatsToWait == 0) {
+                if (relativeBeat % attackSpeed == 0) {
                     h.attacked(dmgPerAttack);
                 } else {
                     h.attacked(0);

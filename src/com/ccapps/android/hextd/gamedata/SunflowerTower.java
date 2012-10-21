@@ -20,6 +20,7 @@ public class SunflowerTower extends BasicTower{
         super(hex);
         this.towerDrawable = new TowerDrawable(this, StaticData.SUNFLOWER);
         this.dmgPerAttack = 10;
+        this.attackSpeed=4;
 
         initModZeroAttackHexes();
     }
