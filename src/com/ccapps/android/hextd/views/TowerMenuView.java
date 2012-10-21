@@ -14,6 +14,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import com.ccapps.android.hextd.R;
+import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
@@ -93,7 +94,6 @@ public class TowerMenuView extends TableLayout {
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
             textView.scrollTo(0,0);
 
-
             currentRow.addView(textView);
         }
         invalidate();
@@ -114,10 +114,10 @@ public class TowerMenuView extends TableLayout {
     @Override
     public void onVisibilityChanged(View v, int visibility) {
         super.onVisibilityChanged(v, visibility);
-        if (visibility == View.GONE || visibility == View.VISIBLE) {
-            this.currentDelayEvents.clear();
-            this.yOffset = 0.f;
-        }
+
+        this.currentDelayEvents.clear();
+        this.yOffset = 0.f;
+        HexGrid.getInstance().clearSelectedHexagon();
     }
 
     public void clearDelayedEvents() {

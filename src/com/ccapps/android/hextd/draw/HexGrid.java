@@ -88,6 +88,10 @@ public class HexGrid extends Drawable {
             }
         }
 
+        if (GRID.selectedHexagon != null) {
+            GRID.selectedHexagon.invalidatePath(delta);
+        }
+
     }
 
     public static boolean isInitialized() {
@@ -108,6 +112,7 @@ public class HexGrid extends Drawable {
     private List<Tower> towersOnGrid;
     private List<Hexagon> goalHexes;
     private List<Creep> creepsOnGrid;
+    private Hexagon selectedHexagon;
 
     public final float gridHeight;
     public final float gridWidth;
@@ -235,13 +240,15 @@ public class HexGrid extends Drawable {
 
     }
 
-    public void initAllPaths() {
-        this.gridPath = new Path();
-        for (Hexagon[] hs: hexMatrix) {
-            for (Hexagon h: hs) {
-                h.initPath();
-                h.addPathTo(gridPath);
-            }
+    public void setSelectedHexagon(Hexagon h) {
+        this.selectedHexagon = h;
+        this.selectedHexagon.initPath();
+    }
+
+    public void clearSelectedHexagon() {
+        if (selectedHexagon != null) {
+            selectedHexagon.setStateToDefault();
+            selectedHexagon = null;
         }
     }
 
@@ -266,6 +273,9 @@ public class HexGrid extends Drawable {
             for (Creep c: creepsOnGrid) {
                 c.draw(canvas);
             }
+        }
+        if (selectedHexagon != null) {
+            selectedHexagon.draw(canvas);
         }
     }
 
@@ -343,7 +353,7 @@ public class HexGrid extends Drawable {
     /*********************GAME LOGIC RELATED*******************************/
 
     public void setGoalHex(int r, int c, boolean isGoal) {
-        hexMatrix[r][c].setGoal(isGoal);
+        hexMatrix[r][c].setState(Hexagon.STATE.GOAL);
         synchronized (goalHexes) {
             goalHexes.add(hexMatrix[r][c]);
         }

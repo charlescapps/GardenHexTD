@@ -7,7 +7,6 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.*;
 import android.widget.RelativeLayout;
-import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.activities.GameLogicThread;
 import com.ccapps.android.hextd.draw.HexGrid;
 
@@ -17,7 +16,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public static TowerMenuView towerMenu = null;
 
-    private GameThread gameThread;
+    private GameViewThread gameViewThread;
     private GestureDetector gestureDetector;
     private GameLogicThread gameLogicThread;
     private Logger l = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -35,20 +34,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void stopDrawing() {
-        this.gameThread.postSuspendMe();
+        this.gameViewThread.postSuspendMe();
     }
 
     public void startDrawing() {
-        if (this.gameThread != null) {
-            gameThread.postNeedsDrawing();
-            gameThread.unSuspendMe();
+        if (this.gameViewThread != null) {
+            gameViewThread.postNeedsDrawing();
+            gameViewThread.unSuspendMe();
         }
     }
 
     public void postNeedsDrawing() {
-
-        this.gameThread.postNeedsDrawing();
-
+        this.gameViewThread.postNeedsDrawing();
     }
 
     @Override
@@ -73,17 +70,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
         this.gameActivityView = (RelativeLayout)getParent();
-        gameThread = new GameThread(getHolder());
-        gestureDetector = new GestureDetector(this.getContext(), new GameTouchListener(gameThread, gameActivityView));
+        gameViewThread = new GameViewThread(getHolder());
+        gestureDetector = new GestureDetector(this.getContext(), new GameTouchListener(gameViewThread, gameActivityView));
         requestFocusFromTouch();
         this.bringToFront();
-        gameThread.start();
+        gameViewThread.start();
         gameLogicThread.start();
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-       // gameThread.drawGrid();
+       // gameViewThread.drawGrid();
     }
 
     @Override
@@ -96,7 +93,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
      * From docs, looks like if I do it this way w / a custom thread, there's no need to even pause the thread.
      * I can just draw "as fast as your thread is capable". http://developer.android.com/guide/topics/graphics/2d-graphics.html
      */
-    public class GameThread extends Thread {
+    public class GameViewThread extends Thread {
         private SurfaceHolder sh;
         private boolean needsDrawing;
         private PointF gridShiftValue;
@@ -105,7 +102,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private static final long PAUSE_TIME = 5; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
 
-        public GameThread(SurfaceHolder sh) {
+        public GameViewThread(SurfaceHolder sh) {
             super();
             this.sh = sh;
             this.needsDrawing = true;

@@ -139,9 +139,9 @@ public abstract class BasicTower implements Tower {
         for (Hexagon h: attackHexes) {
             if (h != null) {
                 if (relativeBeat % beatsToWait == 0) {
-                    h.attacked(dmgPerAttack, true);
+                    h.attacked(dmgPerAttack);
                 } else {
-                    h.attacked(0, false);
+                    h.attacked(0);
                 }
             }
         }

@@ -1,17 +1,11 @@
 package com.ccapps.android.hextd.views;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.view.*;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
-import com.ccapps.android.hextd.gamedata.BasicTower;
 import com.ccapps.android.hextd.gamedata.StaticData;
 
 import java.util.logging.Level;
@@ -26,13 +20,13 @@ import java.util.logging.Logger;
  */
 public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
-    private GameView.GameThread gameThread;
+    private GameView.GameViewThread gameViewThread;
     private View gameActivityView;
     private TowerMenuView towerMenu;
 
-    public GameTouchListener(GameView.GameThread gameThread, View gameActivityView) {
+    public GameTouchListener(GameView.GameViewThread gameViewThread, View gameActivityView) {
         super();
-        this.gameThread = gameThread;
+        this.gameViewThread = gameViewThread;
         this.gameActivityView = gameActivityView;
         this.towerMenu = (TowerMenuView)gameActivityView.findViewById(R.id.towerMenuTable);
     }
@@ -92,13 +86,17 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
                     }
                 })
             , 3000);
+
+            clickedHex.setState(Hexagon.STATE.SELECTED);
+            GRID.setSelectedHexagon(clickedHex);
+
         }
     }
 
     @Override
     public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
-        gameThread.postShiftGrid(0.f, -distanceY);
+        gameViewThread.postShiftGrid(0.f, -distanceY);
         return true;
 
     }
