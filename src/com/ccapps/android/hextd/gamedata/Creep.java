@@ -31,6 +31,9 @@ public interface Creep {
     public Hexagon getHex();
     public void setHex(Hexagon hex);
 
+    public Hexagon getSourceHex();
+    public void setSourceHex(Hexagon hex);
+
     public Hexagon getGoalHex();
     public void setGoalHex(Hexagon hex);
 

@@ -61,4 +61,9 @@ public class BasicCreepGenerator implements CreepGenerator{
     public void setSourceHexes(List<Hexagon> sourceHexes) {
         this.sourceHexes = sourceHexes;
     }
+
+    @Override
+    public void addCreepToQueue(Creep c) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

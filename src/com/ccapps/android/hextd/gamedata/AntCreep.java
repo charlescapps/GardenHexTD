@@ -22,6 +22,7 @@ public class AntCreep implements Creep {
     private List<Hexagon> path;
     private Hexagon hex;
     private Hexagon goalHex;
+    private Hexagon sourceHex;
     private int hitpoints;
     private CreepAlgorithm algorithm;
     private int tick;
@@ -29,10 +30,11 @@ public class AntCreep implements Creep {
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
         this.goalHex = goalHex;
+        this.sourceHex = hex;
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 500;
+        this.hitpoints = 75;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
@@ -89,6 +91,16 @@ public class AntCreep implements Creep {
     @Override
     public void setHex(Hexagon hex) {
         this.hex = hex;
+    }
+
+    @Override
+    public Hexagon getSourceHex() {
+        return sourceHex;
+    }
+
+    @Override
+    public void setSourceHex(Hexagon hex) {
+        this.sourceHex = hex;
     }
 
     @Override

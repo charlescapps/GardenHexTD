@@ -61,6 +61,7 @@ public class GameLogicThread extends Thread {
             for (Creep c: creepsOnGrid) {
                 c.move();
             }
+
             creepGenerator.tick();
 
             gameView.postNeedsDrawing();

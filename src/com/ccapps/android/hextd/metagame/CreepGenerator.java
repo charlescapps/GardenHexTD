@@ -1,6 +1,7 @@
 package com.ccapps.android.hextd.metagame;
 
 import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.gamedata.Creep;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface CreepGenerator {
 
     public List<Hexagon> getSourceHexes();
     public void setSourceHexes(List<Hexagon> sourceHexes);
+
+    public void addCreepToQueue(Creep c);
 }
