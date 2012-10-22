@@ -5,6 +5,7 @@ import com.ccapps.android.hextd.algorithm.CreepAlgorithm;
 import com.ccapps.android.hextd.draw.CreepDrawable;
 import com.ccapps.android.hextd.draw.Hexagon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,17 +17,23 @@ import java.util.List;
  */
 public class AntCreep implements Creep {
 
+
+    private creepStatus status;
     private int direction;
     private int speed;
     private CreepDrawable creepDrawable;
     private List<Hexagon> path;
     private Hexagon hex;
+    private Hexagon prevHex;
     private Hexagon goalHex;
     private int hitpoints;
     private CreepAlgorithm algorithm;
     private int tick;
 
+
+
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
+        this.prevHex = null;
         this.hex = hex;
         this.goalHex = goalHex;
         this.algorithm = algorithm;
@@ -37,8 +44,9 @@ public class AntCreep implements Creep {
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
         this.speed = 4;
+        this.status = creepStatus.FOR_FOL;
 
-        evaluateRoute();
+        this.evaluateRoute();
     }
 
     @Override
@@ -132,9 +140,46 @@ public class AntCreep implements Creep {
     }
 
     @Override
-    public void evaluateRoute() {
-        if (hitpoints > 0 && algorithm.pathNeedsEvaluation()) {
-            this.path = algorithm.buildPath(hex, goalHex);
+    public void evaluateRoute() {   // much of this could be placed in algorithm.pathNeedsEvalution
+        if (hitpoints <= 0)
+            return;
+        if (this.status == creepStatus.FOR_LEAD) {  // already leading
+            if (algorithm.pathNeedsEvaluation()) {
+                this.path = algorithm.buildPath(this.hex, this.goalHex);
+            }
+        }
+        else if (this.status == creepStatus.FOR_FOL) {
+            // determine if creep should lead
+            Hexagon neighbors[] = this.hex.getNeighbors();
+            List<Hexagon> candidate = new ArrayList<Hexagon>(); // possible path
+            int maxWt = 0;
+            for(Hexagon n : neighbors) {
+                if (n != null) {
+                    int wt = n.getCreepWeight();
+                    if (wt > maxWt && n != this.prevHex) {
+                        maxWt = wt;
+                        candidate.clear();
+                        candidate.add(n);
+                    }
+                    else if (wt == maxWt && maxWt > 0 && n != this.prevHex) {
+                        candidate.add(n);
+                    }
+                }
+            }
+            if (candidate.isEmpty() && this.path == null) {    // time to lead
+                this.status = creepStatus.FOR_LEAD;
+                this.path = algorithm.buildPath(hex, goalHex);
+            }
+            else {  // follower, choose a candidate
+                if (candidate.size() > 1) {
+                    // randomly decide
+                    Hexagon tempHex = candidate.get((int)(Math.random() * candidate.size()));
+                    candidate.clear();
+                    candidate.add(tempHex);
+                }
+                this.status = creepStatus.FOR_FOL;
+                this.path = candidate;
+            }
         }
     }
 
@@ -146,6 +191,8 @@ public class AntCreep implements Creep {
             }
             evaluateRoute();
             hex.setCreep(null);
+            hex.setCreepWeight(10);
+            this.prevHex = hex;
             hex = path.remove(0);
             hex.setCreep(this);
             creepDrawable.updateLocation();
@@ -155,5 +202,21 @@ public class AntCreep implements Creep {
     @Override
     public void draw(Canvas canvas) {
         creepDrawable.draw(canvas);
+    }
+
+    // status getter/setter
+    @Override
+    public creepStatus getStatus() {
+        return this.status;
+    }
+
+    @Override
+    public void setStatus(creepStatus status) {
+        this.status = status;
+    }
+
+    @Override
+    public Hexagon getPrevHex() {
+        return this.prevHex;
     }
 }

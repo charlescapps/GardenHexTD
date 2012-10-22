@@ -28,6 +28,9 @@ public class AStarAlgorithm implements CreepAlgorithm{
     AStarNode goal;
 
     AStarNode[][] A_STAR_NODES;
+    /*public enum creepStatus {
+        FOR_LEAD, FOR_FOL, RET_LEAD, RET_FOL
+    }*/
 
     /**
      * If the next hexagon contains a tower, re-evaluate path

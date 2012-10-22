@@ -64,6 +64,7 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
     private boolean wasInvalidated = false;
     private STATE myState;
     private STATE myDefaultState;
+    private int creepWeight;
 
     public Hexagon(PointF center, Point gridPosition) {
         this.center = center;
@@ -75,6 +76,7 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
         hexPaint.setStyle(Paint.Style.STROKE);
         this.myState = this.myDefaultState = STATE.NORMAL;
         //neighbors to be set by the HexGrid instance.
+        this.creepWeight = 0;
     }
 
     /***********************DRAWING RELATED**************************/
@@ -226,5 +228,13 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
             return -1;
         }
         return 1;
+    }
+
+    public int getCreepWeight() {
+        return this.creepWeight;
+    }
+
+    public void setCreepWeight(int weight) {
+        this.creepWeight = weight;
     }
 }

@@ -16,6 +16,13 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface Creep {
+
+    public enum creepStatus {
+        FOR_LEAD, FOR_FOL, RET_LEAD, RET_FOL
+    }
+    public creepStatus getStatus();
+    public void setStatus(creepStatus status);
+
     public int getDirection();
     public void setDirection(int direction);
 
@@ -30,6 +37,8 @@ public interface Creep {
 
     public Hexagon getHex();
     public void setHex(Hexagon hex);
+
+    public Hexagon getPrevHex();
 
     public Hexagon getGoalHex();
     public void setGoalHex(Hexagon hex);
