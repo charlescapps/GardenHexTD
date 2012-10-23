@@ -22,9 +22,9 @@ import java.util.logging.Logger;
  */
 public class TowerDrawable extends Drawable {
 
-    protected Tower tower;
-    protected Bitmap towerImg;
-    protected PointF imgTopLeft;
+    protected final Tower tower;
+    protected final Bitmap towerImg;
+    protected final PointF imgTopLeft;
 
     public TowerDrawable(Tower tower, Bitmap towerImg) {
         super();
@@ -56,5 +56,9 @@ public class TowerDrawable extends Drawable {
     @Override
     public int getOpacity() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public void incrementAttackAnimation() {
+
     }
 }

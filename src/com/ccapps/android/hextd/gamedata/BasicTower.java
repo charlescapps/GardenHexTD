@@ -128,6 +128,7 @@ public abstract class BasicTower implements Tower {
 
     @Override
     public void attack() {
+        towerDrawable.incrementAttackAnimation();
         this.isAttacking = true;
         ++relativeBeat;
         for (Hexagon h: attackHexes) {
