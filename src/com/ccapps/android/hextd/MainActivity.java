@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends Activity {
@@ -141,6 +143,22 @@ public class MainActivity extends Activity {
 
         StaticData.DEAD_ANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
+
+        StaticData.SUNSHINE_ANIMATION = new ArrayList<Bitmap>();
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine1), a, a, false));
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine2), a, a, false));
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine3), a, a, false));
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine4), a, a, false));
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(2), a, a, false));
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(1), a, a, false));
+        StaticData.SUNSHINE_ANIMATION.add(
+                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(0), a, a, false));
 
         StaticData.TOWER_COSTS = new HashMap<Class<? extends Tower>, Integer>();
         StaticData.TOWER_COSTS.put(SunflowerTower.class, 100);

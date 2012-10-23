@@ -22,9 +22,9 @@ import java.util.logging.Logger;
  */
 public class TowerDrawable extends Drawable {
 
-    private Tower tower;
-    private Bitmap towerImg;
-    private PointF imgTopLeft;
+    protected Tower tower;
+    protected Bitmap towerImg;
+    protected PointF imgTopLeft;
 
     public TowerDrawable(Tower tower, Bitmap towerImg) {
         super();

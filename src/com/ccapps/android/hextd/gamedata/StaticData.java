@@ -1,9 +1,12 @@
 package com.ccapps.android.hextd.gamedata;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Display;
+import android.view.animation.Animation;
 
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -25,7 +28,10 @@ public class StaticData {
     public static Bitmap ANT;
     public static Bitmap DEAD_ANT;
 
+    public static List<Bitmap> SUNSHINE_ANIMATION;
+
     public static Display DEFAULT_SCREEN_SIZE;
+
 
     public static Map<Class<? extends Tower>, Integer> TOWER_COSTS;
 

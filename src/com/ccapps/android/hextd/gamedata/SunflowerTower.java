@@ -3,6 +3,7 @@ package com.ccapps.android.hextd.gamedata;
 import android.graphics.Point;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.draw.TowerAnimatedAttackDrawable;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.Collections;
 public class SunflowerTower extends BasicTower{
     public SunflowerTower(Hexagon hex) {
         super(hex);
-        this.towerDrawable = new TowerDrawable(this, StaticData.SUNFLOWER);
+        this.towerDrawable = new TowerAnimatedAttackDrawable(this, StaticData.SUNFLOWER, StaticData.SUNSHINE_ANIMATION);
         this.dmgPerAttack = 10;
         this.attackSpeed=4;
 
