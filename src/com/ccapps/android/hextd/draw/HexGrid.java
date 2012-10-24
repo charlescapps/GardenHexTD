@@ -79,6 +79,10 @@ public class HexGrid extends Drawable {
             }
         }
 
+        if (GRID.selectedHexagon != null) {
+            GRID.selectedHexagon.invalidatePath(delta);
+        }
+
         synchronized (GRID.towersOnGrid) {
             for (Tower t: GRID.towersOnGrid) {
                 t.clearWasInvalidated();
@@ -92,7 +96,7 @@ public class HexGrid extends Drawable {
         }
 
         if (GRID.selectedHexagon != null) {
-            GRID.selectedHexagon.invalidatePath(delta);
+            GRID.selectedHexagon.clearWasInvalidated();
         }
 
     }

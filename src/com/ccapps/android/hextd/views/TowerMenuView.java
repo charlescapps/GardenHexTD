@@ -42,6 +42,7 @@ public class TowerMenuView extends TableLayout {
     private Point lastClickedHex;
     private List<Runnable> currentDelayEvents;
     private float yOffset;
+    private float permanentHeight;
 
     public TowerMenuView(Context context) {
         super(context);
@@ -65,6 +66,7 @@ public class TowerMenuView extends TableLayout {
         this.padding = padding;
         this.row1 = (TableRow)getChildAt(0);
         this.row2 = (TableRow)getChildAt(1);
+        this.permanentHeight = 2*(imageSize+2*padding) + (float)imageSize*0.2f;
 
         for (int i = 0; i < drawableIds.size(); i++) {
             Integer thumb = drawableIds.get(i);
@@ -97,6 +99,10 @@ public class TowerMenuView extends TableLayout {
             currentRow.addView(textView);
         }
         invalidate();
+    }
+
+    public float getPermanentHeight() {
+        return permanentHeight;
     }
 
     public int getYOffset() {

@@ -24,36 +24,39 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
     private GameView.GameViewThread gameViewThread;
     private View gameActivityView;
     private TowerMenuView towerMenu;
+    private final TextView towerInfoView;
 
     public GameTouchListener(GameView.GameViewThread gameViewThread, View gameActivityView) {
         super();
         this.gameViewThread = gameViewThread;
         this.gameActivityView = gameActivityView;
         this.towerMenu = (TowerMenuView)gameActivityView.findViewById(R.id.towerMenuTable);
+        this.towerInfoView = (TextView)gameActivityView.findViewById(R.id.towerInfoTextView);
+
     }
 
     @Override
-    public boolean onSingleTapConfirmed(MotionEvent e) {
+    public boolean onSingleTapUp(MotionEvent e) {
         float x = e.getX();
         float y = e.getY();
         HexGrid GRID = HexGrid.getInstance();
-        Hexagon clickedHex = GRID.getHexFromCoords(e.getX(), e.getY());
+        Hexagon clickedHex = GRID.getHexFromCoords(x, y);
+        //Can only show info popup if there's a tower
         if (clickedHex.getTower() == null) {
             return false;
         }
-        TextView towerInfoView = (TextView)gameActivityView.findViewById(R.id.towerInfoTextView);
-
+        //Move the popup by setting margins.
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
-        int leftMargin = (int)(x + Hexagon.getGlobalSideLength()/2.f);
-        int topMargin = (int)(y + Hexagon.getGlobalSideLength()/2.f);
-        if (leftMargin + towerMenu.getWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
-            leftMargin  -= (towerMenu.getWidth() + Hexagon.getGlobalSideLength() );
+        int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
+        int topMargin = (int)(y + Hexagon.getGlobalSideLength());
+        if (leftMargin + towerInfoView.getMeasuredWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
+            leftMargin  -= (towerInfoView.getMeasuredWidth() + 2.f*Hexagon.getGlobalSideLength() );
         }
-        if (topMargin + towerMenu.getHeight() - HexGrid.GLOBAL_OFFSET.y > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
-            topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
+        if (topMargin + towerInfoView.getMeasuredHeight() + 20.f > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+            topMargin  -= (towerInfoView.getMeasuredHeight() + 2.f*Hexagon.getGlobalSideLength() );
         }
         lp.leftMargin = leftMargin;
-        lp.topMargin = topMargin + towerMenu.getYOffset();
+        lp.topMargin = topMargin; //+ towerMenu.getYOffset();
         lp.bottomMargin = 0;
         lp.rightMargin = 0;
         towerInfoView.setLayoutParams(lp);
@@ -61,6 +64,15 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         towerInfoView.setVisibility(View.VISIBLE);
         towerInfoView.bringToFront();
         GRID.setSelectedHexagon(clickedHex);
+
+        towerInfoView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                towerInfoView.setVisibility(View.GONE);
+                towerInfoView.invalidate();
+            }
+        }
+                , 3000);
 
         return true;
     }
@@ -91,19 +103,23 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
             l.log(Level.SEVERE, "Clicked hex (" + row + ", " + col + ")");
 
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
-            int leftMargin = (int)(x + Hexagon.getGlobalSideLength()/2.f);
-            int topMargin = (int)(y + Hexagon.getGlobalSideLength()/2.f);
-            if (leftMargin + towerMenu.getWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
-                leftMargin  -= (towerMenu.getWidth() + Hexagon.getGlobalSideLength() );
+            int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
+            int topMargin = (int)(y + Hexagon.getGlobalSideLength());
+            if (leftMargin + towerMenu.getMeasuredWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
+                leftMargin  -= (towerMenu.getMeasuredWidth() + 2.f*Hexagon.getGlobalSideLength() );
             }
-            if (topMargin + towerMenu.getHeight() - HexGrid.GLOBAL_OFFSET.y > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
-                topMargin  -= (towerMenu.getHeight() + Hexagon.getGlobalSideLength() );
+            if (topMargin + towerMenu.getMeasuredHeight() + 30.f > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+                topMargin  -= (towerMenu.getMeasuredHeight() + 2.f*Hexagon.getGlobalSideLength() );
             }
             lp.leftMargin = leftMargin;
-            lp.topMargin = topMargin + towerMenu.getYOffset();
+            lp.topMargin = topMargin;
             lp.bottomMargin = 0;
             lp.rightMargin = 0;
             towerMenu.setLayoutParams(lp);
+
+            if (towerInfoView.getVisibility() == View.VISIBLE) {
+                towerInfoView.setVisibility(View.GONE);
+            }
 
             towerMenu.setVisibility(View.VISIBLE);
             towerMenu.bringToFront();
