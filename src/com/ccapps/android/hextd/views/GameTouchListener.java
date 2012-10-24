@@ -37,34 +37,26 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        float x = e.getX();
-        float y = e.getY();
+        float x = e.getX(), y = e.getY();
         HexGrid GRID = HexGrid.getInstance();
         Hexagon clickedHex = GRID.getHexFromCoords(x, y);
-        //Can only show info popup if there's a tower
-        if (clickedHex.getTower() == null) {
-            return false;
-        }
-        //Move the popup by setting margins.
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
-        int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
-        int topMargin = (int)(y + Hexagon.getGlobalSideLength());
-        if (leftMargin + towerInfoView.getMeasuredWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
-            leftMargin  -= (towerInfoView.getMeasuredWidth() + 2.f*Hexagon.getGlobalSideLength() );
-        }
-        if (topMargin + towerInfoView.getMeasuredHeight() + 20.f > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
-            topMargin  -= (towerInfoView.getMeasuredHeight() + 2.f*Hexagon.getGlobalSideLength() );
-        }
-        lp.leftMargin = leftMargin;
-        lp.topMargin = topMargin; //+ towerMenu.getYOffset();
-        lp.bottomMargin = 0;
-        lp.rightMargin = 0;
-        towerInfoView.setLayoutParams(lp);
 
+        //Can only show info popup if there's a tower
+        if (clickedHex == null || clickedHex.getTower() == null) {
+            return true;
+        }
+
+        setLayoutParams(towerInfoView, (int)x, (int)y);
+
+        //Show the info menu
         towerInfoView.setVisibility(View.VISIBLE);
         towerInfoView.bringToFront();
-        GRID.setSelectedHexagon(clickedHex);
 
+        //Store the selected hexagon in the grid for drawing purposes
+        GRID.setSelectedHexagon(clickedHex);
+        clickedHex.setState(Hexagon.STATE.SELECTED);
+
+        //Hide the menu in 3 seconds
         towerInfoView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -72,7 +64,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
                 towerInfoView.invalidate();
             }
         }
-                , 3000);
+        , 3000);
 
         return true;
     }
@@ -84,64 +76,67 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
      */
     @Override
     public void onLongPress(MotionEvent e) {
+        //Guarantee an old event doesn't prematurely hide the menu
         towerMenu.clearDelayedEvents();
-        Logger l = Logger.getAnonymousLogger();
-        Logger.getAnonymousLogger().log(Level.SEVERE, "Single tap happened!");
-        float x = e.getX();
-        float y = e.getY();
+
+        float x = e.getX(), y = e.getY();
         HexGrid GRID = HexGrid.getInstance();
         Hexagon clickedHex = GRID.getHexFromCoords(x, y);
 
+        //Clicked off grid
         if (clickedHex == null) {
-             l.log(Level.SEVERE, "Clicked OFF grid");
-        } else {
-
-            int row = clickedHex.getGridPosition().x;
-            int col = clickedHex.getGridPosition().y;
-            towerMenu.setLastClickedHex(new Point(row, col));
-
-            l.log(Level.SEVERE, "Clicked hex (" + row + ", " + col + ")");
-
-            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)towerMenu.getLayoutParams();
-            int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
-            int topMargin = (int)(y + Hexagon.getGlobalSideLength());
-            if (leftMargin + towerMenu.getMeasuredWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
-                leftMargin  -= (towerMenu.getMeasuredWidth() + 2.f*Hexagon.getGlobalSideLength() );
-            }
-            if (topMargin + towerMenu.getMeasuredHeight() + 30.f > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
-                topMargin  -= (towerMenu.getMeasuredHeight() + 2.f*Hexagon.getGlobalSideLength() );
-            }
-            lp.leftMargin = leftMargin;
-            lp.topMargin = topMargin;
-            lp.bottomMargin = 0;
-            lp.rightMargin = 0;
-            towerMenu.setLayoutParams(lp);
-
-            if (towerInfoView.getVisibility() == View.VISIBLE) {
-                towerInfoView.setVisibility(View.GONE);
-            }
-
-            towerMenu.setVisibility(View.VISIBLE);
-            towerMenu.bringToFront();
-
-            GRID.setSelectedHexagon(clickedHex);
-            clickedHex.setState(Hexagon.STATE.SELECTED);
-
-            gameActivityView.invalidate();
-
-            towerMenu.postDelayed(towerMenu.addDelayedEvent(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (towerMenu.containsEvent(this)) {
-                            towerMenu.setVisibility(View.GONE);
-                            towerMenu.invalidate();
-                        }
-                    }
-                })
-            , 3000);
-
-
+            return;
         }
+
+        towerMenu.setLastClickedHex(new Point(clickedHex.getGridPosition()));
+
+        setLayoutParams(towerMenu, (int)x, (int)y);
+
+        //Hide the tower info menu if it is visible
+        if (towerInfoView.getVisibility() == View.VISIBLE) {
+            towerInfoView.setVisibility(View.GONE);
+        }
+
+        //Make this menu visible
+        towerMenu.setVisibility(View.VISIBLE);
+        towerMenu.bringToFront();
+
+        //Store the selected hexagon in the grid for drawing
+        GRID.setSelectedHexagon(clickedHex);
+        clickedHex.setState(Hexagon.STATE.SELECTED);
+
+        gameActivityView.invalidate();
+
+        //Hide in 3 seconds.
+        towerMenu.postDelayed(towerMenu.addDelayedEvent(new Runnable() {
+                @Override
+                public void run() {
+                    if (towerMenu.containsEvent(this)) {
+                        towerMenu.setVisibility(View.GONE);
+                        towerMenu.invalidate();
+                    }
+                }
+            })
+        , 3000);
+
+
+    }
+
+    private void setLayoutParams(View v, int x, int y) {
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)v.getLayoutParams();
+        int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
+        int topMargin = (int)(y + Hexagon.getGlobalSideLength());
+        if (leftMargin + v.getMeasuredWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
+            leftMargin  -= (v.getMeasuredWidth() + 2.f*Hexagon.getGlobalSideLength() );
+        }
+        if (topMargin + v.getMeasuredHeight() + 30.f > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
+            topMargin  -= (v.getMeasuredHeight() + 2.f*Hexagon.getGlobalSideLength() );
+        }
+        lp.leftMargin = leftMargin;
+        lp.topMargin = topMargin;
+        lp.bottomMargin = 0;
+        lp.rightMargin = 0;
+        v.setLayoutParams(lp);
     }
 
     @Override
