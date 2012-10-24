@@ -27,9 +27,9 @@ public class HexGrid extends Drawable {
 
     //STATICS
     private static HexGrid GRID;
-    public static float Y_MAX = 5.f;
+    public static float Y_MAX;
     public static float Y_MIN;
-    public static PointF MARGIN = new PointF(5.f, 25.f); //pixels
+    public static final PointF MARGIN = new PointF(5.f, 25.f); //pixels
     public static PointF GLOBAL_OFFSET = new PointF(0.f, 0.f);
 
 
@@ -106,11 +106,11 @@ public class HexGrid extends Drawable {
     }
 
     //DATA
-    private PointF topLeft;
-    private int numHorizontal;
-    private int numVertical;
+    private final PointF topLeft;
+    private final int numHorizontal;
+    private final int numVertical;
     private Path gridPath;
-    private Paint gridPaint;
+    private final Paint gridPaint;
 
     private List<Tower> towersOnGrid;
     private List<Hexagon> goalHexes;
