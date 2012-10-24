@@ -39,7 +39,6 @@
 
   </com.ccapps.android.hextd.views.TowerMenuView>
 
-
     <com.ccapps.android.hextd.views.GameView
             android:id="@+id/gameView"
             android:layout_width="match_parent"

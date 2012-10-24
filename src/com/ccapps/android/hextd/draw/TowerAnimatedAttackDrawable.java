@@ -38,7 +38,7 @@ public class TowerAnimatedAttackDrawable extends TowerDrawable {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         for (Hexagon h: tower.getAttackHexes()) {
-            PointF center = h.getCenter();
+            final PointF center = h.getCenter();
             final int x = (int)(center.x - xOffset + HexGrid.GLOBAL_OFFSET.x);
             final int y = (int)(center.y - yOffset + HexGrid.GLOBAL_OFFSET.y);
             canvas.drawBitmap(attackAnimation.get( animationBeat % attackAnimationSize), x, y, null);

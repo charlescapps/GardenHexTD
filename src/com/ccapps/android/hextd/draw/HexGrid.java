@@ -27,8 +27,8 @@ public class HexGrid extends Drawable {
 
     //STATICS
     private static HexGrid GRID;
-    public static float Y_MIN = -5.f;
-    public static float Y_MAX;
+    public static float Y_MAX = 5.f;
+    public static float Y_MIN;
     public static PointF MARGIN = new PointF(5.f, 25.f); //pixels
     public static PointF GLOBAL_OFFSET = new PointF(0.f, 0.f);
 
@@ -51,12 +51,16 @@ public class HexGrid extends Drawable {
     public static void shiftTopLeft(PointF delta) {
 
         float newX = HexGrid.GLOBAL_OFFSET.x + delta.x;
-
         float newY = HexGrid.GLOBAL_OFFSET.y + delta.y;
 
-        if ( -newY < Y_MIN || -newY > Y_MAX) {
-            return;
+        if ( newY < Y_MIN) {
+            newY = Y_MIN;
+            delta.y = newY - HexGrid.GLOBAL_OFFSET.y;
+        } else if (newY > Y_MAX) {
+            newY = Y_MAX;
+            delta.y = newY - HexGrid.GLOBAL_OFFSET.y;
         }
+
         HexGrid.GLOBAL_OFFSET.x = newX;
         HexGrid.GLOBAL_OFFSET.y = newY;
 
@@ -66,7 +70,6 @@ public class HexGrid extends Drawable {
             //Shift the path of the hexes every tower is attacking
             for (Tower t: GRID.towersOnGrid) {
                  t.invalidatePaths(delta);
-
             }
         }
 
@@ -199,11 +202,11 @@ public class HexGrid extends Drawable {
         this.gridHeight = (float)numVertical*2.f*h + h ;
         this.gridWidth = (float)screenSize.x - 2.f*MARGIN.x;
 
-        Y_MIN = -topLeft.y - (float)MARGIN.y;
-        Y_MAX = gridHeight + HexGrid.MARGIN.y*3.f + 2.f*h - (float)screenSize.y;
+        Y_MAX = topLeft.y + MARGIN.y;
+        Y_MIN = topLeft.y - gridHeight + (float)screenSize.y - 5.f*h - MARGIN.y;
     }
 
-    /************************DRAWING RELATED**********************************/
+    /***********************************DRAWING RELATED************************************/
 
     public Hexagon getHexFromCoords(float x, float y) {
         if (x - GLOBAL_OFFSET.x + topLeft.x < 0 || y - GLOBAL_OFFSET.y + topLeft.y < 0 ) {
