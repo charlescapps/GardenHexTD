@@ -40,21 +40,15 @@ public class TowerMenuView extends TableLayout {
     private int padding;
     List<Class<? extends Tower>> towerClasses;
     private Point lastClickedHex;
-    private List<Runnable> currentDelayEvents;
-    private float yOffset;
-    private float permanentHeight;
 
     public TowerMenuView(Context context) {
         super(context);
         this.context = context;
-        this.currentDelayEvents = new ArrayList<Runnable>();
     }
 
     public TowerMenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        this.currentDelayEvents = new ArrayList<Runnable>();
-        this.yOffset = 0.f;
     }
 
     public void init(List<Integer> drawableIds, List<Class<? extends Tower>> towerClasses, int numPerRow,
@@ -66,7 +60,6 @@ public class TowerMenuView extends TableLayout {
         this.padding = padding;
         this.row1 = (TableRow)getChildAt(0);
         this.row2 = (TableRow)getChildAt(1);
-        this.permanentHeight = 2*(imageSize+2*padding) + (float)imageSize*0.2f;
 
         for (int i = 0; i < drawableIds.size(); i++) {
             Integer thumb = drawableIds.get(i);
@@ -101,18 +94,6 @@ public class TowerMenuView extends TableLayout {
         invalidate();
     }
 
-    public float getPermanentHeight() {
-        return permanentHeight;
-    }
-
-    public int getYOffset() {
-        return (int)yOffset;
-    }
-
-    public void shiftYOffset(float pix) {
-        this.yOffset += pix;
-    }
-
     public void setLastClickedHex(Point p) {
         this.lastClickedHex = p;
     }
@@ -121,27 +102,7 @@ public class TowerMenuView extends TableLayout {
     public void onVisibilityChanged(View v, int visibility) {
         super.onVisibilityChanged(v, visibility);
 
-        this.currentDelayEvents.clear();
-        this.yOffset = 0.f;
         HexGrid.getInstance().clearSelectedHexagon();
-    }
-
-    public void clearDelayedEvents() {
-        this.currentDelayEvents.clear();
-    }
-
-    public Runnable addDelayedEvent(Runnable r) {
-        this.currentDelayEvents.add(r);
-        return r;
-    }
-
-    public boolean containsEvent(Runnable runnable) {
-        for (Runnable r: currentDelayEvents) {
-            if (r == runnable) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private class OnClickTower implements OnClickListener {

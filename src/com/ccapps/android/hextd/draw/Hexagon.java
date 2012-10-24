@@ -2,6 +2,7 @@ package com.ccapps.android.hextd.draw;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import android.widget.GridView;
 import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
 
@@ -148,6 +149,14 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
     }
 
     /************************SETTERS / GETTERS************************************/
+    public Point getScreenCenter() {
+        HexGrid GRID = HexGrid.getInstance();
+        PointF topLeft = GRID.getTopLeft();
+        int x = (int)(center.x  );
+        int y = (int)(center.y  + HexGrid.GLOBAL_OFFSET.y);
+        return new Point(x,y);
+    }
+
     public PointF getCenter() {
         return center;
     }

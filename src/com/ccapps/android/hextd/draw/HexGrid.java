@@ -358,6 +358,10 @@ public class HexGrid extends Drawable {
         return creepsOnGrid;
     }
 
+    public PointF getTopLeft() {
+        return topLeft;
+    }
+
     /*********************GAME LOGIC RELATED*******************************/
 
     public void setGoalHex(int r, int c, boolean isGoal) {

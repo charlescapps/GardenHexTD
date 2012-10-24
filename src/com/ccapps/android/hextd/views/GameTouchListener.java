@@ -9,6 +9,8 @@ import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.StaticData;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +27,8 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
     private View gameActivityView;
     private TowerMenuView towerMenu;
     private final TextView towerInfoView;
+    private List<Runnable> towerMenuDelayEvents;
+    private List<Runnable> towerInfoDelayEvents;
 
     public GameTouchListener(GameView.GameViewThread gameViewThread, View gameActivityView) {
         super();
@@ -32,7 +36,8 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         this.gameActivityView = gameActivityView;
         this.towerMenu = (TowerMenuView)gameActivityView.findViewById(R.id.towerMenuTable);
         this.towerInfoView = (TextView)gameActivityView.findViewById(R.id.towerInfoTextView);
-
+        this.towerMenuDelayEvents = new ArrayList<Runnable>();
+        this.towerInfoDelayEvents = new ArrayList<Runnable>();
     }
 
     @Override
@@ -46,6 +51,8 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
             return true;
         }
 
+        //Guarantee an old event doesn't prematurely hide the menu
+        towerInfoDelayEvents.clear();
         setLayoutParams(towerInfoView, (int)x, (int)y);
 
         //Show the info menu
@@ -57,14 +64,18 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         clickedHex.setState(Hexagon.STATE.SELECTED);
 
         //Hide the menu in 3 seconds
-        towerInfoView.postDelayed(new Runnable() {
+        Runnable delayEvent = new Runnable() {
             @Override
             public void run() {
-                towerInfoView.setVisibility(View.GONE);
-                towerInfoView.invalidate();
+                if (towerInfoDelayEvents.contains(this)) {
+                    towerInfoView.setVisibility(View.GONE);
+                    towerInfoView.invalidate();
+                }
             }
-        }
-        , 3000);
+        };
+
+        towerInfoDelayEvents.add(delayEvent);
+        towerInfoView.postDelayed(delayEvent, 3000);
 
         return true;
     }
@@ -76,9 +87,6 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
      */
     @Override
     public void onLongPress(MotionEvent e) {
-        //Guarantee an old event doesn't prematurely hide the menu
-        towerMenu.clearDelayedEvents();
-
         float x = e.getX(), y = e.getY();
         HexGrid GRID = HexGrid.getInstance();
         Hexagon clickedHex = GRID.getHexFromCoords(x, y);
@@ -88,9 +96,12 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
             return;
         }
 
+        //Guarantee an old event doesn't prematurely hide the menu
+        towerMenuDelayEvents.clear();
+
         towerMenu.setLastClickedHex(new Point(clickedHex.getGridPosition()));
 
-        setLayoutParams(towerMenu, (int)x, (int)y);
+        setLayoutParams(towerMenu, (int)clickedHex.getScreenCenter().x, (int)clickedHex.getScreenCenter().y);
 
         //Hide the tower info menu if it is visible
         if (towerInfoView.getVisibility() == View.VISIBLE) {
@@ -107,17 +118,20 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
         gameActivityView.invalidate();
 
-        //Hide in 3 seconds.
-        towerMenu.postDelayed(towerMenu.addDelayedEvent(new Runnable() {
-                @Override
-                public void run() {
-                    if (towerMenu.containsEvent(this)) {
-                        towerMenu.setVisibility(View.GONE);
-                        towerMenu.invalidate();
-                    }
+
+        //Hide the menu in 3 seconds
+        Runnable delayEvent = new Runnable() {
+            @Override
+            public void run() {
+                if (towerMenuDelayEvents.contains(this)) {
+                    towerMenu.setVisibility(View.GONE);
+                    towerMenu.invalidate();
                 }
-            })
-        , 3000);
+            }
+        };
+
+        towerMenuDelayEvents.add(delayEvent);
+        towerMenu.postDelayed(delayEvent, 3000);
 
 
     }
@@ -127,7 +141,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
         int topMargin = (int)(y + Hexagon.getGlobalSideLength());
         if (leftMargin + v.getMeasuredWidth() > StaticData.DEFAULT_SCREEN_SIZE.getWidth()) {
-            leftMargin  -= (v.getMeasuredWidth() + 2.f*Hexagon.getGlobalSideLength() );
+            leftMargin  -= (v.getMeasuredWidth()  );
         }
         if (topMargin + v.getMeasuredHeight() + 30.f > StaticData.DEFAULT_SCREEN_SIZE.getHeight()) {
             topMargin  -= (v.getMeasuredHeight() + 2.f*Hexagon.getGlobalSideLength() );
