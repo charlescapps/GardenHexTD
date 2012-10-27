@@ -52,6 +52,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         //Can only show info popup if there's a tower
         if (clickedHex == null || clickedHex.getTower() == null) {
             towerInfoView.setVisibility(View.GONE);
+            towerMenu.setVisibility(View.GONE);
             return false;
         }
 
