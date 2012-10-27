@@ -20,6 +20,7 @@ public class RoseTower extends BasicTower{
         super(hex);
         this.towerDrawable = new TowerDrawable(this, StaticData.ROSE);
         this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
+        this.direction = 0;
         HexGrid GRID = HexGrid.getInstance();
 
         Point pos = hex.getGridPosition();
@@ -48,7 +49,37 @@ public class RoseTower extends BasicTower{
 
     @Override
     public void rotateClockwise() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        ++direction;
+        this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
+        HexGrid GRID = HexGrid.getInstance();
+        Point pos = hex.getGridPosition();
+
+        switch(direction % 2) {
+            case 0:
+                if (pos.y % 2 == 0) {
+                    addSafe(GRID.get(pos.x+1, pos.y+1));
+                    addSafe(GRID.get(pos.x+1, pos.y-1));
+                }
+                else {
+                    addSafe(GRID.get(pos.x, pos.y+1));
+                    addSafe(GRID.get(pos.x, pos.y-1));
+                }
+                break;
+
+            case 1:
+                if (pos.y % 2 == 0) {
+                    addSafe(GRID.get(pos.x, pos.y+1));
+                    addSafe(GRID.get(pos.x, pos.y-1));
+                    addSafe(GRID.get(pos.x + 1,pos.y));
+                }
+                else {
+                    addSafe(GRID.get(pos.x - 1, pos.y+1));
+                    addSafe(GRID.get(pos.x - 1, pos.y-1));
+                    addSafe(GRID.get(pos.x + 1, pos.y));
+                }
+                break;
+        }
+        initAttackHexPaths();
     }
 
     @Override

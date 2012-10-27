@@ -12,6 +12,9 @@ import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.*;
 import com.ccapps.android.hextd.gamedata.SunflowerTower;
+import com.ccapps.android.hextd.gamedata.terrain.BarrierTower;
+import com.ccapps.android.hextd.gamedata.terrain.RandomTerrainManager;
+import com.ccapps.android.hextd.gamedata.terrain.TerrainManager;
 import com.ccapps.android.hextd.metagame.BasicCreepGenerator;
 import com.ccapps.android.hextd.metagame.CreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
@@ -42,6 +45,9 @@ public class GameActivity extends Activity {
         GameView v = (GameView)findViewById(R.id.gameView);
         this.gameLogicThread = new GameLogicThread(v, creepGenerator);
         v.setGameLogicThread(gameLogicThread);
+
+        TerrainManager terrainManager = new RandomTerrainManager(0.1f, BarrierTower.class);
+        terrainManager.initTerrain(GRID);
 
         setupTowerSelectMenu();
     }

@@ -30,6 +30,9 @@ public class BasicCreepGenerator implements CreepGenerator{
         this.goalHex = goalHex;
         this.creepClass = AntCreep.class;
         this.creepAlgorithm = AStarAlgorithm.class;
+        for (Hexagon h: sourceHexes){
+            h.setState(Hexagon.STATE.SOURCE);
+        }
     }
 
     @Override

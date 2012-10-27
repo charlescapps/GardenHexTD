@@ -42,14 +42,10 @@ public class AStarAlgorithm implements CreepAlgorithm{
         return false;
     }
 
-    public int manhattanDistance(int i1, int i2, int j1, int j2) {
-        return Math.abs(i1 - i2) + Math.abs(j1 - j2);
-    }
-
-    public int manhattanDistance(Hexagon h1, Hexagon h2) {
+    public int admissibleHeuristic(Hexagon h1, Hexagon h2) {
         Point p1 = h1.getGridPosition();
         Point p2 = h2.getGridPosition();
-        return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+        return Math.max(Math.abs(p1.x - p2.x) , Math.abs(p1.y - p2.y));
     }
 
     @Override
@@ -68,7 +64,7 @@ public class AStarAlgorithm implements CreepAlgorithm{
         {
             for (int j = 0; j < COLS; j++)
             {
-                A_STAR_NODES[i][j] = new AStarNode(GRID.get(i,j), manhattanDistance(GRID.get(i,j), goalNode));
+                A_STAR_NODES[i][j] = new AStarNode(GRID.get(i,j), admissibleHeuristic(GRID.get(i, j), goalNode));
             }
         }
 

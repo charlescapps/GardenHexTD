@@ -11,6 +11,7 @@ import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
+import com.ccapps.android.hextd.gamedata.terrain.DummyTower;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         Hexagon clickedHex = GRID.getHexFromCoords(x, y);
 
         //Can only show info popup if there's a tower
-        if (clickedHex == null || clickedHex.getTower() == null) {
+        if (clickedHex == null || clickedHex.getTower() == null || clickedHex.getTower() instanceof DummyTower) {
             towerInfoView.setVisibility(View.GONE);
             towerMenu.setVisibility(View.GONE);
             return false;

@@ -18,24 +18,23 @@ import java.util.Collections;
  */
 public class SunflowerTower extends BasicTower{
 
-    private int dir;
     public SunflowerTower(Hexagon hex) {
         super(hex);
         this.towerDrawable = new TowerAnimatedAttackDrawable(this, StaticData.SUNFLOWER, StaticData.SUNSHINE_ANIMATION);
         this.attackSpeed = 4;
-        this.dir = 0;
+        this.direction = 0;
 
         initModZeroAttackHexes();
     }
 
     @Override
     public void rotateClockwise() {
-        ++dir;
-        if (dir % 2 == 0) {
-            initModOneAttackHexes();
+        ++direction;
+        if (direction % 2 == 0) {
+            initModZeroAttackHexes();
         }
         else {
-            initModZeroAttackHexes();
+            initModOneAttackHexes();
         }
 
         initAttackHexPaths();

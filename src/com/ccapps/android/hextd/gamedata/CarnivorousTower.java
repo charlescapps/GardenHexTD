@@ -16,13 +16,12 @@ import java.util.Collections;
  * To change this template use File | Settings | File Templates.
  */
 public class CarnivorousTower extends BasicTower{
-    private int dir;
 
     public CarnivorousTower(Hexagon hex) {
         super(hex);
         this.towerDrawable = new TowerDrawable(this, StaticData.CARNIVOROUS);
         this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
-        this.dir = 0;
+        this.direction = 0;
         HexGrid GRID = HexGrid.getInstance();
 
         Point pos = hex.getGridPosition();
@@ -47,11 +46,11 @@ public class CarnivorousTower extends BasicTower{
     public void rotateClockwise() {
         this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
 
-        ++dir;
+        ++direction;
         HexGrid GRID = HexGrid.getInstance();
         Point pos = hex.getGridPosition();
 
-        switch (dir % 6) {
+        switch (direction % 6) {
             case 0:
                 addSafe(GRID.get(pos.x - 1, pos.y));
                 addSafe(GRID.get(pos.x - 2, pos.y));
@@ -81,7 +80,7 @@ public class CarnivorousTower extends BasicTower{
             case 4:
                 if (pos.y % 2 == 0) {
                     addSafe(GRID.get(pos.x + 1, pos.y - 1));
-                    addSafe(GRID.get(pos.x, pos.y - 2));
+                    addSafe(GRID.get(pos.x + 1, pos.y - 2));
                 } else {
                     addSafe(GRID.get(pos.x , pos.y - 1));
                     addSafe(GRID.get(pos.x + 1, pos.y - 2));

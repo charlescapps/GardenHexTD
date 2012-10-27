@@ -29,6 +29,7 @@ public class StaticData {
     public static Bitmap DEAD_ANT;
 
     public static Bitmap ROTATE_ICON;
+    public static Bitmap TREE;
 
     public static List<Bitmap> SUNSHINE_ANIMATION;
 

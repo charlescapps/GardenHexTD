@@ -77,6 +77,9 @@ public class PriorityQueueImpl implements PriorityQueue //min heap
             last.getParent().setRight(null);
         }
 
+        decDepths(last.getParent());
+        last.setDepth(root.getDepth());
+
         //Place last at top of tree
         last.setParent(null);
         last.setLeft(root.getLeft());
@@ -191,6 +194,15 @@ public class PriorityQueueImpl implements PriorityQueue //min heap
         while (h != null)
         {
             h.setDepth(h.getDepth() + 1);
+            h = h.getParent();
+        }
+    }
+
+    private void decDepths(HeapNode h)
+    {
+        while (h != null)
+        {
+            h.setDepth(h.getDepth() - 1);
             h = h.getParent();
         }
     }

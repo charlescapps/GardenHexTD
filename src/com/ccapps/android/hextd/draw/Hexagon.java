@@ -103,6 +103,10 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
         }
     }
 
+    public STATE getMyState() {
+        return myState;
+    }
+
     public void setStateToDefault() {
         myState = myDefaultState;
         switch ( myDefaultState ) {
