@@ -37,7 +37,22 @@ public class RoseTower extends BasicTower{
     }
 
     @Override
-    public void reEvaluateAttackHexes(int oldDir, int newDir) {
+    public String getDamageString() {
+        return "10 - 100 damage";  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getTowerName() {
+        return "Brambles";  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void rotateClockwise() {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public int getDmgPerAttack() {
+        return random.nextInt(91) + 10;
     }
 }

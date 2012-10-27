@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:constantSize="true">
+    <item android:drawable="@drawable/tower_info_background_pressed"
+          android:state_pressed="true"/>
+
+    <item android:drawable="@drawable/tower_info_background"
+          android:state_window_focused="true"
+          android:state_enabled="true"/>
+
+</selector>

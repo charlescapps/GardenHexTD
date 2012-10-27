@@ -166,6 +166,8 @@ public class MainActivity extends Activity {
         StaticData.TOWER_COSTS.put(RoseTower.class, 10);
         StaticData.TOWER_COSTS.put(EggplantTower.class, 40);
 
+        StaticData.ROTATE_ICON = BitmapFactory.decodeResource(getResources(), R.drawable.rotate_icon);
+
 
 
 

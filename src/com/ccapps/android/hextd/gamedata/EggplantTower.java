@@ -29,7 +29,22 @@ public class EggplantTower extends BasicTower{
     }
 
     @Override
-    public void reEvaluateAttackHexes(int oldDir, int newDir) {
+    public int getDmgPerAttack() {
+        return random.nextInt(11) + 10;
+    }
+
+    @Override
+    public String getDamageString() {
+        return "10 - 20 damage";  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getTowerName() {
+        return "Jumping Eggplant";  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void rotateClockwise() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }

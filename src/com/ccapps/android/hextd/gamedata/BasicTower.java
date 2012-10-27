@@ -6,6 +6,7 @@ import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.draw.TowerDrawable;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,6 +25,7 @@ public abstract class BasicTower implements Tower {
     protected TowerDrawable towerDrawable;
     private boolean isAttacking;
     protected int direction;
+    protected Random random;
 
     public BasicTower(Hexagon hex) {
         this.dmgPerAttack = 20;
@@ -31,6 +33,7 @@ public abstract class BasicTower implements Tower {
         this.isAttacking = false;
         this.attackSpeed = 4;
         this.direction = 0;
+        this.random = new Random();
     }
 
     @Override
@@ -109,21 +112,12 @@ public abstract class BasicTower implements Tower {
 
     @Override
     public void setDirection(int direction) {
-        reEvaluateAttackHexes(direction, this.direction);
-
         this.direction = direction;
     }
 
     @Override
     public void setTowerDrawable(TowerDrawable towerDrawable) {
         this.towerDrawable = towerDrawable;
-    }
-
-    @Override
-    public void rotateClockwise(int num) {
-        reEvaluateAttackHexes(this.direction, this.direction+num);
-        direction += num;
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -160,7 +154,10 @@ public abstract class BasicTower implements Tower {
         }
     }
 
-    abstract public void reEvaluateAttackHexes(int oldDir, int newDir); //Called after setting the direction
-
+    protected void initAttackHexPaths() {
+        for (Hexagon h: getAttackHexes()) {
+            h.initPath();
+        }
+    }
 
 }

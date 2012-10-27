@@ -61,4 +61,8 @@ public class TowerDrawable extends Drawable {
     public void incrementAttackAnimation() {
 
     }
+
+    public Bitmap getTowerImg() {
+        return towerImg;
+    }
 }

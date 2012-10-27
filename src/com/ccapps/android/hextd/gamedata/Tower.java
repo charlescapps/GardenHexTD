@@ -23,6 +23,8 @@ public interface Tower {
     public TowerDrawable getTowerDrawable();
     public int getDirection();
     public void setDirection(int direction);
+    public String getDamageString();
+    public String getTowerName();
 
     public void setHex(Hexagon hex);
     public void setDmgPerAttack(int dmgPerAttack);
@@ -30,7 +32,7 @@ public interface Tower {
     public void setTowerDrawable(TowerDrawable towerDrawable);
 
     /*************ACTIONS************************/
-    public void rotateClockwise(int num);
+    public void rotateClockwise();
     public void attack();
     public void draw(Canvas canvas);
 

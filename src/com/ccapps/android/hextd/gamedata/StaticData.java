@@ -28,10 +28,11 @@ public class StaticData {
     public static Bitmap ANT;
     public static Bitmap DEAD_ANT;
 
+    public static Bitmap ROTATE_ICON;
+
     public static List<Bitmap> SUNSHINE_ANIMATION;
 
     public static Display DEFAULT_SCREEN_SIZE;
-
 
     public static Map<Class<? extends Tower>, Integer> TOWER_COSTS;
 

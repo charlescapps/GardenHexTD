@@ -1,6 +1,8 @@
 package com.ccapps.android.hextd.views;
 
+import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.view.*;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -8,6 +10,7 @@ import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.StaticData;
+import com.ccapps.android.hextd.gamedata.Tower;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +51,19 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
         //Can only show info popup if there's a tower
         if (clickedHex == null || clickedHex.getTower() == null) {
-            return true;
+            towerInfoView.setVisibility(View.GONE);
+            return false;
         }
 
         //Guarantee an old event doesn't prematurely hide the menu
         towerInfoDelayEvents.clear();
-        setLayoutParams(towerInfoView, (int)x, (int)y);
+        Tower clickedTower = clickedHex.getTower();
+        setTowerInfoDrawables(towerInfoView, clickedTower);
+
+        towerInfoView.setOnClickListener(new OnClickRotate(clickedTower));
+
+        Point towerCenter = clickedHex.getScreenCenter();
+        setLayoutParams(towerInfoView, towerCenter.x, towerCenter.y);
 
         //Show the info menu
         towerInfoView.setVisibility(View.VISIBLE);
@@ -136,6 +146,12 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
     }
 
+    private void setTowerInfoDrawables(TextView v, Tower t) {
+        v.setText(t.getTowerName() + "\n" + t.getDamageString());
+
+
+    }
+
     private void setLayoutParams(View v, int x, int y) {
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)v.getLayoutParams();
         int leftMargin = (int)(x + Hexagon.getGlobalSideLength());
@@ -159,6 +175,20 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         gameViewThread.postShiftGrid(0.f, -distanceY);
         return true;
 
+    }
+
+    private class OnClickRotate implements View.OnClickListener {
+
+        private Tower t;
+
+        public OnClickRotate(Tower t) {
+            this.t = t;
+        }
+        @Override
+        public void onClick(View view) {
+            t.rotateClockwise();
+            towerInfoDelayEvents.clear();
+        }
     }
 
 }
