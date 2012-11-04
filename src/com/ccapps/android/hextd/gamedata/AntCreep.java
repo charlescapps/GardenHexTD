@@ -16,16 +16,16 @@ import java.util.List;
  */
 public class AntCreep implements Creep {
 
-    private int direction;
-    private int speed;
-    private CreepDrawable creepDrawable;
-    private List<Hexagon> path;
-    private Hexagon hex;
-    private Hexagon goalHex;
-    private Hexagon sourceHex;
-    private int hitpoints;
-    private CreepAlgorithm algorithm;
-    private int tick;
+    protected int direction;
+    protected int speed;
+    protected CreepDrawable creepDrawable;
+    protected List<Hexagon> path;
+    protected Hexagon hex;
+    protected Hexagon goalHex;
+    protected Hexagon sourceHex;
+    protected int hitpoints;
+    protected CreepAlgorithm algorithm;
+    protected int tick;
 
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
