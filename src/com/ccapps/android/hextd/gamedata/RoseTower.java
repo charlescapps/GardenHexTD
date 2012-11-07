@@ -8,13 +8,13 @@ import com.ccapps.android.hextd.draw.TowerDrawable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/13/12
- * Time: 2:07 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class RoseTower extends BasicTower{
     public RoseTower(Hexagon hex) {
         super(hex);
@@ -57,10 +57,12 @@ public class RoseTower extends BasicTower{
         switch(direction % 2) {
             case 0:
                 if (pos.y % 2 == 0) {
+                    addSafe(GRID.get(pos.x-1, pos.y));
                     addSafe(GRID.get(pos.x+1, pos.y+1));
                     addSafe(GRID.get(pos.x+1, pos.y-1));
                 }
                 else {
+                    addSafe(GRID.get(pos.x-1, pos.y));
                     addSafe(GRID.get(pos.x, pos.y+1));
                     addSafe(GRID.get(pos.x, pos.y-1));
                 }

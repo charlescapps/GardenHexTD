@@ -6,13 +6,13 @@ import android.view.KeyEvent;
 import android.widget.ImageButton;
 import com.ccapps.android.hextd.gamedata.Tower;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/7/12
- * Time: 3:48 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class TowerButton extends ImageButton{
 
     private Class<? extends Tower> towerClass;

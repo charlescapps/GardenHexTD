@@ -5,13 +5,13 @@ import com.ccapps.android.hextd.gamedata.Creep;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/20/12
- * Time: 2:23 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public interface CreepAlgorithm {
     public boolean pathNeedsEvaluation();
     public List<Hexagon> buildPath(Hexagon src, Hexagon goal);

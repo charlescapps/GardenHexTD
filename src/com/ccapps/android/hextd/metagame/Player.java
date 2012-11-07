@@ -1,18 +1,22 @@
 package com.ccapps.android.hextd.metagame;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/20/12
- * Time: 6:10 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class Player {
+
     private int points;
     private int monies;
+    private int life;
 
-    public Player() {
-        points = monies = 0;
+    public Player(int points, int monies, int life) {
+        this.points = points;
+        this.monies = monies;
+        this.life = life;
     }
 
     public int getPoints() {
@@ -33,5 +37,13 @@ public class Player {
 
     public void addMonies(int monies) {
         this.monies += monies;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void lostLife(int lost) {
+        this.life -= lost;
     }
 }

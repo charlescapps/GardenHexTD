@@ -8,12 +8,13 @@ import com.ccapps.android.hextd.gamedata.Tower;
 
 import javax.xml.transform.Source;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 9/26/12
- * Time: 9:04 AM
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class Hexagon extends Drawable implements Comparable<Hexagon> {
 
     public static enum STATE {

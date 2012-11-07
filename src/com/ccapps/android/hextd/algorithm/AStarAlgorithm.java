@@ -12,13 +12,13 @@ import com.ccapps.android.hextd.gamedata.Creep;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/21/12
- * Time: 10:04 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class AStarAlgorithm implements CreepAlgorithm{
 
     Creep creep;

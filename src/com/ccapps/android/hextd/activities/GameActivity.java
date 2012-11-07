@@ -24,6 +24,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
+
 public class GameActivity extends Activity {
 
     private GameLogicThread gameLogicThread;

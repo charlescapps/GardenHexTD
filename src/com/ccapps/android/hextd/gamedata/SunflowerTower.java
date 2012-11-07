@@ -9,13 +9,13 @@ import com.ccapps.android.hextd.draw.TowerDrawable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/13/12
- * Time: 2:07 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class SunflowerTower extends BasicTower{
 
     public SunflowerTower(Hexagon hex) {

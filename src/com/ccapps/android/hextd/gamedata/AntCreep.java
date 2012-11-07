@@ -7,13 +7,13 @@ import com.ccapps.android.hextd.draw.Hexagon;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/15/12
- * Time: 2:15 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class AntCreep implements Creep {
 
     private int direction;

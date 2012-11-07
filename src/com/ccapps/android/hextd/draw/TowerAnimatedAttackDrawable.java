@@ -10,13 +10,13 @@ import com.ccapps.android.hextd.gamedata.Tower;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 9/30/12
- * Time: 12:50 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class TowerAnimatedAttackDrawable extends TowerDrawable {
 
     private final List<Bitmap> attackAnimation;
