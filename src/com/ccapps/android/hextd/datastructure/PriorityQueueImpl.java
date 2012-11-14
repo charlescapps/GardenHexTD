@@ -7,6 +7,8 @@ package com.ccapps.android.hextd.datastructure;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class PriorityQueueImpl implements PriorityQueue //min heap
 {
     private HeapNode root;
@@ -278,3 +280,4 @@ public class PriorityQueueImpl implements PriorityQueue //min heap
     }
 
 }
+//CLC: Original Code End

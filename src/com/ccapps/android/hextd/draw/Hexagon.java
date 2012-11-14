@@ -15,6 +15,8 @@ import javax.xml.transform.Source;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class Hexagon extends Drawable implements Comparable<Hexagon> {
 
     public static enum STATE {
@@ -242,3 +244,4 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
         return 1;
     }
 }
+//CLC: Original Code End

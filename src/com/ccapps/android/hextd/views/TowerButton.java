@@ -13,6 +13,8 @@ import com.ccapps.android.hextd.gamedata.Tower;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class TowerButton extends ImageButton{
 
     private Class<? extends Tower> towerClass;
@@ -47,3 +49,4 @@ public class TowerButton extends ImageButton{
         return false;
     }
 }
+//CLC: Original Code End

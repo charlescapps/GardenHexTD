@@ -13,6 +13,8 @@ import java.util.logging.Level;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class TowerUtils {
 
 
@@ -35,3 +37,4 @@ public class TowerUtils {
 
     }
 }
+//CLC: Original Code End

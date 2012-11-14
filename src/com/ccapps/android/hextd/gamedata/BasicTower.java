@@ -15,6 +15,8 @@ import java.util.Random;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public abstract class BasicTower implements Tower {
 
     protected Hexagon hex;
@@ -161,3 +163,4 @@ public abstract class BasicTower implements Tower {
     }
 
 }
+//CLC: Original Code End

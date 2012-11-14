@@ -12,6 +12,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface CreepGenerator {
     public void tick();
 
@@ -23,3 +25,4 @@ public interface CreepGenerator {
 
     public void addCreepToQueue(Creep c);
 }
+//CLC: Original Code End

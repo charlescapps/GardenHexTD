@@ -25,6 +25,8 @@ import java.util.logging.Logger;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
 
     private GameView.GameViewThread gameViewThread;
@@ -194,3 +196,4 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
     }
 
 }
+//CLC: Original Code End

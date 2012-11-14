@@ -15,6 +15,8 @@ import java.util.Collections;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class RoseTower extends BasicTower{
     public RoseTower(Hexagon hex) {
         super(hex);
@@ -89,3 +91,4 @@ public class RoseTower extends BasicTower{
         return random.nextInt(91) + 10;
     }
 }
+//CLC: Original Code End

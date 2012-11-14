@@ -15,6 +15,8 @@ import java.util.Collections;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class EggplantTower extends BasicTower{
     public EggplantTower(Hexagon hex) {
         super(hex);
@@ -48,3 +50,4 @@ public class EggplantTower extends BasicTower{
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
+//CLC: Original Code End

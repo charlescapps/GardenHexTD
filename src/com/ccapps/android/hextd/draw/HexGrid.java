@@ -24,6 +24,8 @@ import java.util.logging.Level;
 /**
  * Singleton design pattern.
  */
+
+//CLC: Original Code Begin
 public class HexGrid extends Drawable {
 
     //STATICS
@@ -373,3 +375,4 @@ public class HexGrid extends Drawable {
         hexMatrix[r][c].initPath();
     }
 }
+//CLC: Original Code End

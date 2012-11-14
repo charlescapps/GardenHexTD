@@ -19,6 +19,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class AStarAlgorithm implements CreepAlgorithm{
 
     Creep creep;
@@ -48,6 +50,8 @@ public class AStarAlgorithm implements CreepAlgorithm{
         return Math.max(Math.abs(p1.x - p2.x) , Math.abs(p1.y - p2.y));
     }
 
+    //CLC: Adapted Code Wikipedia article on A*
+    //CLC: Adapted Code Begin
     @Override
     public List<Hexagon> buildPath(Hexagon startNode, Hexagon goalNode) {
         final HexGrid GRID = HexGrid.getInstance();
@@ -119,6 +123,8 @@ public class AStarAlgorithm implements CreepAlgorithm{
         return null;
     }
 
+    //CLC: Adapted Code End
+
     private List<Hexagon> reconstructAStarPath() {
         List<AStarNode> path = new ArrayList<AStarNode>();
         reconstructPathHelper(goal, path);
@@ -149,3 +155,5 @@ public class AStarAlgorithm implements CreepAlgorithm{
         this.creep = creep;
     }
 }
+//CLC: Original Code End
+

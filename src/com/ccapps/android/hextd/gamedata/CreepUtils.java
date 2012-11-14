@@ -14,6 +14,8 @@ import java.util.logging.Level;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class CreepUtils {
 
 
@@ -46,3 +48,4 @@ public class CreepUtils {
         addCreep(creepClass, src.getGridPosition().x, src.getGridPosition().y, goalHex, algorithmClass);
     }
 }
+//CLC: Original Code End

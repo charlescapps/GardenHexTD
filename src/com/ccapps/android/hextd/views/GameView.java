@@ -19,6 +19,8 @@ import java.util.logging.Logger;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public static TowerMenuView towerMenu = null;
@@ -210,3 +212,4 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 }
+//CLC: Original Code End

@@ -20,6 +20,8 @@ import java.util.logging.Logger;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class TowerDrawable extends Drawable {
 
     protected final Tower tower;
@@ -66,3 +68,4 @@ public class TowerDrawable extends Drawable {
         return towerImg;
     }
 }
+//CLC: Original Code End

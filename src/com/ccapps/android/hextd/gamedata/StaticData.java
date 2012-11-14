@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class StaticData {
 
     public static Bitmap BASIC_TOWER_IMAGE;
@@ -40,3 +42,4 @@ public class StaticData {
     public static Logger l = Logger.getAnonymousLogger();
 
 }
+//CLC: Original Code End

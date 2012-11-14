@@ -9,6 +9,8 @@ import com.ccapps.android.hextd.gamedata.Creep;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface GameManager {
 
     public void tick();
@@ -18,3 +20,4 @@ public interface GameManager {
     public void setPlayer(Player player);
 
 }
+//CLC: Original Code End

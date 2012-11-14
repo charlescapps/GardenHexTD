@@ -21,6 +21,8 @@ import java.util.logging.Logger;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class GameLogicThread extends Thread {
     private boolean isRunning;
     private static final long GAME_TICK = 250; // limit to 4 events/s reduce computations
@@ -101,3 +103,5 @@ public class GameLogicThread extends Thread {
         }
     }
 }
+//CLC: Original Code End
+

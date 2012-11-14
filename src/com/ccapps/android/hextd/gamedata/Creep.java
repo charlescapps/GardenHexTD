@@ -15,6 +15,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface Creep {
     public int getDirection();
     public void setDirection(int direction);
@@ -51,3 +53,4 @@ public interface Creep {
     public void draw(Canvas canvas);
 
 }
+//CLC: Original Code End

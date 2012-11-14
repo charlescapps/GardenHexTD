@@ -9,7 +9,10 @@ import com.ccapps.android.hextd.draw.HexGrid;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface TerrainManager {
     public void initTerrain(HexGrid grid);
 
 }
+//CLC: Original Code End

@@ -28,6 +28,8 @@ import java.util.HashMap;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class MainActivity extends Activity {
 
     public static final int NUM_VERTICAL_HEXES = 16;                  //test values for now...
@@ -83,8 +85,6 @@ public class MainActivity extends Activity {
     @Override
     public void onPause() {
         super.onPause();
-
-
     }
 
     @Override
@@ -95,8 +95,6 @@ public class MainActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean changed) {
         super.onWindowFocusChanged(changed);
-
-
     }
 
     private void setupHexGrid() {
@@ -181,3 +179,4 @@ public class MainActivity extends Activity {
     }
     
 }
+//CLC: Original Code End

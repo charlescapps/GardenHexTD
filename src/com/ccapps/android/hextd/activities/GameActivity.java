@@ -32,6 +32,7 @@ import java.util.List;
  Fall 2012
  *****************************************************/
 
+//CLC: Original Code Begin
 public class GameActivity extends Activity {
 
     private GameLogicThread gameLogicThread;
@@ -121,3 +122,5 @@ public class GameActivity extends Activity {
 
     }
 }
+//CLC: Original Code End
+

@@ -18,6 +18,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class BarrierTower extends BasicTower implements DummyTower{
 
     public BarrierTower(Hexagon hex) {
@@ -56,3 +58,4 @@ public class BarrierTower extends BasicTower implements DummyTower{
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
+//CLC: Original Code End
