@@ -2,13 +2,13 @@ package com.ccapps.android.hextd.datastructure;
 
 import com.ccapps.android.hextd.draw.Hexagon;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/21/12
- * Time: 10:28 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class AStarNode {
     private int pathCost;
     private int heuristicCost;

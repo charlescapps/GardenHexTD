@@ -1,12 +1,12 @@
 package com.ccapps.android.hextd.datastructure;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/21/12
- * Time: 9:50 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public interface PriorityQueue {
     public void insert(HeapNode n);
     public Object removeHighestPriority();

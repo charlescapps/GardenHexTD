@@ -2,13 +2,13 @@ package com.ccapps.android.hextd.gamedata.terrain;
 
 import com.ccapps.android.hextd.draw.HexGrid;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/27/12
- * Time: 1:56 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public interface TerrainManager {
     public void initTerrain(HexGrid grid);
 

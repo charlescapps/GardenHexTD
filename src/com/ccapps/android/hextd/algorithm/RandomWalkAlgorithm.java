@@ -7,13 +7,13 @@ import com.ccapps.android.hextd.gamedata.Creep;
 
 import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/20/12
- * Time: 2:25 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class RandomWalkAlgorithm implements CreepAlgorithm{
 
     private Creep creep;

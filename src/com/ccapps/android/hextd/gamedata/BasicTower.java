@@ -8,13 +8,13 @@ import com.ccapps.android.hextd.draw.TowerDrawable;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 9/30/12
- * Time: 12:37 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public abstract class BasicTower implements Tower {
 
     protected Hexagon hex;

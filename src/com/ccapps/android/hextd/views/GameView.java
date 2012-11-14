@@ -12,6 +12,13 @@ import com.ccapps.android.hextd.draw.HexGrid;
 
 import java.util.logging.Logger;
 
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public static TowerMenuView towerMenu = null;

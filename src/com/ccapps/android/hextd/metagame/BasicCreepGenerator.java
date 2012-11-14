@@ -10,13 +10,13 @@ import com.ccapps.android.hextd.gamedata.CreepUtils;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/20/12
- * Time: 5:37 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class BasicCreepGenerator implements CreepGenerator{
     private Class<? extends Creep> creepClass;
     private Class<? extends CreepAlgorithm> creepAlgorithm;

@@ -11,13 +11,13 @@ import com.ccapps.android.hextd.gamedata.Tower;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/27/12
- * Time: 1:42 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class BarrierTower extends BasicTower implements DummyTower{
 
     public BarrierTower(Hexagon hex) {

@@ -13,12 +13,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 9/26/12
- * Time: 10:57 AM
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 
 /**
  * Singleton design pattern.

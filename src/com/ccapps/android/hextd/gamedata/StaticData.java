@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/7/12
- * Time: 5:23 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class StaticData {
 
     public static Bitmap BASIC_TOWER_IMAGE;

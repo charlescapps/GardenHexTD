@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/3/12
- * Time: 7:42 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class GameLogicThread extends Thread {
     private boolean isRunning;
     private static final long GAME_TICK = 250; // limit to 4 events/s reduce computations

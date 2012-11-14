@@ -21,6 +21,13 @@ import com.ccapps.android.hextd.gamedata.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
 public class MainActivity extends Activity {
 
     public static final int NUM_VERTICAL_HEXES = 16;                  //test values for now...

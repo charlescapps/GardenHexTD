@@ -8,26 +8,27 @@ import com.ccapps.android.hextd.datastructure.PriorityQueueImpl;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Creep;
+import com.ccapps.android.hextd.gamedata.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 10/21/12
- * Time: 10:04 AM
- * To change this template use File | Settings | File Templates.
- */
-public class AStarAlgorithm implements CreepAlgorithm {
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
+public class AStarAlgorithm implements CreepAlgorithm{
 
-    protected Creep creep;
-    protected Hexagon startNode;
-    protected Hexagon goalNode;
-    protected AStarNode src;
-    protected AStarNode goal;
+    Creep creep;
+    Hexagon startNode;
+    Hexagon goalNode;
+    AStarNode src;
+    AStarNode goal;
 
-    protected AStarNode[][] A_STAR_NODES;
+    AStarNode[][] A_STAR_NODES;
 
     /**
      * If the next hexagon contains a tower, re-evaluate path
@@ -147,5 +148,76 @@ public class AStarAlgorithm implements CreepAlgorithm {
     @Override
     public void setCreep(Creep creep) {
         this.creep = creep;
+    }
+
+    // Decision analysis for creep behavior
+    public void decisionAnalysis(Creep creep) {
+        List<Hexagon> currentPath = creep.getPath();
+        Hexagon creepHex = creep.getHex();
+        Hexagon neighbors[] = creepHex.getNeighbors();
+
+        // determine if viable candidates exist in neighbors
+        List<Hexagon> candidates = new ArrayList<Hexagon>(6);
+        int maxWeight = 0;
+        for (Hexagon h : neighbors) {
+            // skip if neighbor doesn't exist OR
+            // neighbor is previously OR
+            // if tower exists in path
+            if (h == null || h == creep.getPrevHex() || h.getTower() != null)
+                continue;
+            int curWt = h.getWeight();
+            if (curWt > maxWeight) {
+                maxWeight = curWt;
+                candidates.clear();
+                candidates.add(h);
+            }
+            else if (curWt == maxWeight) {
+                candidates.add(h);
+            }
+        }
+
+        State creepState = creep.getState();
+        if (creepState == State.FORAGE_FOLLOW) {
+            if (currentPath == null || currentPath.size() == 0) {
+                if (candidates.size() == 0) {
+                    creep.setState(State.FORAGE_LEAD);
+                }
+                else {
+                    // candidates exist
+                    if (candidates.size() == 1) {   // only one candidate
+                        if (currentPath == null) {
+                            creep.setPath(candidates);
+                        }
+                        else {
+                            currentPath.add(candidates.get(0));
+                        }
+                    }
+                }
+            }
+        }
+        else if (creepState == State.FORAGE_LEAD) {
+            if (currentPath == null || currentPath.size() == 0) {
+                // no path exists, check if goal reached
+                if (creep.getHex() == creep.getGoalHex()) {
+                    // goal reached, return to hive
+                    creep.setState(State.RETURN_LEAD);
+                }
+                else {
+                    // recalculate Astar to goal
+                    creep.setPath(this.buildPath(creep.getHex(), creep.getGoalHex()));
+                }
+            }
+            else {
+                // path exists
+                if (currentPath.get(0).getTower() != null) {
+                    // tower exists at node. if it's goal hex, has food and now return
+                    if (currentPath.get(0) == this.goalNode) {
+                        creep.setState(State.RETURN_LEAD);
+                        creep.setPath(null);
+                    }
+                }
+            }
+        }
+
     }
 }
