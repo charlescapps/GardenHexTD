@@ -50,4 +50,8 @@ public interface Creep {
     public void move();
     public void draw(Canvas canvas);
 
+    public State getState();
+    public void setState(State state);
+    public Hexagon getPrevHex();
+
 }

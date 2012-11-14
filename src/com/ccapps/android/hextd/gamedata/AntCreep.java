@@ -27,6 +27,9 @@ public class AntCreep implements Creep {
     protected CreepAlgorithm algorithm;
     protected int tick;
 
+    protected State creepState;
+    protected Hexagon prevHex;
+
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
         this.goalHex = goalHex;
@@ -40,7 +43,10 @@ public class AntCreep implements Creep {
         this.tick = 0;
         this.speed = 4;
 
-        evaluateRoute();
+        this.creepState = State.FORAGE_FOLLOW;
+        this.prevHex = null;
+
+        this.evaluateRoute();
     }
 
     @Override
@@ -144,6 +150,11 @@ public class AntCreep implements Creep {
     }
 
     @Override
+    public void draw(Canvas canvas) {
+        creepDrawable.draw(canvas);
+    }
+
+    @Override
     public void evaluateRoute() {
         if (hitpoints > 0 && algorithm.pathNeedsEvaluation()) {
             this.path = algorithm.buildPath(hex, goalHex);
@@ -165,7 +176,19 @@ public class AntCreep implements Creep {
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        creepDrawable.draw(canvas);
+    public State getState()
+    {
+        return this.creepState;
     }
+
+    @Override
+    public void setState(State state) {
+        this.creepState = state;
+    }
+
+    @Override
+    public Hexagon getPrevHex() {
+        return this.prevHex;
+    }
+
 }
