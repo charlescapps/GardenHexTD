@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
+import com.ccapps.android.hextd.algorithm.ScentAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.*;
@@ -50,6 +51,8 @@ public class GameActivity extends Activity {
 
         sourceHexes.add(GRID.get(0,5));
         CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
+        creepGenerator.setCreepClass(ScentAntCreep.class);
+        creepGenerator.setCreepAlgorithm(ScentAlgorithm.class);
 
         GameView v = (GameView)findViewById(R.id.gameView);
         this.gameLogicThread = new GameLogicThread(v, creepGenerator);

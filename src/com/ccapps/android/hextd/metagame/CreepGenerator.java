@@ -1,5 +1,6 @@
 package com.ccapps.android.hextd.metagame;
 
+import com.ccapps.android.hextd.algorithm.CreepAlgorithm;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Creep;
 
@@ -24,5 +25,8 @@ public interface CreepGenerator {
     public void setSourceHexes(List<Hexagon> sourceHexes);
 
     public void addCreepToQueue(Creep c);
+
+    public void setCreepClass(Class <? extends Creep> creepClass);
+    public void setCreepAlgorithm(Class <? extends CreepAlgorithm> creepAlgorithm);
 }
 //CLC: Original Code End

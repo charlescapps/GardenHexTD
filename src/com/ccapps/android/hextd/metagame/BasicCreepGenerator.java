@@ -58,6 +58,16 @@ public class BasicCreepGenerator implements CreepGenerator{
     }
 
     @Override
+    public void setCreepClass(Class<? extends Creep> creepClass) {
+        this.creepClass = creepClass;
+    }
+
+    @Override
+    public void setCreepAlgorithm(Class<? extends CreepAlgorithm> creepAlgorithm) {
+        this.creepAlgorithm = creepAlgorithm;
+    }
+
+    @Override
     public List<Hexagon> getSourceHexes() {
         return sourceHexes;
     }

@@ -18,16 +18,16 @@ import java.util.List;
 //CLC: Original Code Begin
 public class AntCreep implements Creep {
 
-    private int direction;
-    private int speed;
+    protected int direction;
+    protected int speed;
     private CreepDrawable creepDrawable;
-    private List<Hexagon> path;
-    private Hexagon hex;
-    private Hexagon goalHex;
-    private Hexagon sourceHex;
-    private int hitpoints;
-    private CreepAlgorithm algorithm;
-    private int tick;
+    protected List<Hexagon> path;
+    protected Hexagon hex;
+    protected Hexagon goalHex;
+    protected Hexagon sourceHex;
+    protected int hitpoints;
+    protected CreepAlgorithm algorithm;
+    protected int tick;
 
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
@@ -36,7 +36,7 @@ public class AntCreep implements Creep {
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 500;
+        this.hitpoints = 250;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;

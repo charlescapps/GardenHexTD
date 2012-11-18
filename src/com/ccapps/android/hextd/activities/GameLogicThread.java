@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.view.SurfaceHolder;
+import com.ccapps.android.hextd.algorithm.ScentAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
@@ -52,19 +53,40 @@ public class GameLogicThread extends Thread {
     }
 
     private void eventLoop() {
+        int relativeTick = 0;
         while(true) {
+            ++relativeTick;
             pauseMe(GAME_TICK);
             towersOnGrid = theGrid.getTowersOnGrid();
             creepsOnGrid = theGrid.getCreepsOnGrid();
 
-            for (Tower t: towersOnGrid) {
-                t.attack();
+            synchronized (towersOnGrid) {
+                for (Tower t: towersOnGrid) {
+                    t.attack();
+                }
             }
             for (Creep c: creepsOnGrid) {
                 c.move();
             }
 
             creepGenerator.tick();
+
+            //Decay scents
+            if (relativeTick % 64 == 0) {
+                int[][] scents = ScentAlgorithm.scents;
+                if (scents != null) {
+                    for (int i = 0; i < theGrid.getNumVertical(); i++) {
+                        for (int j = 0; j < theGrid.getNumHorizontal(); j++) {
+                            if (scents[i][j] > 0) {
+                                scents[i][j] -= 1 ;
+                            }
+                            else if (scents[i][j] < 0) {
+                                scents[i][j] += 1;
+                            }
+                        }
+                    }
+                }
+            }
 
             gameView.postNeedsDrawing();
 

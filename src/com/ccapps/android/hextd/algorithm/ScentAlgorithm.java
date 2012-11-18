@@ -1,10 +1,7 @@
 package com.ccapps.android.hextd.algorithm;
 
 import android.graphics.Point;
-import com.ccapps.android.hextd.datastructure.AStarHeapNode;
-import com.ccapps.android.hextd.datastructure.AStarNode;
-import com.ccapps.android.hextd.datastructure.PriorityQueue;
-import com.ccapps.android.hextd.datastructure.PriorityQueueImpl;
+import com.ccapps.android.hextd.datastructure.*;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Creep;
@@ -12,17 +9,17 @@ import com.ccapps.android.hextd.gamedata.Creep;
 import java.util.ArrayList;
 import java.util.List;
 
-/*****************************************************
- Garden Hex Tower Defense
- Charles Capps & Joseph Lee
- ID:  920474106
- CS 313 AI and Game Design
- Fall 2012
- *****************************************************/
-
-//CLC: Original Code Begin
-public class AStarAlgorithm implements CreepAlgorithm{
-
+/**
+ * Created with IntelliJ IDEA.
+ * User: charles
+ * Date: 11/17/12
+ * Time: 11:05 AM
+ * To change this template use File | Settings | File Templates.
+ */
+public class ScentAlgorithm implements CreepAlgorithm {
+    //value of scents on each hexagon
+    public static int[][] scents;
+    private HexGrid grid;
     Creep creep;
     Hexagon startNode;
     Hexagon goalNode;
@@ -30,6 +27,18 @@ public class AStarAlgorithm implements CreepAlgorithm{
     AStarNode goal;
 
     AStarNode[][] A_STAR_NODES;
+
+    public ScentAlgorithm() {
+        grid = HexGrid.getInstance();
+        if (scents == null) {
+            scents = new int[grid.getNumVertical()][grid.getNumHorizontal()];
+            for (int i = 0; i < grid.getNumVertical(); i++) {
+                for (int j = 0; j < grid.getNumHorizontal(); j++) {
+                    scents[i][j] = 0;
+                }
+            }
+        }
+    }
 
     /**
      * If the next hexagon contains a tower, re-evaluate path
@@ -48,6 +57,11 @@ public class AStarAlgorithm implements CreepAlgorithm{
         Point p1 = h1.getGridPosition();
         Point p2 = h2.getGridPosition();
         return Math.max(Math.abs(p1.x - p2.x) , Math.abs(p1.y - p2.y));
+    }
+
+    public int edgeWeight(Point p1, Point p2) {
+        int scentWeight = -Math.min(scents[p1.x][p1.y], scents[p2.x][p2.y]);
+        return scentWeight + 10;
     }
 
     //CLC: Adapted Code Wikipedia article on A*
@@ -73,8 +87,8 @@ public class AStarAlgorithm implements CreepAlgorithm{
         }
 
         src = A_STAR_NODES[startPos.x][startPos.y];
-        src.setPathCost(0);
         goal = A_STAR_NODES[goalPos.x][goalPos.y];
+        src.setPathCost(0);
 
         int gScore = 0;
         int fScore = gScore + src.getHeuristicCost();
@@ -108,7 +122,7 @@ public class AStarAlgorithm implements CreepAlgorithm{
                 if (closedSet.contains(nbr))
                     continue;
 
-                int tentantivePathScore = current.getPathCost() + 1;
+                int tentantivePathScore = current.getPathCost() + edgeWeight(currentPos, nbrPos);
 
                 if (!openSet.contains(nbr) || tentantivePathScore < nbr.getPathCost())
                 {
