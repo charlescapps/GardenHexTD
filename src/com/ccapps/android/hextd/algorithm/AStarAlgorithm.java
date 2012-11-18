@@ -1,10 +1,7 @@
 package com.ccapps.android.hextd.algorithm;
 
 import android.graphics.Point;
-import com.ccapps.android.hextd.datastructure.AStarHeapNode;
-import com.ccapps.android.hextd.datastructure.AStarNode;
-import com.ccapps.android.hextd.datastructure.PriorityQueue;
-import com.ccapps.android.hextd.datastructure.PriorityQueueImpl;
+import com.ccapps.android.hextd.datastructure.*;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Creep;
@@ -76,17 +73,13 @@ public class AStarAlgorithm implements CreepAlgorithm{
         src.setPathCost(0);
         goal = A_STAR_NODES[goalPos.x][goalPos.y];
 
-        int gScore = 0;
-        int fScore = gScore + src.getHeuristicCost();
-
         List<AStarNode> closedSet = new ArrayList<AStarNode>(); //don't need to use priority queue for closed
-        PriorityQueue openSet = new PriorityQueueImpl();     //priority queue for open set
+        PriorityQueue openSet = new PriorityQueueFast(GRID.getNumVertical()*GRID.getNumHorizontal());     //priority queue for open set
         openSet.insert(new AStarHeapNode(src));
 
         while (!openSet.isEmpty())
         {
             AStarNode current = (AStarNode)openSet.removeHighestPriority();
-            Point currentPos = current.getHexagon().getGridPosition();
 
             if (current == goal)
             {
@@ -103,7 +96,6 @@ public class AStarAlgorithm implements CreepAlgorithm{
             for (int i = 0; i < adjs.size(); i++ )
             {
                 AStarNode nbr = adjs.get(i);
-                Point nbrPos = nbr.getHexagon().getGridPosition();
 
                 if (closedSet.contains(nbr))
                     continue;

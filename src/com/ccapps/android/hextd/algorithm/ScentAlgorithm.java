@@ -90,11 +90,8 @@ public class ScentAlgorithm implements CreepAlgorithm {
         goal = A_STAR_NODES[goalPos.x][goalPos.y];
         src.setPathCost(0);
 
-        int gScore = 0;
-        int fScore = gScore + src.getHeuristicCost();
-
         List<AStarNode> closedSet = new ArrayList<AStarNode>(); //don't need to use priority queue for closed
-        PriorityQueue openSet = new PriorityQueueImpl();     //priority queue for open set
+        PriorityQueue openSet = new PriorityQueueFast(grid.getNumVertical()*grid.getNumHorizontal());     //priority queue for open set
         openSet.insert(new AStarHeapNode(src));
 
         while (!openSet.isEmpty())
