@@ -52,8 +52,8 @@ public class GameActivity extends Activity {
 
         sourceHexes.add(GRID.get(0,5));
         CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
-        creepGenerator.setCreepClass(AngryAntCreep.class);
-        creepGenerator.setCreepAlgorithm(AngryCreepAlgorithm.class);
+        creepGenerator.setCreepClass(ScentAntCreep.class);
+        creepGenerator.setCreepAlgorithm(ScentAlgorithm.class);
 
         GameView v = (GameView)findViewById(R.id.gameView);
         this.gameLogicThread = new GameLogicThread(v, creepGenerator);

@@ -6,13 +6,15 @@ import com.ccapps.android.hextd.algorithm.ScentAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 11/18/12
- * Time: 9:04 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
+
+//CLC: Original Code Begin
 public class ScentAntCreep extends AntCreep{
     private boolean wasDead;
     public ScentAntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
@@ -44,16 +46,25 @@ public class ScentAntCreep extends AntCreep{
             }
             if (hitpoints <= 0 && !wasDead && tick % speed == 0 ) {
                 wasDead = true;
+
                 HexGrid GRID = HexGrid.getInstance();
                 Point pos = hex.getGridPosition();
-                for (int i = pos.x-1; i <= pos.x + 1; i++) {
-                    for (int j = pos.y - 1; j <= pos.y + 1; j++ ) {
-                        if (i >= 0 && i < GRID.getNumVertical() && j >= 0 && j < GRID.getNumHorizontal()) {
-                            //Subtract 0.5f from the scents on surrounding hexes when an ant dies
-                            ScentAlgorithm.scents[i][j] = Math.max(-100, ScentAlgorithm.scents[i][j] - 20);
-                        }
+                ScentAlgorithm.scents[pos.x][pos.y] = Math.max(-100, ScentAlgorithm.scents[pos.x][pos.y]-30);
+                for (Hexagon h: hex.getNeighbors()) {
+                    if (h != null) {
+                        pos = h.getGridPosition();
+                        ScentAlgorithm.scents[pos.x][pos.y] = Math.max(-100, ScentAlgorithm.scents[pos.x][pos.y]-10);
+
                     }
                 }
+//                for (int i = pos.x-1; i <= pos.x + 1; i++) {
+//                    for (int j = pos.y - 1; j <= pos.y + 1; j++ ) {
+//                        if (i >= 0 && i < GRID.getNumVertical() && j >= 0 && j < GRID.getNumHorizontal()) {
+//                            //Subtract 0.5f from the scents on surrounding hexes when an ant dies
+//                            ScentAlgorithm.scents[i][j] = Math.max(-100, ScentAlgorithm.scents[i][j] - 20);
+//                        }
+//                    }
+//                }
             }
         }
     }
@@ -63,3 +74,4 @@ public class ScentAntCreep extends AntCreep{
         return this==o;
     }
 }
+//CLC: Original Code End
