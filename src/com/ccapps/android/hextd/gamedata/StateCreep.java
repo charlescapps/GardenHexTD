@@ -8,13 +8,15 @@ import com.ccapps.android.hextd.draw.Hexagon;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: monleezy
- * Date: 11/4/12
- * Time: 8:16 PM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106, 963099011
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
+
+// JL: Original Code Begin
 public interface StateCreep {
 
     public int getDirection();
@@ -56,3 +58,4 @@ public interface StateCreep {
     public Hexagon getPrevHex();
 
 }
+// JL: Original Code End

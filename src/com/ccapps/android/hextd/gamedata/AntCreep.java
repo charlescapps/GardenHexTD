@@ -11,7 +11,7 @@ import static com.ccapps.android.hextd.gamedata.Creep.FORAGE_STATE;
 /*****************************************************
  Garden Hex Tower Defense
  Charles Capps & Joseph Lee
- ID:  920474106
+ ID:  920474106, 963099011
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
@@ -204,6 +204,7 @@ public class AntCreep implements Creep {
         return this==o;
     }
 
+    // JL: Original Code Begin
     @Override
     public int getStepCount() {
         return this.stepCount;
@@ -230,8 +231,19 @@ public class AntCreep implements Creep {
     }
 
     @Override
+    public void setAttr(Gene attr) {
+        this.attr = attr;
+    }
+
+    @Override
     public Hexagon getPrevHex() {
         return this.prevPath.get(0);
     }
+
+    @Override
+    public List<Hexagon> getPrevPath() {
+        return this.prevPath;
+    }
+    // JL: Original Code End
 }
 //CLC: Original Code End

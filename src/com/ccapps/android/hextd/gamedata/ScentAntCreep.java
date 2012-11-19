@@ -6,13 +6,15 @@ import com.ccapps.android.hextd.algorithm.ScentAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 11/18/12
- * Time: 9:04 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106, 963099011
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
+
+//CLC: Original Code Begin
 public class ScentAntCreep extends AntCreep{
     private boolean wasDead;
     public ScentAntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
@@ -63,3 +65,4 @@ public class ScentAntCreep extends AntCreep{
         return this==o;
     }
 }
+//CLC: Original Code End
