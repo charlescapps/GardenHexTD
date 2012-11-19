@@ -6,6 +6,7 @@ import com.ccapps.android.hextd.draw.CreepDrawable;
 import com.ccapps.android.hextd.draw.Hexagon;
 
 import java.util.List;
+import static com.ccapps.android.hextd.gamedata.Creep.FORAGE_STATE;
 
 /*****************************************************
  Garden Hex Tower Defense
@@ -28,6 +29,7 @@ public class AntCreep implements Creep {
     protected int hitpoints;
     protected CreepAlgorithm algorithm;
     protected int tick;
+    protected FORAGE_STATE forageState;
 
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
@@ -41,6 +43,7 @@ public class AntCreep implements Creep {
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
         this.speed = 4;
+        this.forageState = FORAGE_STATE.FORAGE;
 
         evaluateRoute();
     }
@@ -155,11 +158,11 @@ public class AntCreep implements Creep {
     @Override
     public void move() {
         if (++tick % speed == 0 && hitpoints > 0) {
-            if (path.size() <= 0) {
+            evaluateRoute();
+            if (path == null || path.size() <= 0) {
                 return;
             }
-            evaluateRoute();
-            hex.setCreep(null);
+            hex.removeCreep(this);
             hex = path.remove(0);
             hex.setCreep(this);
             creepDrawable.updateLocation();
@@ -169,6 +172,11 @@ public class AntCreep implements Creep {
     @Override
     public void draw(Canvas canvas) {
         creepDrawable.draw(canvas);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this==o;
     }
 }
 //CLC: Original Code End

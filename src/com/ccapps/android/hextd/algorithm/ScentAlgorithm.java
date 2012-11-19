@@ -136,6 +136,7 @@ public class ScentAlgorithm implements CreepAlgorithm {
     }
 
     //CLC: Adapted Code End
+    //CLC: Original Code Begin
 
     private List<Hexagon> reconstructAStarPath() {
         List<AStarNode> path = new ArrayList<AStarNode>();

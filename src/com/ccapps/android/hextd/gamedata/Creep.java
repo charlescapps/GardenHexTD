@@ -18,6 +18,8 @@ import java.util.List;
 
 //CLC: Original Code Begin
 public interface Creep {
+    public static enum FORAGE_STATE {FORAGE, RETURN, BACK_TO_HIVE};
+
     public int getDirection();
     public void setDirection(int direction);
 

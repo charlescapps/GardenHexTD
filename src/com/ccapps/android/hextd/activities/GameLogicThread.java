@@ -11,6 +11,7 @@ import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.metagame.CreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,8 +66,12 @@ public class GameLogicThread extends Thread {
                     t.attack();
                 }
             }
-            for (Creep c: creepsOnGrid) {
-                c.move();
+            synchronized (creepsOnGrid) {
+                List<Creep> shallowCopy = new ArrayList<Creep>();
+                shallowCopy.addAll(creepsOnGrid);
+                for (Creep c: shallowCopy) { //Avoid concurrent modification exceptions when removing creeps from creepsOnGrid
+                    c.move();
+                }
             }
 
             creepGenerator.tick();

@@ -25,9 +25,22 @@ public class ScentAntCreep extends AntCreep{
     public void move() {
         super.move();
         if (tick % speed == 0) {
-            if (hitpoints > 0 ) {
+            if (hitpoints > 0 && forageState != FORAGE_STATE.BACK_TO_HIVE) {
                 Point pos = hex.getGridPosition();
                 ScentAlgorithm.scents[pos.x][pos.y] = Math.min(100, ScentAlgorithm.scents[pos.x][pos.y] + 1);
+                if (hex == goalHex) {
+                    if (forageState == FORAGE_STATE.FORAGE) {
+                        goalHex = sourceHex;
+                        sourceHex = hex;
+                        path = null;
+                        forageState = FORAGE_STATE.RETURN;
+                    }
+                    else {
+                         forageState = FORAGE_STATE.BACK_TO_HIVE;
+                          HexGrid.getInstance().removeCreep(this);
+                         hex.removeCreep(this);
+                    }
+                }
             }
             if (hitpoints <= 0 && !wasDead && tick % speed == 0 ) {
                 wasDead = true;
@@ -43,5 +56,10 @@ public class ScentAntCreep extends AntCreep{
                 }
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this==o;
     }
 }

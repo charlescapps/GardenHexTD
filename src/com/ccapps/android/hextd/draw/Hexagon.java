@@ -7,6 +7,8 @@ import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
 
 import javax.xml.transform.Source;
+import java.util.ArrayList;
+import java.util.List;
 
 /*****************************************************
  Garden Hex Tower Defense
@@ -20,7 +22,7 @@ import javax.xml.transform.Source;
 public class Hexagon extends Drawable implements Comparable<Hexagon> {
 
     public static enum STATE {
-        NORMAL, NORMAL_DRAW, GOAL, SOURCE, SELECTED, ATTACKED
+        NORMAL, GOAL, SOURCE, SELECTED, ATTACKED
     }
 
     /********************STATICS****************************/
@@ -64,7 +66,7 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
     private Point gridPosition;
     private Hexagon[] neighbors;
     private Tower tower;
-    private Creep creep;
+    private List<Creep> creeps;
     private boolean wasInvalidated = false;
     private STATE myState;
     private STATE myDefaultState;
@@ -78,6 +80,7 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
         hexPaint.setStrokeWidth(1);
         hexPaint.setStyle(Paint.Style.STROKE);
         this.myState = this.myDefaultState = STATE.NORMAL;
+        this.creeps = new ArrayList<Creep>();
         //neighbors to be set by the HexGrid instance.
     }
 
@@ -193,11 +196,15 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
     }
 
     public void setCreep(Creep creep) {
-        this.creep = creep;
+        creeps.add(creep);
     }
 
-    public Creep getCreep() {
-        return creep;
+    public void removeCreep(Creep creep) {
+        creeps.remove(creep);
+    }
+
+    public List<Creep> getCreeps() {
+        return creeps;
     }
     /*****************************GAME LOGIC************************************/
     /**
@@ -210,14 +217,9 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
         else {
             setStateToDefault();
         }
-        if (this.getCreep() != null) {
-            this.getCreep().loseHitpoints(dmg);
+        for (Creep c: creeps) {
+            c.loseHitpoints(dmg);
         }
-    }
-
-    public boolean isEmpty() {
-        return tower == null && creep == null;
-
     }
 
     /************************STANDARD METHODS**************************************/

@@ -38,10 +38,9 @@ public class CreepUtils {
         } catch (Exception e) {
             StaticData.l.log(Level.SEVERE, "Exception in CreepUtils: " + e.getCause() + ": " + e.getCause().getMessage());
         }
-        if (GRID.get(row, col).getCreep() == null) {
-            Creep instance = getInstance(creepClass, GRID.get(row, col), goalHex, algorithm);
-            GRID.setCreep(row, col, instance);
-        }
+
+        Creep instance = getInstance(creepClass, GRID.get(row, col), goalHex, algorithm);
+        GRID.addCreep(row, col, instance);
     }
 
     public static void addCreep(Class<? extends Creep> creepClass, Hexagon src, Hexagon goalHex, Class<? extends CreepAlgorithm> algorithmClass) {

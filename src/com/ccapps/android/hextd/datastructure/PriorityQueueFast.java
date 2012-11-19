@@ -11,12 +11,10 @@ package com.ccapps.android.hextd.datastructure;
 //CLC: Original Code Begin
 public class PriorityQueueFast implements PriorityQueue //min heap
 {
-    private int MAX_CAPACITY;
     private HeapNode[] array;
     private int lastIndex;
 
     public PriorityQueueFast(int MAX_CAPACITY) {
-        this.MAX_CAPACITY = MAX_CAPACITY;
         this.array = new HeapNode[MAX_CAPACITY];
         this.lastIndex = -1;
     }
@@ -49,18 +47,6 @@ public class PriorityQueueFast implements PriorityQueue //min heap
 
     private int right(int i) {
         return i*2 + 2;
-    }
-
-    private HeapNode getLeft(int i) {
-        return array[i*2+1];
-    }
-
-    private HeapNode getRight(int i) {
-        return array[i*2+2];
-    }
-
-    private HeapNode getParent(int i) {
-        return array[(i-1)/2];
     }
 
     private int parent(int i) {

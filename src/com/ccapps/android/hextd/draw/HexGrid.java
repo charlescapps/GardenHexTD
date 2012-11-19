@@ -341,7 +341,7 @@ public class HexGrid extends Drawable {
         tower.initPaths();
     }
 
-    public void setCreep(int r, int c, Creep creep) {
+    public void addCreep(int r, int c, Creep creep) {
         if (hexMatrix[r][c].getTower() != null) {
             StaticData.l.log(Level.SEVERE, "Attempt to place creep on hex with a tower! (" + r + ", " + c + ")");
             return;
@@ -351,6 +351,10 @@ public class HexGrid extends Drawable {
             creepsOnGrid.add(creep);
         }
         creep.evaluateRoute();
+    }
+
+    public void removeCreep(Creep c) {
+        creepsOnGrid.remove(c);
     }
 
     public List<Tower> getTowersOnGrid() {
