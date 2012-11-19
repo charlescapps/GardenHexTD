@@ -1,14 +1,13 @@
 package com.ccapps.android.hextd.views;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PointF;
+import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.*;
 import android.widget.RelativeLayout;
 import com.ccapps.android.hextd.activities.GameLogicThread;
 import com.ccapps.android.hextd.draw.HexGrid;
+import com.ccapps.android.hextd.gamedata.StaticData;
 
 import java.util.logging.Logger;
 
@@ -110,6 +109,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private HexGrid gridInstance;
         private static final long PAUSE_TIME = 5; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
+        private Paint grassPaint;
 
         public GameViewThread(SurfaceHolder sh) {
             super();
@@ -117,6 +117,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             this.needsDrawing = true;
             this.gridInstance = HexGrid.getInstance();
             this.isRunning = false;
+            this.grassPaint = new Paint();
         }
 
         @Override
@@ -134,7 +135,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             if (this.needsDrawing) {
                 Canvas c = sh.lockCanvas();
 
-                c.drawColor(Color.BLACK);  //avoid lingering artifacts from previous draw
+                //c.drawColor(Color.BLACK);  //avoid lingering artifacts from previous draw
+                drawGrass(c);
 
                 gridInstance.draw(c);
 
@@ -143,6 +145,26 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 sh.unlockCanvasAndPost(c);
             }
 
+        }
+
+        private void drawGrass(Canvas c) {
+            Bitmap grass = StaticData.GRASS;
+            final int H = StaticData.DEFAULT_SCREEN_SIZE.getHeight();
+            final int grassW = grass.getWidth();
+            final int grassH = grass.getHeight();
+            int maxHeightDrawn = 0;
+            while(maxHeightDrawn < H) {
+
+                int startY = ((maxHeightDrawn - (int)HexGrid.GLOBAL_OFFSET.y) % grassH);
+                if (startY < 0)
+                    startY += grassH;
+                int htToDraw = grassH - startY;
+
+                Rect src = new Rect(0, startY, grassW, grassH);
+                Rect dest = new Rect(0,maxHeightDrawn,grassW, maxHeightDrawn + htToDraw);
+                c.drawBitmap(grass,src,dest,null);
+                maxHeightDrawn += htToDraw;
+            }
         }
 
         private void shiftGrid() {

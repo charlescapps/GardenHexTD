@@ -151,7 +151,7 @@ public class HexGrid extends Drawable {
         this.gridPaint.setAlpha(128);
         this.gridPaint.setStrokeWidth(1);
         this.gridPaint.setStyle(Paint.Style.STROKE);
-        
+
         this.hexMatrix = new Hexagon[numVertical][numHorizontal];  //rows / columns starting from top-left (math matrix style)
 
         float a = Hexagon.getGlobalSideLength();
@@ -211,6 +211,7 @@ public class HexGrid extends Drawable {
 
         Y_MAX = topLeft.y + MARGIN.y;
         Y_MIN = topLeft.y - gridHeight + (float)screenSize.y - 5.f*h - MARGIN.y;
+
     }
 
     /***********************************DRAWING RELATED************************************/

@@ -33,6 +33,8 @@ public class StaticData {
     public static Bitmap ROTATE_ICON;
     public static Bitmap TREE;
 
+    public static Bitmap GRASS;
+
     public static List<Bitmap> SUNSHINE_ANIMATION;
 
     public static Display DEFAULT_SCREEN_SIZE;
