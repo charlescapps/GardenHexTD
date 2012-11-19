@@ -8,10 +8,12 @@ import com.ccapps.android.hextd.datastructure.PriorityQueueImpl;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.Creep;
+import com.ccapps.android.hextd.gamedata.Gene;
 import com.ccapps.android.hextd.gamedata.State;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.XMLFormatter;
 
 /*****************************************************
  Garden Hex Tower Defense
@@ -154,70 +156,314 @@ public class AStarAlgorithm implements CreepAlgorithm{
     public void decisionAnalysis(Creep creep) {
         List<Hexagon> currentPath = creep.getPath();
         Hexagon creepHex = creep.getHex();
-        Hexagon neighbors[] = creepHex.getNeighbors();
+        Gene genome  = creep.getAttr();
+        //Hexagon neighbors[] = creepHex.getNeighbors();
 
-        // determine if viable candidates exist in neighbors
-        List<Hexagon> candidates = new ArrayList<Hexagon>(6);
-        int maxWeight = 0;
-        for (Hexagon h : neighbors) {
-            // skip if neighbor doesn't exist OR
-            // neighbor is previously OR
-            // if tower exists in path
-            if (h == null || h == creep.getPrevHex() || h.getTower() != null)
-                continue;
-            int curWt = h.getWeight();
-            if (curWt > maxWeight) {
-                maxWeight = curWt;
-                candidates.clear();
-                candidates.add(h);
+        // expired stamina or goal reached, return to source
+        if (creep.getState() == State.FORAGE_FOLLOW ||
+                creep.getState() == State.FORAGE_LEAD) {
+            // check if goal has been reached
+            if (creepHex == creep.getGoalHex()) {
+                creep.setGoalMet(true);
+                // return home, sourceHex
+                creep.setGoalHex(creep.getSourceHex());
+                creep.setPath(this.buildPath(creep.getHex(), creep.getGoalHex()));
             }
-            else if (curWt == maxWeight) {
-                candidates.add(h);
+
+            // check if stamina has run out
+            int stam = genome.getStamina() + this.admissibleHeuristic(creep.getSourceHex(), creep.getGoalHex());
+            if (creep.getStepCount() > stam && creep.getGoalMet() == false) {
+                // return home, sourceHex
+                creep.setGoalHex(creep.getSourceHex());
+                creep.setPath(this.buildPath(creep.getHex(), creep.getGoalHex()));
             }
+            creep.setState(State.RETURN_LEAD);
+        }
+
+        // random step chance from genome
+        Hexagon rand = this.takeRandomStep(creep);
+        if (rand != null) {
+            List<Hexagon> newPath = new ArrayList<Hexagon>();
+            newPath.add(rand);
+            creep.setPath(newPath);
+            return;
         }
 
         State creepState = creep.getState();
-        if (creepState == State.FORAGE_FOLLOW) {
-            if (currentPath == null || currentPath.size() == 0) {
-                if (candidates.size() == 0) {
-                    creep.setState(State.FORAGE_LEAD);
-                }
-                else {
-                    // candidates exist
-                    if (candidates.size() == 1) {   // only one candidate
-                        if (currentPath == null) {
-                            creep.setPath(candidates);
-                        }
-                        else {
-                            currentPath.add(candidates.get(0));
-                        }
-                    }
-                }
-            }
+
+        // arrived at goal
+        if (creepHex == goalNode) {
+            // set path to home colony
+            creep.setPath(null);
         }
-        else if (creepState == State.FORAGE_LEAD) {
-            if (currentPath == null || currentPath.size() == 0) {
-                // no path exists, check if goal reached
-                if (creep.getHex() == creep.getGoalHex()) {
-                    // goal reached, return to hive
-                    creep.setState(State.RETURN_LEAD);
+
+        // path exists
+        if (currentPath != null && currentPath.size() > 0) {
+            // check if next path traversible
+            if (this.traversable(currentPath.get(0))) {
+                if (this.survivalEstimate(creep)) {
+                    // traversable and allowable by survival heuristic
+                    return;
                 }
                 else {
-                    // recalculate Astar to goal
-                    creep.setPath(this.buildPath(creep.getHex(), creep.getGoalHex()));
+                    // fails survival estimate, take safestep
+                    List<Hexagon> newPath = new ArrayList<Hexagon>();
+                    newPath.add(this.safeStep(creep));
+                    creep.setPath(newPath);
                 }
             }
             else {
-                // path exists
-                if (currentPath.get(0).getTower() != null) {
-                    // tower exists at node. if it's goal hex, has food and now return
-                    if (currentPath.get(0) == this.goalNode) {
-                        creep.setState(State.RETURN_LEAD);
-                        creep.setPath(null);
+                // next step non-traversable
+                List<Hexagon> newPath = new ArrayList<Hexagon>();
+                //Hexagon safeHex = this.safeStep(creep);
+                newPath.add(this.estimateStep(creep));
+                creep.setPath(newPath);
+            }
+        }
+        else {
+            // path doesn't exist, construct new path
+            List<Hexagon> newPath = this.buildPath(creepHex, creep.getGoalHex());
+            creep.setPath(newPath);
+            // validate path
+            if (this.traversable(newPath.get(0))) {
+                // check for safety attr
+                if (this.survivalEstimate(creep)) {
+                    return;
+                }
+                else {
+                    // surv est fails
+                    newPath.clear();
+                    newPath.add(this.safeStep(creep));
+                }
+            }
+            else {
+                // new Astar path is untraversable
+                newPath.clear();
+                newPath.add(this.estimateStep(creep));
+                creep.setPath(newPath);
+            }
+
+        }
+
+    }
+
+    private List<Hexagon> getCandidates() {
+        return null;
+    }
+
+    // step to take when in evasive/survival mode
+    private Hexagon safeStep(Creep creep) {
+        Hexagon current = creep.getHex();
+        Hexagon neighbors[] = current.getNeighbors();
+
+        Hexagon nextGuess = this.estimateStep(creep);
+        if (nextGuess.getMyState() != Hexagon.STATE.ATTACKED) {
+            return nextGuess;
+        }
+        else {
+            // choose best guess neighbor not under attack
+            List<Hexagon> notAttacked = new ArrayList<Hexagon>();
+            for (Hexagon h : neighbors) {
+                if (h == null)
+                    continue;
+                if (h.getMyState() != Hexagon.STATE.ATTACKED &&
+                        h != creep.getPrevHex()) {
+                    notAttacked.add(h);
+                }
+            }
+            // choose best not-attacked hex
+            switch(notAttacked.size()) {
+                case 0:
+                    return null;
+                case 1:
+                    return notAttacked.get(0);
+                default:
+                    Hexagon closestSafe = null,
+                        goalHex = creep.getGoalHex();
+                    int distance = -1,
+                        heurDist;
+                    for (Hexagon h : notAttacked) {
+                        heurDist = this.admissibleHeuristic(h, goalHex);
+                        if (closestSafe == null ||
+                            heurDist < distance) {
+                            distance = heurDist;
+                            closestSafe = h;
+                        }
+                    }
+                    return closestSafe;
+            }
+        }
+    }
+
+    private boolean traversable(Hexagon hex) {
+        if (hex == null || hex.getTower() != null || hex.getCreep() != null)
+            return false;
+        return true;
+    }
+
+    // get best guess estimate based on heuristic distance to goal
+    private Hexagon estimateStep(Creep creep) {
+        Hexagon current = creep.getHex(),
+                prev = creep.getPrevHex();
+        Point s = creep.getHex().getGridPosition();
+        Point g = creep.getGoalHex().getGridPosition();
+
+        int deltaX = g.x - s.x,
+                deltaY = g.y - s.y;
+
+        Hexagon neighbors[] = current.getNeighbors();
+
+        if (deltaX == 0) {
+            if(deltaY > 0) {
+                int[] order = {0, 1, 5, 2, 4, 3};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+            else {
+                // y < 0
+                int[] order = {3, 2, 4, 1, 5, 0};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
                     }
                 }
             }
         }
+        else if (deltaY == 0) {
+            if(deltaX > 0) {
+                int[] order = {5, 4, 0, 3, 1, 2};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+            else {
+                // x < 0
+                int[] order = {1, 2, 0, 3, 5, 4};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+        }
+        else if (deltaX > 0 && deltaY > 0) {
+            if (deltaX > deltaY) {
+                int[] order = {5, 0, 4, 3, 1, 2};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+            else {
+                int[] order = {0, 5, 4, 1, 2, 3};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+
+        }
+        else if (deltaX > 0 && deltaY < 0) {
+            if (deltaX < (deltaY * -1)) {
+                int[] order = {3, 4, 2, 5, 1, 0};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+            else {
+                int[] order = {4, 3, 5, 2, 0, 1};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+        }
+        else if (deltaX < 0 && deltaY > 0) {
+            if (deltaY >= (deltaX * -1)) {
+                int[] order = {1, 0, 2, 5, 4, 3};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+            else {
+                int[] order = {1, 2, 0, 5, 3, 4};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+        }
+        else if (deltaX < 0 && deltaY < 0) {
+            if ((deltaX * -1) >= (deltaY * -1)) {
+                int[] order = {2, 3, 1, 0, 4, 5};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+            else {
+                int[] order = {3, 2, 4, 1, 5, 0};
+                for (int i : order) {
+                    if (this.traversable(neighbors[i]) && neighbors[i] != prev) {
+                        return neighbors[i];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    // estimate of creep will sustain X attacks in the next Y steps,
+    // where X is the Threshold attributes and Y is the Foresight
+    // attribute in the creep's genetic attributes
+    // return true: will survive
+    // false: will not, seek new path
+    public boolean survivalEstimate(Creep creep) {
+        Gene creepGene = creep.getAttr();
+        int threshold = creepGene.getThreshold();
+        int foresight = creepGene.getForesight();
+        List<Hexagon> path = creep.getPath();
+
+        int attackCount = 0;
+
+        for (int i = 0; i < path.size() && i < foresight; i++) {
+            if (path.get(i).getMyState() == Hexagon.STATE.ATTACKED) {
+                attackCount++;
+            }
+        }
+
+        if (attackCount >= threshold) {
+            return false;
+        }
+        return true;
 
     }
+
+    // check for random step
+    private Hexagon takeRandomStep(Creep creep) {
+        Hexagon current = creep.getHex(),
+                goal = creep.getGoalHex();
+        int chance = creep.getAttr().getRandomness() + 1;
+        // randomness range = 1 to 4 / 512
+        if ((int) (Math.random() * 512) <= chance) {
+            Hexagon randomHex = this.estimateStep(creep);
+            return this.estimateStep(creep);
+        }
+        return null;
+    }
+
 }

@@ -54,4 +54,11 @@ public interface Creep {
     public void setState(State state);
     public Hexagon getPrevHex();
 
+    public Gene getAttr();
+    public boolean getGoalMet();
+    public void setGoalMet(boolean goalMet);
+
+    public int getStepCount();
+    public void incStepCount();
+
 }

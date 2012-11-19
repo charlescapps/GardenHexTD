@@ -16,19 +16,22 @@ import java.util.List;
  *****************************************************/
 public class AntCreep implements Creep {
 
-    protected int direction;
-    protected int speed;
-    protected CreepDrawable creepDrawable;
-    protected List<Hexagon> path;
-    protected Hexagon hex;
-    protected Hexagon goalHex;
-    protected Hexagon sourceHex;
-    protected int hitpoints;
-    protected CreepAlgorithm algorithm;
-    protected int tick;
+    private int direction;
+    private int speed;
+    private CreepDrawable creepDrawable;
+    private List<Hexagon> path;
+    private List<Hexagon> prevPath;
+    private Hexagon hex;
+    private Hexagon goalHex;
+    private Hexagon sourceHex;
+    private int hitpoints;
+    private CreepAlgorithm algorithm;
+    private int tick;
 
-    protected State creepState;
-    protected Hexagon prevHex;
+    private State creepState;
+    private Gene attr;
+    private boolean goalMet;
+    private int stepCount;
 
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
@@ -44,9 +47,11 @@ public class AntCreep implements Creep {
         this.speed = 4;
 
         this.path = null;
+        this.prevPath = null;
 
         this.creepState = State.FORAGE_FOLLOW;
-        this.prevHex = null;
+        this.goalMet = false;
+        this.stepCount = 0;
 
         this.evaluateRoute();
     }
@@ -190,7 +195,32 @@ public class AntCreep implements Creep {
 
     @Override
     public Hexagon getPrevHex() {
-        return this.prevHex;
+        return this.prevPath.get(this.prevPath.size() - 1);
+    }
+
+    @Override
+    public Gene getAttr() {
+        return this.attr;
+    }
+
+    @Override
+    public boolean getGoalMet() {
+        return this.goalMet;
+    }
+
+    @Override
+    public void setGoalMet(boolean goalMet) {
+        this.goalMet = goalMet;
+    }
+
+    @Override
+    public int getStepCount() {
+        return this.stepCount;
+    }
+
+    @Override
+    public void incStepCount() {
+        this.stepCount++;
     }
 
 }
