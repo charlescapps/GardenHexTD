@@ -9,13 +9,15 @@ import com.ccapps.android.hextd.gamedata.Creep;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: charles
- * Date: 11/17/12
- * Time: 11:05 AM
- * To change this template use File | Settings | File Templates.
- */
+/*****************************************************
+ Garden Hex Tower Defense
+ Charles Capps & Joseph Lee
+ ID:  920474106
+ CS 313 AI and Game Design
+ Fall 2012
+ *****************************************************/
+//CLC: Original Code Begin
+
 public class ScentAlgorithm implements CreepAlgorithm {
     //value of scents on each hexagon
     public static int[][] scents;

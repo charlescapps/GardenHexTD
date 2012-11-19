@@ -21,7 +21,7 @@ public class AntCreep implements Creep {
 
     protected int direction;
     protected int speed;
-    private CreepDrawable creepDrawable;
+    protected CreepDrawable creepDrawable;
     protected List<Hexagon> path;
     protected Hexagon hex;
     protected Hexagon goalHex;
@@ -45,7 +45,7 @@ public class AntCreep implements Creep {
         this.speed = 4;
         this.forageState = FORAGE_STATE.FORAGE;
 
-        evaluateRoute();
+       // evaluateRoute();
     }
 
     @Override
