@@ -22,6 +22,11 @@ import java.util.logging.XMLFormatter;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+// JL: Original Code Begin
+/*  Gene Algorithm is an adaptation of the Creep A* Algorithm
+    Implementation of pathing involving genetic attributes of creep
+ */
 public class GeneAlgorithm implements CreepAlgorithm{
 
     Creep creep;
@@ -50,7 +55,10 @@ public class GeneAlgorithm implements CreepAlgorithm{
         Point p2 = h2.getGridPosition();
         return Math.max(Math.abs(p1.x - p2.x) , Math.abs(p1.y - p2.y));
     }
+    // JL: Original Code Halt
 
+    //CLC: Adapted Code Wikipedia article on A*
+    //CLC: Adapted Code Begin
     @Override
     public List<Hexagon> buildPath(Hexagon startNode, Hexagon goalNode) {
         final HexGrid GRID = HexGrid.getInstance();
@@ -121,6 +129,7 @@ public class GeneAlgorithm implements CreepAlgorithm{
         }
         return null;
     }
+    // CLC: Adapted Code End
 
     private List<Hexagon> reconstructAStarPath() {
         List<AStarNode> path = new ArrayList<AStarNode>();
@@ -151,7 +160,9 @@ public class GeneAlgorithm implements CreepAlgorithm{
     public void setCreep(Creep creep) {
         this.creep = creep;
     }
+    // CLC: Original Code End
 
+    // JL: Original Code Resume
     // Decision analysis for creep behavior
     public void decisionAnalysis(Creep creep) {
         List<Hexagon> currentPath = creep.getPath();
@@ -245,10 +256,6 @@ public class GeneAlgorithm implements CreepAlgorithm{
 
         }
 
-    }
-
-    private List<Hexagon> getCandidates() {
-        return null;
     }
 
     // step to take when in evasive/survival mode
@@ -466,3 +473,4 @@ public class GeneAlgorithm implements CreepAlgorithm{
         return null;
     }
 }
+// JL: Original Code End

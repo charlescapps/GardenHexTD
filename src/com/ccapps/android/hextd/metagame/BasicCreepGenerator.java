@@ -20,12 +20,12 @@ import java.util.List;
 
 //CLC: Original Code Begin
 public class BasicCreepGenerator implements CreepGenerator{
-    private Class<? extends Creep> creepClass;
-    private Class<? extends CreepAlgorithm> creepAlgorithm;
-    private int speed = 24;
-    private int tick = 0;
-    private List<Hexagon> sourceHexes;
-    private Hexagon goalHex;
+    protected Class<? extends Creep> creepClass;
+    protected Class<? extends CreepAlgorithm> creepAlgorithm;
+    protected int speed = 24;
+    protected int tick = 0;
+    protected List<Hexagon> sourceHexes;
+    protected Hexagon goalHex;
 
     public BasicCreepGenerator(List<Hexagon> sourceHexes, Hexagon goalHex) {
         this.sourceHexes = sourceHexes;
