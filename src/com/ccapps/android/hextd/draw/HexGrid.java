@@ -24,6 +24,8 @@ import java.util.logging.Level;
 /**
  * Singleton design pattern.
  */
+
+//CLC: Original Code Begin
 public class HexGrid extends Drawable {
 
     //STATICS
@@ -149,7 +151,7 @@ public class HexGrid extends Drawable {
         this.gridPaint.setAlpha(128);
         this.gridPaint.setStrokeWidth(1);
         this.gridPaint.setStyle(Paint.Style.STROKE);
-        
+
         this.hexMatrix = new Hexagon[numVertical][numHorizontal];  //rows / columns starting from top-left (math matrix style)
 
         float a = Hexagon.getGlobalSideLength();
@@ -209,6 +211,7 @@ public class HexGrid extends Drawable {
 
         Y_MAX = topLeft.y + MARGIN.y;
         Y_MIN = topLeft.y - gridHeight + (float)screenSize.y - 5.f*h - MARGIN.y;
+
     }
 
     /***********************************DRAWING RELATED************************************/
@@ -339,7 +342,7 @@ public class HexGrid extends Drawable {
         tower.initPaths();
     }
 
-    public void setCreep(int r, int c, Creep creep) {
+    public void addCreep(int r, int c, Creep creep) {
         if (hexMatrix[r][c].getTower() != null) {
             StaticData.l.log(Level.SEVERE, "Attempt to place creep on hex with a tower! (" + r + ", " + c + ")");
             return;
@@ -349,6 +352,10 @@ public class HexGrid extends Drawable {
             creepsOnGrid.add(creep);
         }
         creep.evaluateRoute();
+    }
+
+    public void removeCreep(Creep c) {
+        creepsOnGrid.remove(c);
     }
 
     public List<Tower> getTowersOnGrid() {
@@ -373,3 +380,4 @@ public class HexGrid extends Drawable {
         hexMatrix[r][c].initPath();
     }
 }
+//CLC: Original Code End

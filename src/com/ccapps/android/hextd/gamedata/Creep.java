@@ -15,7 +15,11 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface Creep {
+    public static enum FORAGE_STATE {FORAGE, RETURN, BACK_TO_HIVE};
+
     public int getDirection();
     public void setDirection(int direction);
 
@@ -62,3 +66,4 @@ public interface Creep {
     public void incStepCount();
 
 }
+//CLC: Original Code End

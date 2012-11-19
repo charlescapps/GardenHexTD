@@ -7,5 +7,8 @@ package com.ccapps.android.hextd.gamedata.terrain;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface DummyTower {
 }
+//CLC: Original Code End

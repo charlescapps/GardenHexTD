@@ -7,6 +7,8 @@ package com.ccapps.android.hextd.metagame;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class Player {
 
     private int points;
@@ -47,3 +49,4 @@ public class Player {
         this.life -= lost;
     }
 }
+//CLC: Original Code End

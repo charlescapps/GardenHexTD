@@ -9,6 +9,8 @@ import com.ccapps.android.hextd.gamedata.Creep;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class BasicGameManager implements GameManager{
 
     Player player;
@@ -47,3 +49,4 @@ public class BasicGameManager implements GameManager{
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
+//CLC: Original Code End

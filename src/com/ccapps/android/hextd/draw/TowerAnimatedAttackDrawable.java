@@ -17,6 +17,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class TowerAnimatedAttackDrawable extends TowerDrawable {
 
     private final List<Bitmap> attackAnimation;
@@ -52,3 +54,4 @@ public class TowerAnimatedAttackDrawable extends TowerDrawable {
         ++animationBeat;
     }
 }
+//CLC: Original Code End

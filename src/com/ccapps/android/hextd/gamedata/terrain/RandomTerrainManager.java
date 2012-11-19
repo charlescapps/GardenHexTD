@@ -15,6 +15,8 @@ import java.util.Random;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class RandomTerrainManager implements TerrainManager{
 
     private float density;
@@ -41,3 +43,4 @@ public class RandomTerrainManager implements TerrainManager{
         }
     }
 }
+//CLC: Original Code End

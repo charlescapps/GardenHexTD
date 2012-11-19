@@ -17,6 +17,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class BasicCreepGenerator implements CreepGenerator{
     private Class<? extends Creep> creepClass;
     private Class<? extends CreepAlgorithm> creepAlgorithm;
@@ -56,6 +58,16 @@ public class BasicCreepGenerator implements CreepGenerator{
     }
 
     @Override
+    public void setCreepClass(Class<? extends Creep> creepClass) {
+        this.creepClass = creepClass;
+    }
+
+    @Override
+    public void setCreepAlgorithm(Class<? extends CreepAlgorithm> creepAlgorithm) {
+        this.creepAlgorithm = creepAlgorithm;
+    }
+
+    @Override
     public List<Hexagon> getSourceHexes() {
         return sourceHexes;
     }
@@ -70,3 +82,4 @@ public class BasicCreepGenerator implements CreepGenerator{
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
+//CLC: Original Code End

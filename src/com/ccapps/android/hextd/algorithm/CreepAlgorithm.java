@@ -12,6 +12,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface CreepAlgorithm {
     public boolean pathNeedsEvaluation();
     public List<Hexagon> buildPath(Hexagon src, Hexagon goal);
@@ -20,3 +22,4 @@ public interface CreepAlgorithm {
     public void setCreep(Creep creep);
 
 }
+//CLC: Original Code End

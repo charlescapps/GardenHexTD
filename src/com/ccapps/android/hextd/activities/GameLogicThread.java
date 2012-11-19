@@ -4,12 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.view.SurfaceHolder;
+import com.ccapps.android.hextd.algorithm.ScentAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.gamedata.Creep;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.metagame.CreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,8 @@ import java.util.logging.Logger;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class GameLogicThread extends Thread {
     private boolean isRunning;
     private static final long GAME_TICK = 250; // limit to 4 events/s reduce computations
@@ -50,19 +54,44 @@ public class GameLogicThread extends Thread {
     }
 
     private void eventLoop() {
+        int relativeTick = 0;
         while(true) {
+            ++relativeTick;
             pauseMe(GAME_TICK);
             towersOnGrid = theGrid.getTowersOnGrid();
             creepsOnGrid = theGrid.getCreepsOnGrid();
 
-            for (Tower t: towersOnGrid) {
-                t.attack();
+            synchronized (towersOnGrid) {
+                for (Tower t: towersOnGrid) {
+                    t.attack();
+                }
             }
-            for (Creep c: creepsOnGrid) {
-                c.move();
+            synchronized (creepsOnGrid) {
+                List<Creep> shallowCopy = new ArrayList<Creep>();
+                shallowCopy.addAll(creepsOnGrid);
+                for (Creep c: shallowCopy) { //Avoid concurrent modification exceptions when removing creeps from creepsOnGrid
+                    c.move();
+                }
             }
 
             creepGenerator.tick();
+
+            //Decay scents
+            if (relativeTick % 64 == 0) {
+                int[][] scents = ScentAlgorithm.scents;
+                if (scents != null) {
+                    for (int i = 0; i < theGrid.getNumVertical(); i++) {
+                        for (int j = 0; j < theGrid.getNumHorizontal(); j++) {
+                            if (scents[i][j] > 0) {
+                                scents[i][j] -= 1 ;
+                            }
+                            else if (scents[i][j] < 0) {
+                                scents[i][j] += 1;
+                            }
+                        }
+                    }
+                }
+            }
 
             gameView.postNeedsDrawing();
 
@@ -101,3 +130,5 @@ public class GameLogicThread extends Thread {
         }
     }
 }
+//CLC: Original Code End
+

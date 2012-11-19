@@ -13,6 +13,8 @@ import java.util.logging.Level;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class TowerUtils {
 
 
@@ -28,10 +30,11 @@ public class TowerUtils {
 
     public static void addTower(Class<? extends Tower> towerClass, int row, int col) {
         HexGrid GRID = HexGrid.getInstance();
-        if (GRID.get(row, col).getTower() == null && GRID.get(row,col).getCreep() == null) {
+        if (GRID.get(row, col).getTower() == null && GRID.get(row,col).getCreeps().size() == 0) {
             Tower instance = getInstance(towerClass, GRID.get(row, col));
             GRID.setTower(row, col, instance);
         }
 
     }
 }
+//CLC: Original Code End

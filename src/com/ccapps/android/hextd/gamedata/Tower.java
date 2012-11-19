@@ -14,6 +14,8 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public interface Tower {
     /***********GETTERS / SETTERS***************/
     public Hexagon getHex();
@@ -42,3 +44,4 @@ public interface Tower {
 
 
 }
+//CLC: Original Code End

@@ -14,6 +14,8 @@ import com.ccapps.android.hextd.gamedata.Creep;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class CreepDrawable extends Drawable {
 
     private Creep creep;
@@ -69,3 +71,4 @@ public class CreepDrawable extends Drawable {
         );
     }
 }
+//CLC: Original Code End

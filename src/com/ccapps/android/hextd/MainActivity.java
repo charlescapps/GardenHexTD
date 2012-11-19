@@ -28,6 +28,8 @@ import java.util.HashMap;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class MainActivity extends Activity {
 
     public static final int NUM_VERTICAL_HEXES = 16;                  //test values for now...
@@ -83,8 +85,6 @@ public class MainActivity extends Activity {
     @Override
     public void onPause() {
         super.onPause();
-
-
     }
 
     @Override
@@ -95,8 +95,6 @@ public class MainActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean changed) {
         super.onWindowFocusChanged(changed);
-
-
     }
 
     private void setupHexGrid() {
@@ -114,7 +112,7 @@ public class MainActivity extends Activity {
         float a = gridWidth * 1.f / ( (3.f/2.f) * (float)NUM_HORIZONTAL_HEXES + 1.f/2.f);
         float h = a*Hexagon.sqrt3/2.f;
 
-        setupStaticData((int)(a*1.6f));
+        setupStaticData((int)(a*1.6f), screenSize);
 
 
         PointF margin = new PointF(5.f, 5.f);
@@ -128,7 +126,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private void setupStaticData(int a) {
+    private void setupStaticData(int a, Point screenSize) {
         StaticData.BASIC_TOWER_IMAGE =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.tower), a, a, false) ;
 
@@ -151,6 +149,11 @@ public class MainActivity extends Activity {
         StaticData.DEAD_ANT =
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
 
+        Bitmap grass=BitmapFactory.decodeResource(getResources(), R.drawable.grass);
+        int width = screenSize.x;
+        int height = (int)((float)grass.getHeight()*(float)screenSize.x/(float)grass.getWidth());
+        StaticData.GRASS = Bitmap.createScaledBitmap(grass, width, height, false);
+
         StaticData.SUNSHINE_ANIMATION = new ArrayList<Bitmap>();
         StaticData.SUNSHINE_ANIMATION.add(
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine1), a, a, false));
@@ -167,6 +170,8 @@ public class MainActivity extends Activity {
         StaticData.SUNSHINE_ANIMATION.add(
                 Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(0), a, a, false));
 
+
+
         StaticData.TOWER_COSTS = new HashMap<Class<? extends Tower>, Integer>();
         StaticData.TOWER_COSTS.put(SunflowerTower.class, 100);
         StaticData.TOWER_COSTS.put(CarnivorousTower.class, 20);
@@ -181,3 +186,4 @@ public class MainActivity extends Activity {
     }
     
 }
+//CLC: Original Code End

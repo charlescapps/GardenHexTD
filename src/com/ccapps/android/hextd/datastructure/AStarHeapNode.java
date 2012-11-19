@@ -9,6 +9,8 @@ import com.ccapps.android.hextd.draw.Hexagon;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class AStarHeapNode implements HeapNode {
     private HeapNode left;
     private HeapNode right;
@@ -71,3 +73,4 @@ public class AStarHeapNode implements HeapNode {
     }
 
 }
+//CLC: Original Code End

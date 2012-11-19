@@ -6,6 +6,7 @@ import com.ccapps.android.hextd.draw.CreepDrawable;
 import com.ccapps.android.hextd.draw.Hexagon;
 
 import java.util.List;
+import static com.ccapps.android.hextd.gamedata.Creep.FORAGE_STATE;
 
 /*****************************************************
  Garden Hex Tower Defense
@@ -14,24 +15,28 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class AntCreep implements Creep {
 
-    private int direction;
-    private int speed;
+    protected int direction;
+    protected int speed;
     private CreepDrawable creepDrawable;
-    private List<Hexagon> path;
-    private List<Hexagon> prevPath;
-    private Hexagon hex;
-    private Hexagon goalHex;
-    private Hexagon sourceHex;
-    private int hitpoints;
-    private CreepAlgorithm algorithm;
-    private int tick;
+    protected List<Hexagon> path;
+    protected Hexagon hex;
+    protected Hexagon goalHex;
+    protected Hexagon sourceHex;
+    protected int hitpoints;
+    protected CreepAlgorithm algorithm;
+    protected int tick;
+    protected FORAGE_STATE forageState;
 
     private State creepState;
     private Gene attr;
     private boolean goalMet;
     private int stepCount;
+
+    protected List<Hexagon> prevPath;
 
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
@@ -40,11 +45,12 @@ public class AntCreep implements Creep {
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 500;
+        this.hitpoints = 250;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
         this.speed = 4;
+        this.forageState = FORAGE_STATE.FORAGE;
 
         this.path = null;
         this.prevPath = null;
@@ -171,11 +177,11 @@ public class AntCreep implements Creep {
     @Override
     public void move() {
         if (++tick % speed == 0 && hitpoints > 0) {
-            if (path.size() <= 0) {
+            evaluateRoute();
+            if (path == null || path.size() <= 0) {
                 return;
             }
-            evaluateRoute();
-            hex.setCreep(null);
+            hex.removeCreep(this);
             hex = path.remove(0);
             hex.setCreep(this);
             creepDrawable.updateLocation();
@@ -189,28 +195,13 @@ public class AntCreep implements Creep {
     }
 
     @Override
-    public void setState(State state) {
-        this.creepState = state;
+    public void setState(State creepState) {
+        this.creepState = creepState;
     }
 
     @Override
-    public Hexagon getPrevHex() {
-        return this.prevPath.get(this.prevPath.size() - 1);
-    }
-
-    @Override
-    public Gene getAttr() {
-        return this.attr;
-    }
-
-    @Override
-    public boolean getGoalMet() {
-        return this.goalMet;
-    }
-
-    @Override
-    public void setGoalMet(boolean goalMet) {
-        this.goalMet = goalMet;
+    public boolean equals(Object o) {
+        return this==o;
     }
 
     @Override
@@ -223,4 +214,24 @@ public class AntCreep implements Creep {
         this.stepCount++;
     }
 
+    @Override
+    public void setGoalMet(boolean goalMet) {
+        this.goalMet = goalMet;
+    }
+
+    @Override
+    public boolean getGoalMet() {
+        return this.goalMet;
+    }
+
+    @Override
+    public Gene getAttr() {
+        return this.attr;
+    }
+
+    @Override
+    public Hexagon getPrevHex() {
+        return this.prevPath.get(0);
+    }
 }
+//CLC: Original Code End

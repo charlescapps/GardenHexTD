@@ -9,6 +9,8 @@ import com.ccapps.android.hextd.draw.Hexagon;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class AStarNode {
     private int pathCost;
     private int heuristicCost;
@@ -67,3 +69,4 @@ public class AStarNode {
 
 
 }
+//CLC: Original Code End

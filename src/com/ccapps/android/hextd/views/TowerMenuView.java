@@ -30,6 +30,10 @@ import java.util.List;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Adapted Code from official Android example, http://developer.android.com/guide/topics/ui/layout/gridview.html
+//Completely different now, though...
+//CLC: Adapted Code Begin
 public class TowerMenuView extends TableLayout {
     private TableRow row1;
     private TableRow row2;
@@ -140,3 +144,5 @@ public class TowerMenuView extends TableLayout {
 
     }
 }
+
+//CLC: Adapted Code End

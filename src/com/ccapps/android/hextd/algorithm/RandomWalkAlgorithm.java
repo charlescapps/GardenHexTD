@@ -14,6 +14,8 @@ import java.util.*;
  CS 313 AI and Game Design
  Fall 2012
  *****************************************************/
+
+//CLC: Original Code Begin
 public class RandomWalkAlgorithm implements CreepAlgorithm{
 
     private Creep creep;
@@ -119,3 +121,4 @@ public class RandomWalkAlgorithm implements CreepAlgorithm{
         return h != null && h.getTower() == null && !visited.contains(h);
     }
 }
+//CLC: Original Code End

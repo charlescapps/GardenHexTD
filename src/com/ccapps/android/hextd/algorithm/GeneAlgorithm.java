@@ -296,7 +296,7 @@ public class GeneAlgorithm implements CreepAlgorithm{
     }
 
     private boolean traversable(Hexagon hex) {
-        if (hex == null || hex.getTower() != null || hex.getCreep() != null)
+        if (hex == null || hex.getTower() != null || (hex.getCreeps() != null && hex.getCreeps().size() > 0))
             return false;
         return true;
     }
