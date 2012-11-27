@@ -161,10 +161,10 @@ public class MainActivity extends Activity {
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine2), a, a, false));
         StaticData.SUNSHINE_ANIMATION.add(
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine3), a, a, false));
-        StaticData.SUNSHINE_ANIMATION.add(
-                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine4), a, a, false));
-        StaticData.SUNSHINE_ANIMATION.add(
-                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(2), a, a, false));
+//        StaticData.SUNSHINE_ANIMATION.add(
+//                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine4), a, a, false));
+//        StaticData.SUNSHINE_ANIMATION.add(
+//                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(2), a, a, false));
         StaticData.SUNSHINE_ANIMATION.add(
                 Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(1), a, a, false));
         StaticData.SUNSHINE_ANIMATION.add(

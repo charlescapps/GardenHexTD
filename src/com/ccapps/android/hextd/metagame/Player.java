@@ -17,7 +17,7 @@ public class Player {
         if (playerInstance != null) {
             return playerInstance;
         }
-        playerInstance = new Player(0, 400, 50);
+        playerInstance = new Player(0, 400, 20);
         return playerInstance;
     }
 

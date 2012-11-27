@@ -123,6 +123,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             textPaint.setColor(Color.WHITE);
             textPaint.setTextSize(20f);
             textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            textPaint.setAntiAlias(true);
             this.player = Player.getInstance();
 
         }
@@ -158,7 +159,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         private void drawInfoBox(Canvas c) {
             c.drawText("Money: $" + player.getMonies(), 20.f, 25.f, textPaint);
-
+            c.drawText("Life: " + player.getLife(), 20.f, 50.f, textPaint);
         }
 
         private void drawGrass(Canvas c) {

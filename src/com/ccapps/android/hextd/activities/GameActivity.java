@@ -51,7 +51,10 @@ public class GameActivity extends Activity {
         Hexagon goalHex = GRID.get(GRID.getNumVertical() - 1, 5);
         GRID.setGoalHex(goalHex.getGridPosition().x, goalHex.getGridPosition().y, true);
 
-        sourceHexes.add(GRID.get(0,5));
+        Hexagon sourceHex = GRID.get(0,5);
+        sourceHexes.add(sourceHex);
+        GRID.setSourceHex(0,5);
+
         CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
         creepGenerator.setCreepClass(ScentAntCreep.class);
         creepGenerator.setCreepAlgorithm(ScentAlgorithm.class);

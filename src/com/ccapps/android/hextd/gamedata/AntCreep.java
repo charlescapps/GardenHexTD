@@ -48,7 +48,6 @@ public class AntCreep implements Creep {
         this.speed = 4;
         this.forageState = FORAGE_STATE.FORAGE;
 
-       // evaluateRoute();
     }
 
     @Override
