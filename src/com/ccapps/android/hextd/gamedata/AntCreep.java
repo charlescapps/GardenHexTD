@@ -38,7 +38,7 @@ public class AntCreep implements Creep {
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 250;
+        this.hitpoints = 125;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;

@@ -55,12 +55,12 @@ public class GameActivity extends Activity {
         creepGenerator.setCreepClass(ScentAntCreep.class);
         creepGenerator.setCreepAlgorithm(ScentAlgorithm.class);
 
+        TerrainManager terrainManager = new RandomTerrainManager(0.1f, BarrierTower.class);
+        terrainManager.initTerrain(GRID);
+
         GameView v = (GameView)findViewById(R.id.gameView);
         this.gameLogicThread = new GameLogicThread(v, creepGenerator);
         v.setGameLogicThread(gameLogicThread);
-
-        TerrainManager terrainManager = new RandomTerrainManager(0.1f, BarrierTower.class);
-        terrainManager.initTerrain(GRID);
 
         setupTowerSelectMenu();
     }

@@ -211,12 +211,7 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
      * Fire events when a square is attacked
      */
     public void attacked(int dmg) {
-        if (dmg > 0) {
-            setState(STATE.ATTACKED);
-        }
-        else {
-            setStateToDefault();
-        }
+
         for (Creep c: creeps) {
             c.loseHitpoints(dmg);
         }

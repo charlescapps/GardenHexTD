@@ -283,7 +283,12 @@ public class HexGrid extends Drawable {
         }
         synchronized (creepsOnGrid) {
             for (Creep c: creepsOnGrid) {
-                c.draw(canvas);
+                if (c.isDead())
+                    c.draw(canvas);
+            }
+            for (Creep c: creepsOnGrid) {
+                if (!c.isDead())
+                    c.draw(canvas);
             }
         }
         if (selectedHexagon != null) {

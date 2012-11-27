@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ant), a, a, false) ;
 
         StaticData.DEAD_ANT =
-                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.splat2), a, a, false) ;
 
         Bitmap grass=BitmapFactory.decodeResource(getResources(), R.drawable.grass);
         int width = screenSize.x;
