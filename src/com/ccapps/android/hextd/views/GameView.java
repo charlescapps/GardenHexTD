@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import com.ccapps.android.hextd.activities.GameLogicThread;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.gamedata.StaticData;
+import com.ccapps.android.hextd.metagame.Player;
 
 import java.util.logging.Logger;
 
@@ -109,7 +110,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private HexGrid gridInstance;
         private static final long PAUSE_TIME = 5; // limit to 60 fps, reduce computations
         private static final float VELOCITY_FACTOR = 1.5f;
-        private Paint grassPaint;
+        private Paint textPaint;
+        private Player player;
 
         public GameViewThread(SurfaceHolder sh) {
             super();
@@ -117,7 +119,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             this.needsDrawing = true;
             this.gridInstance = HexGrid.getInstance();
             this.isRunning = false;
-            this.grassPaint = new Paint();
+            this.textPaint = new Paint();
+            textPaint.setColor(Color.WHITE);
+            textPaint.setTextSize(20f);
+            textPaint.setTypeface(Typeface.DEFAULT_BOLD);
+            this.player = Player.getInstance();
+
         }
 
         @Override
@@ -140,10 +147,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
                 gridInstance.draw(c);
 
+                drawInfoBox(c);
+
                 this.needsDrawing = false;
 
                 sh.unlockCanvasAndPost(c);
             }
+
+        }
+
+        private void drawInfoBox(Canvas c) {
+            c.drawText("Money: $" + player.getMonies(), 20.f, 25.f, textPaint);
 
         }
 

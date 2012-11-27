@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.algorithm.AngryCreepAlgorithm;
@@ -122,6 +123,8 @@ public class GameActivity extends Activity {
         TowerMenuView menu = (TowerMenuView)findViewById(R.id.towerMenuTable);
         GameView.towerMenu = menu;
         menu.init(mThumbIds,mTowerClasses, numPerRow, imageSize, padding);
+
+
 
 
     }

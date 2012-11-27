@@ -11,11 +11,21 @@ package com.ccapps.android.hextd.metagame;
 //CLC: Original Code Begin
 public class Player {
 
+    private static Player playerInstance;
+
+    public static Player getInstance() {
+        if (playerInstance != null) {
+            return playerInstance;
+        }
+        playerInstance = new Player(0, 400, 50);
+        return playerInstance;
+    }
+
     private int points;
     private int monies;
     private int life;
 
-    public Player(int points, int monies, int life) {
+    private Player(int points, int monies, int life) {
         this.points = points;
         this.monies = monies;
         this.life = life;
@@ -39,6 +49,10 @@ public class Player {
 
     public void addMonies(int monies) {
         this.monies += monies;
+    }
+
+    public void spendMonies(int monies) {
+        this.monies = Math.max(0, this.monies - monies);
     }
 
     public int getLife() {

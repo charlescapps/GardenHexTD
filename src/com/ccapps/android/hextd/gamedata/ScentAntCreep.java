@@ -19,7 +19,6 @@ public class ScentAntCreep extends AntCreep{
     private boolean wasDead;
     public ScentAntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         super(hex, goalHex, algorithm);
-        wasDead = false;
 
     }
 
@@ -44,27 +43,19 @@ public class ScentAntCreep extends AntCreep{
                     }
                 }
             }
-            if (hitpoints <= 0 && !wasDead && tick % speed == 0 ) {
-                wasDead = true;
+        }
+    }
 
-                HexGrid GRID = HexGrid.getInstance();
-                Point pos = hex.getGridPosition();
-                ScentAlgorithm.scents[pos.x][pos.y] = Math.max(-100, ScentAlgorithm.scents[pos.x][pos.y]-30);
-                for (Hexagon h: hex.getNeighbors()) {
-                    if (h != null) {
-                        pos = h.getGridPosition();
-                        ScentAlgorithm.scents[pos.x][pos.y] = Math.max(-100, ScentAlgorithm.scents[pos.x][pos.y]-10);
+    @Override
+    public void onDeath() {
+        super.onDeath();
+        Point pos = hex.getGridPosition();
+        ScentAlgorithm.scents[pos.x][pos.y] = Math.max(-100, ScentAlgorithm.scents[pos.x][pos.y]-30);
+        for (Hexagon h: hex.getNeighbors()) {
+            if (h != null) {
+                pos = h.getGridPosition();
+                ScentAlgorithm.scents[pos.x][pos.y] = Math.max(-100, ScentAlgorithm.scents[pos.x][pos.y]-10);
 
-                    }
-                }
-//                for (int i = pos.x-1; i <= pos.x + 1; i++) {
-//                    for (int j = pos.y - 1; j <= pos.y + 1; j++ ) {
-//                        if (i >= 0 && i < GRID.getNumVertical() && j >= 0 && j < GRID.getNumHorizontal()) {
-//                            //Subtract 0.5f from the scents on surrounding hexes when an ant dies
-//                            ScentAlgorithm.scents[i][j] = Math.max(-100, ScentAlgorithm.scents[i][j] - 20);
-//                        }
-//                    }
-//                }
             }
         }
     }
