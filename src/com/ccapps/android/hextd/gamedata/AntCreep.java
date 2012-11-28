@@ -3,6 +3,7 @@ package com.ccapps.android.hextd.gamedata;
 import android.graphics.Canvas;
 import com.ccapps.android.hextd.algorithm.CreepAlgorithm;
 import com.ccapps.android.hextd.draw.CreepDrawable;
+import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.metagame.Player;
 
@@ -32,6 +33,7 @@ public class AntCreep implements Creep {
     protected int tick;
     protected FORAGE_STATE forageState;
     protected boolean wasDead;
+    protected int deadDuration;
 
     public AntCreep(Hexagon hex, Hexagon goalHex, CreepAlgorithm algorithm) {
         this.hex = hex;
@@ -42,6 +44,7 @@ public class AntCreep implements Creep {
         this.direction = 0;
         this.hitpoints = 125;
         this.wasDead = false;
+        this.deadDuration = 0;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
@@ -176,6 +179,21 @@ public class AntCreep implements Creep {
                 hex = path.remove(0);
                 hex.setCreep(this);
                 creepDrawable.updateLocation();
+
+                if (hex == goalHex) {
+                    if (forageState == FORAGE_STATE.FORAGE) {
+                        onReachGoal();
+                        goalHex = sourceHex;
+                        sourceHex = hex;
+                        path = null;
+                        forageState = FORAGE_STATE.RETURN;
+                    }
+                    else {
+                        forageState = FORAGE_STATE.BACK_TO_HIVE;
+                        HexGrid.getInstance().removeCreep(this);
+                        hex.removeCreep(this);
+                    }
+                }
             }
             if (hitpoints <= 0 && !wasDead) {
                 onDeath();
@@ -188,6 +206,12 @@ public class AntCreep implements Creep {
     public void onDeath() {
         Player player = Player.getInstance();
         player.addMonies(getReward());
+    }
+
+    @Override
+    public void onReachGoal() {
+        Player player = Player.getInstance();
+        player.lostLife(1);
     }
 
     @Override

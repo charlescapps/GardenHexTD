@@ -411,5 +411,13 @@ public class HexGrid extends Drawable {
         }
         hexMatrix[r][c].initPath();
     }
+
+    public void setSourceHexes(List<Hexagon> sourceHexes) {
+        this.sourceHexes.addAll(sourceHexes);
+        for (Hexagon h: sourceHexes) {
+            h.setState(Hexagon.STATE.SOURCE);
+            h.initPath();
+        }
+    }
 }
 //CLC: Original Code End

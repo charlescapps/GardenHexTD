@@ -48,6 +48,7 @@ public interface Creep {
     public int getReward();
 
     public void onDeath();
+    public void onReachGoal();
 
     public boolean isDead();
 

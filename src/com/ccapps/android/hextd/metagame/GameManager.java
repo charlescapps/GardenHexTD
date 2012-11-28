@@ -16,8 +16,6 @@ public interface GameManager {
     public void tick();
     public void creepHitsGoal(Creep creep);
 
-    public Player getPlayer();
-    public void setPlayer(Player player);
 
 }
 //CLC: Original Code End

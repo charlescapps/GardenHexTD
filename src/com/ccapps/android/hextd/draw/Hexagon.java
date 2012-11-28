@@ -104,21 +104,21 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
         switch ( myState ) {
             case NORMAL:
                 hexPaint.setColor(Color.GREEN);
-                hexPaint.setStrokeWidth(1.0f);
+                hexPaint.setStrokeWidth(1f);
                 break;
             case GOAL:
                 hexPaint.setColor(Color.BLUE);
                 myDefaultState = STATE.GOAL;
-                hexPaint.setStrokeWidth(3f);
+                hexPaint.setStrokeWidth(2f);
                 break;
             case SOURCE:
                 hexPaint.setColor(Color.RED);
                 myDefaultState = STATE.SOURCE;
-                hexPaint.setStrokeWidth(3f);
+                hexPaint.setStrokeWidth(2f);
                 break;
             case SELECTED:
                 hexPaint.setColor(Color.YELLOW);
-                hexPaint.setStrokeWidth(3f);
+                hexPaint.setStrokeWidth(2f);
                 break;
             case ATTACKED:
                 if (myDefaultState == STATE.NORMAL)

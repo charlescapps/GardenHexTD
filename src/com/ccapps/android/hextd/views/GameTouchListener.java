@@ -56,6 +56,7 @@ public class GameTouchListener extends GestureDetector.SimpleOnGestureListener {
         if (clickedHex == null || clickedHex.getTower() == null || clickedHex.getTower() instanceof DummyTower) {
             towerInfoView.setVisibility(View.GONE);
             towerMenu.setVisibility(View.GONE);
+            GRID.clearSelectedHexagon();
             return false;
         }
 

@@ -19,8 +19,8 @@ public class BasicGameManager implements GameManager{
     int tick = 0;
 
 
-    public BasicGameManager(Player player, int moneyPerTick, int ticksUntilMoney) {
-        this.player = player;
+    public BasicGameManager(int moneyPerTick, int ticksUntilMoney) {
+        this.player = Player.getInstance();
         this.moneyPerTick = moneyPerTick;
         this.ticksUntilMoney = ticksUntilMoney;
     }
@@ -39,14 +39,5 @@ public class BasicGameManager implements GameManager{
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    public Player getPlayer() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void setPlayer(Player player) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
 }
 //CLC: Original Code End

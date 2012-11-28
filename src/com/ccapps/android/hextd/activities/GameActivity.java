@@ -20,6 +20,7 @@ import com.ccapps.android.hextd.gamedata.terrain.RandomTerrainManager;
 import com.ccapps.android.hextd.gamedata.terrain.TerrainManager;
 import com.ccapps.android.hextd.metagame.BasicCreepGenerator;
 import com.ccapps.android.hextd.metagame.CreepGenerator;
+import com.ccapps.android.hextd.metagame.RandomCreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 import com.ccapps.android.hextd.views.TowerMenuView;
 
@@ -46,16 +47,20 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         HexGrid GRID = HexGrid.getInstance();
-        List<Hexagon> sourceHexes = new ArrayList<Hexagon>();
 
+        //Set goal hex
         Hexagon goalHex = GRID.get(GRID.getNumVertical() - 1, 5);
         GRID.setGoalHex(goalHex.getGridPosition().x, goalHex.getGridPosition().y, true);
 
-        Hexagon sourceHex = GRID.get(0,5);
-        sourceHexes.add(sourceHex);
-        GRID.setSourceHex(0,5);
+        //Set source hexes
+        List<Hexagon> sourceHexes = new ArrayList<Hexagon>();
+        sourceHexes.add(GRID.get(0,GRID.getNumHorizontal()/2));
+        sourceHexes.add(GRID.get(0,0));
+      //  sourceHexes.add(GRID.get(0,GRID.getNumHorizontal()-1));
+        GRID.setSourceHexes(sourceHexes);
 
-        CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
+        //Setup creep generator
+        CreepGenerator creepGenerator = new RandomCreepGenerator(sourceHexes, goalHex, 100);
         creepGenerator.setCreepClass(ScentAntCreep.class);
         creepGenerator.setCreepAlgorithm(ScentAlgorithm.class);
 
