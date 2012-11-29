@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupHexGrid();
+
 
         setupStartGameButton();
     }
@@ -74,6 +74,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setupHexGrid();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 MainActivity.this.startActivity(intent);
 
