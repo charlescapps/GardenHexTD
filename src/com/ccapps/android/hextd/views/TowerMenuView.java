@@ -9,16 +9,14 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+import android.widget.*;
 import com.ccapps.android.hextd.R;
 import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
 import com.ccapps.android.hextd.gamedata.StaticData;
 import com.ccapps.android.hextd.gamedata.Tower;
 import com.ccapps.android.hextd.gamedata.TowerUtils;
+import com.ccapps.android.hextd.metagame.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,15 +109,24 @@ public class TowerMenuView extends TableLayout {
 
     private class OnClickTower implements OnClickListener {
         private Class<? extends Tower> towerClass;
+        private int cost;
         public OnClickTower(Class<? extends Tower> towerClass) {
             this.towerClass = towerClass;
+            this.cost = StaticData.TOWER_COSTS.get(towerClass);
         }
 
         @Override
         public void onClick(View view) {
             final TextView textView = (TextView) view;
             final TowerMenuView towerMenu = TowerMenuView.this;
-            TowerUtils.addTower(towerClass, lastClickedHex.x, lastClickedHex.y);
+            Player player = Player.getInstance();
+            if (player.getMonies() < cost) {
+                Toast.makeText(getContext(),"You cannot afford this tower!", Toast.LENGTH_SHORT);
+            }
+            else {
+                TowerUtils.addTower(towerClass, lastClickedHex.x, lastClickedHex.y);
+                player.spendMonies(cost);
+            }
 
             textView.setBackgroundResource(R.drawable.grid_background_touched);
             towerMenu.invalidate();

@@ -3,7 +3,9 @@ package com.ccapps.android.hextd.gamedata;
 import android.graphics.Canvas;
 import com.ccapps.android.hextd.algorithm.CreepAlgorithm;
 import com.ccapps.android.hextd.draw.CreepDrawable;
+import com.ccapps.android.hextd.draw.HexGrid;
 import com.ccapps.android.hextd.draw.Hexagon;
+import com.ccapps.android.hextd.metagame.Player;
 
 import java.util.List;
 import static com.ccapps.android.hextd.gamedata.Creep.FORAGE_STATE;
@@ -21,7 +23,7 @@ public class AntCreep implements Creep {
 
     protected int direction;
     protected int speed;
-    private CreepDrawable creepDrawable;
+    protected CreepDrawable creepDrawable;
     protected List<Hexagon> path;
     protected Hexagon hex;
     protected Hexagon goalHex;
@@ -30,6 +32,8 @@ public class AntCreep implements Creep {
     protected CreepAlgorithm algorithm;
     protected int tick;
     protected FORAGE_STATE forageState;
+    protected boolean wasDead;
+    protected int deadDuration;
 
     private State creepState;
     private Gene attr;
@@ -45,7 +49,9 @@ public class AntCreep implements Creep {
         this.algorithm = algorithm;
         this.algorithm.setCreep(this);
         this.direction = 0;
-        this.hitpoints = 250;
+        this.hitpoints = 125;
+        this.wasDead = false;
+        this.deadDuration = 0;
 
         this.creepDrawable = new CreepDrawable(this, StaticData.ANT, StaticData.DEAD_ANT);
         this.tick = 0;
@@ -148,6 +154,11 @@ public class AntCreep implements Creep {
     }
 
     @Override
+    public int getReward() {
+        return 10;
+    }
+
+    @Override
     public boolean isDead() {
         return hitpoints <= 0;
     }
@@ -176,16 +187,51 @@ public class AntCreep implements Creep {
 
     @Override
     public void move() {
-        if (++tick % speed == 0 && hitpoints > 0) {
-            evaluateRoute();
-            if (path == null || path.size() <= 0) {
-                return;
+        ++tick;
+        if (tick % speed == 0) {
+            if (hitpoints > 0)
+            {
+                evaluateRoute();
+                if (path == null || path.size() <= 0) {
+                    return;
+                }
+                hex.removeCreep(this);
+                hex = path.remove(0);
+                hex.setCreep(this);
+                creepDrawable.updateLocation();
+
+                if (hex == goalHex) {
+                    if (forageState == FORAGE_STATE.FORAGE) {
+                        onReachGoal();
+                        goalHex = sourceHex;
+                        sourceHex = hex;
+                        path = null;
+                        forageState = FORAGE_STATE.RETURN;
+                    }
+                    else {
+                        forageState = FORAGE_STATE.BACK_TO_HIVE;
+                        HexGrid.getInstance().removeCreep(this);
+                        hex.removeCreep(this);
+                    }
+                }
             }
-            hex.removeCreep(this);
-            hex = path.remove(0);
-            hex.setCreep(this);
-            creepDrawable.updateLocation();
+            if (hitpoints <= 0 && !wasDead) {
+                onDeath();
+                wasDead = true;
+            }
         }
+    }
+
+    @Override
+    public void onDeath() {
+        Player player = Player.getInstance();
+        player.addMonies(getReward());
+    }
+
+    @Override
+    public void onReachGoal() {
+        Player player = Player.getInstance();
+        player.lostLife(1);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupHexGrid();
+
 
         setupStartGameButton();
     }
@@ -74,6 +74,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setupHexGrid();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 MainActivity.this.startActivity(intent);
 
@@ -147,7 +148,7 @@ public class MainActivity extends Activity {
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ant), a, a, false) ;
 
         StaticData.DEAD_ANT =
-                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.dead_ant), a, a, false) ;
+                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.splat2), a, a, false) ;
 
         Bitmap grass=BitmapFactory.decodeResource(getResources(), R.drawable.grass);
         int width = screenSize.x;
@@ -161,10 +162,10 @@ public class MainActivity extends Activity {
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine2), a, a, false));
         StaticData.SUNSHINE_ANIMATION.add(
                 Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine3), a, a, false));
-        StaticData.SUNSHINE_ANIMATION.add(
-                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine4), a, a, false));
-        StaticData.SUNSHINE_ANIMATION.add(
-                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(2), a, a, false));
+//        StaticData.SUNSHINE_ANIMATION.add(
+//                Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sunshine4), a, a, false));
+//        StaticData.SUNSHINE_ANIMATION.add(
+//                Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(2), a, a, false));
         StaticData.SUNSHINE_ANIMATION.add(
                 Bitmap.createScaledBitmap(StaticData.SUNSHINE_ANIMATION.get(1), a, a, false));
         StaticData.SUNSHINE_ANIMATION.add(

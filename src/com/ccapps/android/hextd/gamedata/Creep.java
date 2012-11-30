@@ -45,6 +45,11 @@ public interface Creep {
     public void setHitpoints(int hp);
     public void loseHitpoints(int hp);
 
+    public int getReward();
+
+    public void onDeath();
+    public void onReachGoal();
+
     public boolean isDead();
 
     public CreepAlgorithm getAlgorithm();

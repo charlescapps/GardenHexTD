@@ -105,10 +105,28 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
     public void setState(STATE myState) {
         this.myState = myState;
         switch ( myState ) {
-            case NORMAL: hexPaint.setColor(Color.GREEN); break;
-            case GOAL: hexPaint.setColor(Color.BLUE); myDefaultState = STATE.GOAL; break;
-            case SELECTED: hexPaint.setColor(Color.YELLOW); break;
-            case ATTACKED: if (myDefaultState == STATE.NORMAL) hexPaint.setColor(Color.RED); break;
+            case NORMAL:
+                hexPaint.setColor(Color.GREEN);
+                hexPaint.setStrokeWidth(1f);
+                break;
+            case GOAL:
+                hexPaint.setColor(Color.BLUE);
+                myDefaultState = STATE.GOAL;
+                hexPaint.setStrokeWidth(2f);
+                break;
+            case SOURCE:
+                hexPaint.setColor(Color.RED);
+                myDefaultState = STATE.SOURCE;
+                hexPaint.setStrokeWidth(2f);
+                break;
+            case SELECTED:
+                hexPaint.setColor(Color.YELLOW);
+                hexPaint.setStrokeWidth(2f);
+                break;
+            case ATTACKED:
+                if (myDefaultState == STATE.NORMAL)
+                    hexPaint.setColor(Color.RED);
+                break;
         }
     }
 
@@ -214,12 +232,7 @@ public class Hexagon extends Drawable implements Comparable<Hexagon> {
      * Fire events when a square is attacked
      */
     public void attacked(int dmg) {
-        if (dmg > 0) {
-            setState(STATE.ATTACKED);
-        }
-        else {
-            setStateToDefault();
-        }
+
         for (Creep c: creeps) {
             c.loseHitpoints(dmg);
         }

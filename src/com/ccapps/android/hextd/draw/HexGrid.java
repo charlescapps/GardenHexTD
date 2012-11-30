@@ -82,6 +82,12 @@ public class HexGrid extends Drawable {
             }
         }
 
+        synchronized (GRID.sourceHexes) {
+            for (Hexagon h: GRID.sourceHexes) {
+                h.invalidatePath(delta);
+            }
+        }
+
         if (GRID.selectedHexagon != null) {
             GRID.selectedHexagon.invalidatePath(delta);
         }
@@ -94,6 +100,12 @@ public class HexGrid extends Drawable {
 
         synchronized (GRID.goalHexes) {
             for (Hexagon h: GRID.goalHexes) {
+                h.clearWasInvalidated();
+            }
+        }
+
+        synchronized (GRID.sourceHexes) {
+            for (Hexagon h: GRID.sourceHexes) {
                 h.clearWasInvalidated();
             }
         }
@@ -121,6 +133,7 @@ public class HexGrid extends Drawable {
 
     private List<Tower> towersOnGrid;
     private List<Hexagon> goalHexes;
+    private List<Hexagon> sourceHexes;
     private List<Creep> creepsOnGrid;
     private Hexagon selectedHexagon;
 
@@ -146,6 +159,7 @@ public class HexGrid extends Drawable {
         this.towersOnGrid = Collections.synchronizedList(new ArrayList<Tower>());
         this.creepsOnGrid = Collections.synchronizedList(new ArrayList<Creep>());
         this.goalHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
+        this.sourceHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         this.gridPaint = new Paint();
         this.gridPaint.setColor(Color.GREEN);
         this.gridPaint.setAlpha(128);
@@ -281,9 +295,19 @@ public class HexGrid extends Drawable {
                 h.draw(canvas);
             }
         }
+        synchronized (sourceHexes) {
+            for (Hexagon h: sourceHexes) {
+                h.draw(canvas);
+            }
+        }
         synchronized (creepsOnGrid) {
             for (Creep c: creepsOnGrid) {
-                c.draw(canvas);
+                if (c.isDead())
+                    c.draw(canvas);
+            }
+            for (Creep c: creepsOnGrid) {
+                if (!c.isDead())
+                    c.draw(canvas);
             }
         }
         if (selectedHexagon != null) {
@@ -378,6 +402,22 @@ public class HexGrid extends Drawable {
             goalHexes.add(hexMatrix[r][c]);
         }
         hexMatrix[r][c].initPath();
+    }
+
+    public void setSourceHex(int r, int c) {
+        hexMatrix[r][c].setState(Hexagon.STATE.SOURCE);
+        synchronized (sourceHexes) {
+            sourceHexes.add(hexMatrix[r][c]);
+        }
+        hexMatrix[r][c].initPath();
+    }
+
+    public void setSourceHexes(List<Hexagon> sourceHexes) {
+        this.sourceHexes.addAll(sourceHexes);
+        for (Hexagon h: sourceHexes) {
+            h.setState(Hexagon.STATE.SOURCE);
+            h.initPath();
+        }
     }
 }
 //CLC: Original Code End

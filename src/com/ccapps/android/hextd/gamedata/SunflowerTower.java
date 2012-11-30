@@ -26,13 +26,18 @@ public class SunflowerTower extends BasicTower{
         this.attackSpeed = 4;
         this.direction = 0;
 
-        initModZeroAttackHexes();
+        if (hex.getGridPosition().y % 2 == 0) {
+            initModZeroAttackHexes();
+        }
+        else {
+            initModOneAttackHexes();
+        }
     }
 
     @Override
     public void rotateClockwise() {
         ++direction;
-        if (direction % 2 == 0) {
+        if (hex.getGridPosition().y % 2 == 0) {
             initModZeroAttackHexes();
         }
         else {
@@ -46,40 +51,166 @@ public class SunflowerTower extends BasicTower{
         this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         HexGrid GRID = HexGrid.getInstance();
 
-        for (Hexagon h: hex.getNeighbors()) {
-            addSafe(h);
-        }
-
         Point pos = hex.getGridPosition();
 
-        addSafe(GRID.get(pos.x - 2, pos.y));
-        addSafe(GRID.get(pos.x + 2, pos.y));
+        switch(direction % 6) {
+            case 0:
+                addSafe(GRID.get(pos.x, pos.y -1));
+                addSafe(GRID.get(pos.x-1, pos.y-2));
 
-        addSafe(GRID.get(pos.x - 1, pos.y-2));
-        addSafe(GRID.get(pos.x - 1, pos.y+2));
-        addSafe(GRID.get(pos.x + 1, pos.y-2));
-        addSafe(GRID.get(pos.x + 1, pos.y+2));
+                addSafe(GRID.get(pos.x-1, pos.y));
+                addSafe(GRID.get(pos.x-2, pos.y));
 
+                addSafe(GRID.get(pos.x, pos.y+1));
+                addSafe(GRID.get(pos.x-1, pos.y+2));
+
+                break;
+            case 1:
+                addSafe(GRID.get(pos.x-1, pos.y));
+                addSafe(GRID.get(pos.x-2, pos.y));
+
+                addSafe(GRID.get(pos.x, pos.y+1));
+                addSafe(GRID.get(pos.x-1, pos.y+2));
+
+                addSafe(GRID.get(pos.x+1, pos.y+1));
+                addSafe(GRID.get(pos.x+1, pos.y+2));
+
+                break;
+            case 2:
+
+                addSafe(GRID.get(pos.x, pos.y+1));
+                addSafe(GRID.get(pos.x-1, pos.y+2));
+
+                addSafe(GRID.get(pos.x+1, pos.y+1));
+                addSafe(GRID.get(pos.x+1, pos.y+2));
+
+                addSafe(GRID.get(pos.x+1, pos.y));
+                addSafe(GRID.get(pos.x+2, pos.y));
+
+                break;
+
+            case 3:
+                addSafe(GRID.get(pos.x+1, pos.y+1));
+                addSafe(GRID.get(pos.x+1, pos.y+2));
+
+                addSafe(GRID.get(pos.x+1, pos.y));
+                addSafe(GRID.get(pos.x+2, pos.y));
+
+                addSafe(GRID.get(pos.x+1, pos.y-1));
+                addSafe(GRID.get(pos.x+1, pos.y-2));
+                break;
+
+            case 4:
+
+                addSafe(GRID.get(pos.x+1, pos.y));
+                addSafe(GRID.get(pos.x+2, pos.y));
+
+                addSafe(GRID.get(pos.x+1, pos.y-1));
+                addSafe(GRID.get(pos.x+1, pos.y-2));
+
+                addSafe(GRID.get(pos.x, pos.y-1));
+                addSafe(GRID.get(pos.x-1, pos.y-2));
+
+
+                break;
+
+            case 5:
+
+                addSafe(GRID.get(pos.x+1, pos.y-1));
+                addSafe(GRID.get(pos.x+1, pos.y-2));
+
+                addSafe(GRID.get(pos.x, pos.y-1));
+                addSafe(GRID.get(pos.x-1, pos.y-2));
+
+                addSafe(GRID.get(pos.x-1, pos.y));
+                addSafe(GRID.get(pos.x-2, pos.y));
+                break;
+        }
     }
 
     private void initModOneAttackHexes() {
         this.attackHexes = Collections.synchronizedList(new ArrayList<Hexagon>());
         HexGrid GRID = HexGrid.getInstance();
 
-        for (Hexagon h: hex.getNeighbors()) {
-            addSafe(h);
-        }
-
         Point pos = hex.getGridPosition();
 
-        addSafe(GRID.get(pos.x , pos.y - 2));
-        addSafe(GRID.get(pos.x, pos.y + 2));
+        switch (direction % 6) {
 
-        addSafe(GRID.get(pos.x - 2, pos.y-1));
-        addSafe(GRID.get(pos.x - 2, pos.y+1));
-        addSafe(GRID.get(pos.x + 1, pos.y-1));
-        addSafe(GRID.get(pos.x + 1, pos.y+1));
+            case 0:
+                addSafe(GRID.get(pos.x-1, pos.y -1));
+                addSafe(GRID.get(pos.x - 1, pos.y-2));
 
+                addSafe(GRID.get(pos.x-1 , pos.y ));
+                addSafe(GRID.get(pos.x-2 , pos.y ));
+
+                addSafe(GRID.get(pos.x - 1, pos.y+1));
+                addSafe(GRID.get(pos.x - 1, pos.y+2));
+                break;
+            case 1:
+                addSafe(GRID.get(pos.x-1 , pos.y ));
+                addSafe(GRID.get(pos.x-2 , pos.y ));
+
+                addSafe(GRID.get(pos.x - 1, pos.y+1));
+                addSafe(GRID.get(pos.x - 1, pos.y+2));
+
+                addSafe(GRID.get(pos.x , pos.y+1));
+                addSafe(GRID.get(pos.x + 1, pos.y+2));
+
+                break;
+
+            case 2:
+
+                addSafe(GRID.get(pos.x - 1, pos.y+1));
+                addSafe(GRID.get(pos.x - 1, pos.y+2));
+
+                addSafe(GRID.get(pos.x , pos.y+1));
+                addSafe(GRID.get(pos.x + 1, pos.y+2));
+
+                addSafe(GRID.get(pos.x +1, pos.y));
+                addSafe(GRID.get(pos.x +2, pos.y));
+
+                break;
+
+            case 3:
+
+                addSafe(GRID.get(pos.x , pos.y+1));
+                addSafe(GRID.get(pos.x + 1, pos.y+2));
+
+                addSafe(GRID.get(pos.x +1, pos.y));
+                addSafe(GRID.get(pos.x +2, pos.y));
+
+                addSafe(GRID.get(pos.x +1, pos.y -2));
+                addSafe(GRID.get(pos.x, pos.y-1));
+
+                break;
+
+            case 4:
+
+                addSafe(GRID.get(pos.x +1, pos.y));
+                addSafe(GRID.get(pos.x +2, pos.y));
+
+                addSafe(GRID.get(pos.x +1, pos.y -2));
+                addSafe(GRID.get(pos.x, pos.y-1));
+
+                addSafe(GRID.get(pos.x-1, pos.y -1));
+                addSafe(GRID.get(pos.x - 1, pos.y-2));
+
+                break;
+
+            case 5:
+
+                addSafe(GRID.get(pos.x +1, pos.y -2));
+                addSafe(GRID.get(pos.x, pos.y-1));
+
+                addSafe(GRID.get(pos.x-1, pos.y -1));
+                addSafe(GRID.get(pos.x - 1, pos.y-2));
+
+                addSafe(GRID.get(pos.x-1 , pos.y ));
+                addSafe(GRID.get(pos.x-2 , pos.y ));
+
+                break;
+
+        }
     }
 
 

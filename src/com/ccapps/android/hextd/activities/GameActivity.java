@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.ccapps.android.hextd.R;
+import com.ccapps.android.hextd.algorithm.AngryCreepAlgorithm;
 import com.ccapps.android.hextd.algorithm.RandomWalkAlgorithm;
 import com.ccapps.android.hextd.algorithm.ScentAlgorithm;
 import com.ccapps.android.hextd.draw.HexGrid;
@@ -18,6 +20,7 @@ import com.ccapps.android.hextd.gamedata.terrain.RandomTerrainManager;
 import com.ccapps.android.hextd.gamedata.terrain.TerrainManager;
 import com.ccapps.android.hextd.metagame.BasicCreepGenerator;
 import com.ccapps.android.hextd.metagame.CreepGenerator;
+import com.ccapps.android.hextd.metagame.RandomCreepGenerator;
 import com.ccapps.android.hextd.views.GameView;
 import com.ccapps.android.hextd.views.TowerMenuView;
 
@@ -44,22 +47,29 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         HexGrid GRID = HexGrid.getInstance();
-        List<Hexagon> sourceHexes = new ArrayList<Hexagon>();
 
+        //Set goal hex
         Hexagon goalHex = GRID.get(GRID.getNumVertical() - 1, 5);
         GRID.setGoalHex(goalHex.getGridPosition().x, goalHex.getGridPosition().y, true);
 
-        sourceHexes.add(GRID.get(0,5));
-        CreepGenerator creepGenerator = new BasicCreepGenerator(sourceHexes, goalHex);
+        //Set source hexes
+        List<Hexagon> sourceHexes = new ArrayList<Hexagon>();
+        sourceHexes.add(GRID.get(0,GRID.getNumHorizontal()/2));
+        sourceHexes.add(GRID.get(0,0));
+      //  sourceHexes.add(GRID.get(0,GRID.getNumHorizontal()-1));
+        GRID.setSourceHexes(sourceHexes);
+
+        //Setup creep generator
+        CreepGenerator creepGenerator = new RandomCreepGenerator(sourceHexes, goalHex, 100);
         creepGenerator.setCreepClass(ScentAntCreep.class);
         creepGenerator.setCreepAlgorithm(ScentAlgorithm.class);
+
+        TerrainManager terrainManager = new RandomTerrainManager(0.1f, BarrierTower.class);
+        terrainManager.initTerrain(GRID);
 
         GameView v = (GameView)findViewById(R.id.gameView);
         this.gameLogicThread = new GameLogicThread(v, creepGenerator);
         v.setGameLogicThread(gameLogicThread);
-
-        TerrainManager terrainManager = new RandomTerrainManager(0.1f, BarrierTower.class);
-        terrainManager.initTerrain(GRID);
 
         setupTowerSelectMenu();
     }
@@ -121,6 +131,8 @@ public class GameActivity extends Activity {
         TowerMenuView menu = (TowerMenuView)findViewById(R.id.towerMenuTable);
         GameView.towerMenu = menu;
         menu.init(mThumbIds,mTowerClasses, numPerRow, imageSize, padding);
+
+
 
 
     }

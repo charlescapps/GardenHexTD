@@ -20,13 +20,13 @@ import java.util.List;
 //CLC: Original Code Begin
 public class AStarAlgorithm implements CreepAlgorithm{
 
-    Creep creep;
-    Hexagon startNode;
-    Hexagon goalNode;
-    AStarNode src;
-    AStarNode goal;
+    protected Creep creep;
+    protected Hexagon startNode;
+    protected Hexagon goalNode;
+    protected AStarNode src;
+    protected AStarNode goal;
 
-    AStarNode[][] A_STAR_NODES;
+    protected AStarNode[][] A_STAR_NODES;
 
     /**
      * If the next hexagon contains a tower, re-evaluate path
